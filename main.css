@@ -135,5 +135,6 @@ h2 {
 
     .image-group {
         flex-direction: row;
+        flex-wrap: wrap;
     }
 }
