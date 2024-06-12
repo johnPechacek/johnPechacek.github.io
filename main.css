@@ -21,7 +21,8 @@ header {
 
 body {
     padding: 0 5rem;
-    margin-top: 8rem;
+    margin: 8rem auto 0;
+    max-width: 50rem;
     background-color: rgb(246, 244, 238);
 }
 
@@ -42,8 +43,10 @@ h3 {
 }
 
 .headshot {
-    max-width: 30rem;
-    margin: auto;
+    min-width: 20rem;
+    min-height: 20rem;
+    /* margin: auto; */
+    background: center 15% / cover no-repeat url(images/headshot.webp);
 }
 
 /* .work h3 {
