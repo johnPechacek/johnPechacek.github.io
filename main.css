@@ -12,18 +12,26 @@ header {
     flex-direction: column;
     position: fixed;
     width: 100%;
-    background-color: rgb(255, 255, 250);
-    filter: drop-shadow(0 0 .2rem rgba(56, 56, 76, .5));
+    background: center / cover no-repeat url(images/headerBG_4.png);
+    filter: drop-shadow(0 0 .2rem rgba(56, 56, 76, 1));
     padding: 1rem;
     top: 0;
     left: 0;
+}
+
+header h1 {
+    color: white;
+}
+
+header h4 {
+    color: rgb(240, 240, 220);
+    font-weight: 100;
 }
 
 body {
     padding: 0 5rem;
     margin: 8rem auto 0;
     max-width: 50rem;
-    background-color: rgb(246, 244, 238);
 }
 
 img {
@@ -45,13 +53,8 @@ h3 {
 .headshot {
     min-width: 20rem;
     min-height: 20rem;
-    /* margin: auto; */
     background: center 15% / cover no-repeat url(images/headshot.webp);
 }
-
-/* .work h3 {
-    margin-bottom: 1rem;
-} */
 
 .work-link {
     display: flex;
@@ -79,6 +82,10 @@ h3 {
 
 .work-link-image-phonAware {
     background-image: url(images/phonAware.JPG);
+}
+
+.work-link-image-about {
+    background-image: url(images/headshot.webp);
 }
 
 @media screen and (min-width: 48rem) {
