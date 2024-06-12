@@ -88,6 +88,14 @@ h3 {
     background-image: url(images/headshot.webp);
 }
 
+.image-container {
+    margin: auto;
+}
+
+.about-link {
+    justify-content: center;
+}
+
 @media screen and (min-width: 48rem) {
     h3 {
         margin-top: 0;
