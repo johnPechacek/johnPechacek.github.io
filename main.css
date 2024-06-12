@@ -1,0 +1,70 @@
+* {
+    margin: 0;
+    font-family: "Roboto Slab", serif;
+    color: rgb(56, 56, 76);
+    background-color: transparent;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    width: 100%;
+    background-color: rgb(255, 255, 250);
+    filter: drop-shadow(0 0 .2rem rgba(56, 56, 76, .5));
+    padding: 1rem;
+    top: 0;
+    left: 0;
+}
+
+body {
+    padding: 0 5rem;
+    margin-top: 8rem;
+    background-color: rgb(246, 244, 238);
+}
+
+img {
+    width: 100%;
+}
+
+p {
+    margin: 1rem 0;
+}
+
+.work-link {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    text-align: center;
+}
+
+.work-link-image {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 100%;
+    filter: drop-shadow(0 0 .2rem rgba(56, 56, 76, .5));
+    background: center / cover no-repeat white;
+}
+
+.work-link-image-homeward {
+    background-image: url(images/homeward.png);
+}
+
+.work-link-image-phonAware {
+    background-image: url(images/phonAware.JPG);
+}
+
+.headshot {
+    max-width: 30rem;
+    margin: auto;
+}
+
+@media screen and (min-width: 48rem) {
+    .about {
+        display: flex;
+        justify-content: space-between;
+        gap: 2rem;
+    }
+}
