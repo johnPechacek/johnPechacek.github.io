@@ -1,5 +1,242 @@
 lottie-player {
-    background: rgb(25, 25, 25);
     width: 20rem;
     height: 20rem;
+}
+
+.lottie-animations {
+    background: rgb(25, 25, 25);
+}
+
+.svg-animations {
+    background: rgb(61, 80, 189);
+}
+
+.icon {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    margin: 50px auto;
+    background-color: transparent;
+    border: 3px dashed rgb(255, 255, 255, .1);
+}
+
+.icon svg {
+    overflow: visible;
+    width: 100%;
+
+}
+
+.icon svg #main {
+    filter: drop-shadow(10px 10px rgba(0, 0, 0, .2));
+}
+
+.icon svg .star {
+    filter: drop-shadow(10px 10px rgba(0, 0, 0, .2));
+}
+
+.icon svg #protractorArm {
+    transform-origin: 65px 83px;
+}
+
+.icon svg #controller {
+    transform-origin: 75px 175px;
+}
+
+.icon svg #star_big {
+    transform-origin: 180px 30px;
+}
+
+.icon svg #star_little {
+    transform-origin: 190px 50px;
+}
+
+.icon svg .numbers {
+    opacity: .6;
+}
+
+.icon svg #numbersBG {
+    opacity: .1;
+}
+
+.icon svg #numbers_1 {
+    opacity: 0;
+}
+
+.icon svg #numbers_2 {
+    opacity: 0;
+}
+
+.icon svg #numbers_3 {
+    opacity: 0;
+}
+
+.icon svg #numbers_4 {
+    opacity: .6;
+}
+
+.icon:hover {
+    #calculator {
+        animation: 1600ms infinite alternate float-1 ease-in-out;
+    }
+
+    #protractor {
+        animation: 2000ms infinite alternate float-2 ease-in-out;
+    }
+
+    #protractorArm {
+        animation: 3000ms infinite alternate rotate-1 ease-in-out;
+    }
+
+    #controller {
+        animation: 1000ms infinite alternate rotate-2 ease-in-out;
+    }
+
+    #star_big {
+        animation: 200ms infinite alternate wiggle ease-in-out;
+    }
+
+    #star_little {
+        animation: 200ms infinite alternate-reverse wiggle ease-in-out;
+    }
+
+    #numbers_1 {
+        animation: 3000ms infinite alternate-reverse numbers_1 ease-in-out;
+    }
+    
+    #numbers_2 {
+        animation: 3000ms infinite alternate-reverse numbers_2 ease-in-out;
+    }
+    
+    #numbers_3 {
+        animation: 3000ms infinite alternate-reverse numbers_3 ease-in-out;
+    }
+    
+    #numbers_4 {
+        animation: 3000ms infinite alternate-reverse numbers_4 ease-in-out;
+    }
+}
+
+@keyframes numbers_1 {
+    0% {
+        opacity: 0;
+    }
+    39% {
+        opacity: 0;
+    }
+    40% {
+        opacity: .6;
+    }
+    49% {
+        opacity: .6;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes numbers_2 {
+    0% {
+        opacity: 0;
+    }
+    49% {
+        opacity: 0;
+    }
+    50% {
+        opacity: .6;
+    }
+    59% {
+        opacity: .6;
+    }
+    60% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes numbers_3 {
+    0% {
+        opacity: 0;
+    }
+    59% {
+        opacity: 0;
+    }
+    60% {
+        opacity: .6;
+    }
+    69% {
+        opacity: .6;
+    }
+    70% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes numbers_4 {
+    0% {
+        opacity: 0;
+    }
+    69% {
+        opacity: 0;
+    }
+    70% {
+        opacity: .6;
+    }
+    100% {
+        opacity: .6;
+    }
+}
+
+@keyframes float-1 {
+    0% {
+        transform: translateY(0px);
+    }
+    100% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes float-2 {
+    0% {
+        transform: translateY(0px);
+    }
+    100% {
+        transform: translateY(8px);
+    }
+}
+
+@keyframes rotate-1 {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-60deg);
+    }
+}
+
+@keyframes rotate-2 {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(10deg);
+    }
+}
+
+@keyframes wiggle {
+    0% {
+        transform: scale(.8, 1.2);
+    }
+    100% {
+        transform: scale(1.2, .8);
+    }
 }
