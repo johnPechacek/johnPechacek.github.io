@@ -33,6 +33,23 @@ p {
     margin: 1rem 0;
 }
 
+section {
+    padding: 1rem 0;
+}
+
+h3 {
+    margin: 1rem 0;
+}
+
+.headshot {
+    max-width: 30rem;
+    margin: auto;
+}
+
+/* .work h3 {
+    margin-bottom: 1rem;
+} */
+
 .work-link {
     display: flex;
     flex-direction: row;
@@ -44,8 +61,13 @@ p {
     width: 10rem;
     height: 10rem;
     border-radius: 100%;
-    filter: drop-shadow(0 0 .2rem rgba(56, 56, 76, .5));
     background: center / cover no-repeat white;
+    transition: all.2s ease-in-out;
+}
+
+.work-link a:hover .work-link-image {
+    transform: translateY(-1rem);
+    filter: drop-shadow(0 0 .2rem rgba(56, 56, 76, .5));
 }
 
 .work-link-image-homeward {
@@ -56,12 +78,11 @@ p {
     background-image: url(images/phonAware.JPG);
 }
 
-.headshot {
-    max-width: 30rem;
-    margin: auto;
-}
-
 @media screen and (min-width: 48rem) {
+    h3 {
+        margin-top: 0;
+    }
+
     .about {
         display: flex;
         justify-content: space-between;
