@@ -42,6 +42,10 @@ p {
     margin: 1rem 0;
 }
 
+a {
+    text-decoration: none;
+}
+
 section {
     padding: 1rem 0;
 }
@@ -61,6 +65,7 @@ h3 {
     flex-direction: row;
     gap: 3rem;
     text-align: center;
+    flex-wrap: wrap;
 }
 
 .work-link-image {
@@ -82,6 +87,14 @@ h3 {
 
 .work-link-image-phonAware {
     background-image: url(images/phonAware.JPG);
+}
+
+.work-link-image-lottie {
+    background-image: url(images/lottieLink.JPG);
+}
+
+.work-link-image-ui {
+    background-image: url(images/animatedSVGElements.JPG);
 }
 
 .work-link-image-about {
