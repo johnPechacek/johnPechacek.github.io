@@ -113,6 +113,10 @@ h2 {
     margin: 1rem;
 }
 
+.image-group .image-container {
+    flex-basis: 30%;
+}
+
 .about-link {
     justify-content: center;
 }
