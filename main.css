@@ -64,6 +64,7 @@ h2 {
     min-width: 20rem;
     min-height: 20rem;
     background: center 15% / cover no-repeat url(images/headshot.webp);
+    margin-bottom: 1rem;
 }
 
 .work-link {
@@ -146,5 +147,9 @@ h2 {
     .image-group {
         flex-direction: row;
         flex-wrap: wrap;
+    }
+
+    .headshot {
+        margin-bottom: 0;
     }
 }
