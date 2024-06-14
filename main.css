@@ -95,7 +95,7 @@ h2 {
 }
 
 .work-link-image-phonAware {
-    background-image: url(images/phonAware.JPG);
+    background: .1rem .1rem / 102% url(images/phonAware_2.JPG);
 }
 
 .work-link-image-lottie {

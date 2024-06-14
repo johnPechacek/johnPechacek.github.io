@@ -10,6 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/lottie-interactive@latest/dist/lottie-interactive.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-interactivity@latest/dist/lottie-interactivity.min.js"></script>
+    <script src="script.js"></script>
 </head>
 <a href="../">
     <header>
@@ -25,7 +28,8 @@
     <section class="lottie">
         <h3>Lottie Animations</h3>
         <div class="image-group lottie-animations">
-            <div class="image-container"><lottie-player src="images/chest.json" speed="1" loop autoplay></lottie-player></div>
+            <!-- <div class="image-container"><lottie-interactive id="lottie-chest" path="images/chest.json" interaction="click"></lottie-interactive></div> -->
+            <div class="image-container"><lottie-player id="lottie-chest" src="images/chest.json" speed="1" loop autoplay></lottie-player></div>
             <div class="image-container"><lottie-player src="images/trophy.json" speed="1" loop autoplay></lottie-player></div>
             <div class="image-container"><lottie-player src="images/waveform.json" speed="1" loop autoplay></lottie-player></div>
             <div class="image-container"><lottie-player src="images/rotateDevice.json" speed="1" loop autoplay></lottie-player></div>
