@@ -135,8 +135,13 @@ h2 {
     height: 10rem;
 }
 
+.lottie-chest-homepage-container:hover #lottie-chest-homepage {
+    filter: drop-shadow(0 0 .2rem rgba(56, 56, 76, .5));
+}
+
 #lottie-chest-homepage {
     transform: scale(2) translate(.6rem, -1rem);
+    transition: all.2s ease-in-out;
 }
 
 @media screen and (min-width: 48rem) {
