@@ -1,6 +1,6 @@
 LottieInteractivity.create({
     mode: 'chain',
-    player: '#lottie-chest',
+    player: '#lottie-chest-homepage',
     actions: [
         {
             state: 'loop',

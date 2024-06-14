@@ -129,6 +129,16 @@ h2 {
     justify-content: center;
 }
 
+.lottie-chest-homepage-container {
+    overflow: visible;
+    width: 10rem;
+    height: 10rem;
+}
+
+#lottie-chest-homepage {
+    transform: scale(2) translate(.6rem, -1rem);
+}
+
 @media screen and (min-width: 48rem) {
     body {
         padding: 0 5rem;

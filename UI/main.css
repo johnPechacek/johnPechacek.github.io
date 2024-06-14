@@ -7,6 +7,10 @@ lottie-player {
     background: rgb(25, 25, 25);
 }
 
+.interactive-lottie-container {
+    cursor: pointer;
+}
+
 .svg-animations {
     background: rgb(61, 80, 189);
 }
