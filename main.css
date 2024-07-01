@@ -113,7 +113,7 @@ h6 {
 .work-link {
     display: flex;
     flex-direction: row;
-    gap: 3rem;
+    gap: 2rem;
     text-align: center;
     flex-wrap: wrap;
     justify-content: center;
@@ -122,11 +122,11 @@ h6 {
 
 .work-link-btn {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 1rem;
-    width: 12rem;
+    width: 100%;
     padding: 1.3rem;
     border-radius: 2rem;
     background-color: rgb(245, 248, 252);
@@ -143,23 +143,24 @@ h6 {
 }
 
 .work-link-btn:hover .work-link-image {
-    transform: translateY(-1rem);
+    transform: translateY(-.5rem);
     filter: drop-shadow(0 0 .5rem rgba(56, 56, 76, .2));
 }
 
 .work-link-btn:active .work-link-image {
     transform: translateY(0);
     filter: drop-shadow(0 0 0 rgba(56, 56, 76, .5));
-    transition: all 400ms cubic-bezier(0,1.59,.6,.83);
+    transition: transform 400ms cubic-bezier(0,1.59,.6,.83), filter 400ms cubic-bezier(0,1.59,.6,.83);
 }
 
 .work-link-image {
-    width: 10rem;
-    height: 10rem;
+    width: 7rem;
+    height: 7rem;
+    min-width: 7rem;
     border-radius: 100%;
     background: center / cover no-repeat white;
-    filter: drop-shadow(0 0 0 rgba(56, 56, 76, .5));
-    transition: all 400ms ease-in-out;
+    filter: drop-shadow(0 0 -.01rem rgba(56, 56, 76, .5));
+    transition: transform 400ms ease-in-out, filter 400ms ease-in-out;
 }
 
 .work-link-image-homeward {
@@ -171,7 +172,7 @@ h6 {
 }
 
 .work-link-image-introToPC {
-    background: -1.6rem -1.15rem  / 133% url(images/IntroToPC_thumbnail.JPG);
+    background: -1.12rem -.8rem  / 133% url(images/IntroToPC_thumbnail.JPG);
 }
 
 .work-link-image-wordKnowledge {
@@ -218,8 +219,8 @@ h6 {
 
 .lottie-chest-homepage-container {
     overflow: visible;
-    width: 10rem;
-    height: 10rem;
+    width: 7rem;
+    height: 7rem;
     margin: 0;
     pointer-events: none;
 }
@@ -262,12 +263,6 @@ h6 {
     margin: 0;
 }
 
-.team .summary-subsections-subsection-list {
-    /* display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: .5rem; */
-}
-
 .team .summary-subsections-subsection-list p {
     margin: 0;
 }
@@ -277,8 +272,7 @@ h6 {
 }
 
 #lottie-chest-homepage {
-    transform: scale(2) translate(.6rem, -1rem);
-    transition: all.2s ease-in-out;
+    transform: scale(2) translate(.35rem, -.6rem);
 }
 
 @media screen and (min-width: 48rem) {
@@ -307,6 +301,42 @@ h6 {
 }
 
 @media screen and (min-width: 32.25rem) {
+    .work-link {
+        gap: 3rem;
+    }
+
+    .work-link-image {
+        width: 10rem;
+        height: 10rem;
+    }
+
+    .work-link-image-homeward {
+        background: -.5rem -1.2rem / 120% url(images/homeward.JPG);
+    }
+
+    .work-link-image-phonAware {
+        background: .1rem .1rem / 102% url(images/phonAware_2.JPG);
+    }
+
+    .work-link-image-introToPC {
+        background: -1.6rem -1.15rem  / 133% url(images/IntroToPC_thumbnail.JPG);
+    }
+
+    .work-link-btn {
+        flex-direction: column;
+        justify-content: center;
+        width: 12rem;
+    }
+
+    .lottie-chest-homepage-container {
+        width: 10rem;
+        height: 10rem;
+    }
+
+    #lottie-chest-homepage {
+        transform: scale(2) translate(.6rem, -1rem);
+    }
+    
     .summary-container {
         flex-direction: row;
     }
@@ -321,12 +351,6 @@ h6 {
     .roles-responsibilities {
         display: flex;
         flex-direction: column;
-    }
-
-    .team .summary-subsections-subsection-list {
-        /* display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: .5rem; */
     }
 
     .team-member-name {
