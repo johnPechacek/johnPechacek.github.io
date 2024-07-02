@@ -7,12 +7,14 @@
 
 header {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
+    gap: 1rem;
     position: fixed;
     width: 100%;
     background-image: url(images/headerBG_4.png);
+    background-color: rgb(255, 255, 255);
     background-repeat: repeat;
     background-size: 75rem;
     filter: drop-shadow(0 0 .2rem rgba(56, 56, 76, 1));
@@ -22,24 +24,19 @@ header {
     z-index: 1;
 }
 
-header:hover {
+nav:hover {
     cursor: pointer;
 }
 
-header h1 {
-    color: white;
-    font-weight: 600;
-}
-
-header h4 {
-    color: rgb(240, 240, 220);
-    font-weight: 100;
-    font-size: 1rem;
+nav {
+    color: rgb(240, 240, 250);
+    font-weight: 200;
+    font-size: 1.25rem;
 }
 
 body {
     padding: 0 1rem;
-    margin: 6rem auto 0;
+    margin: 8rem auto 0;
     max-width: 50rem;
     color: rgb(56, 56, 76);
     background-color: rgb(245, 248, 252);
@@ -61,6 +58,12 @@ a {
 
 section {
     padding: 1rem 0;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 200;
+    line-height: 4rem;
 }
 
 h2 {
@@ -91,6 +94,129 @@ h6 {
     font-size: 1rem;
 }
 
+.desktop {
+    display: none;
+}
+
+.mobile {
+    display: block;
+}
+
+.nav {
+    /* padding: 0 .5rem; */
+    border-radius: 2rem;
+    filter: drop-shadow(0 0 .25rem rgba(245, 248, 252, 0));
+}
+
+.nav:hover {
+    filter: drop-shadow(0 0 .5rem rgba(245, 248, 252, .5));
+}
+
+.nav-group-left {
+    margin-left: 1rem;
+}
+
+.nav-group-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    gap: 1.25rem;
+    margin-right: 1rem;
+}
+
+.nav-group-left nav {
+    font-weight: 600;
+}
+
+.nav-group-right nav {
+    font-size: 1rem;
+}
+
+.name {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.name-letters {
+    height: 7.5rem;
+}
+
+.name-letters span {
+    position: absolute;
+    margin: -.5rem;
+    transform-origin: bottom center;
+}
+
+.name-letter-1 {
+    left: 41%;
+    animation: name-letters 15000ms infinite ease-in-out 1000ms;
+}
+
+.name-letter-2 {
+    left: 45%;
+    animation: name-letters 15000ms infinite ease-in-out 1100ms;
+}
+
+.name-letter-3 {
+    left: 50.5%;
+    animation: name-letters 15000ms infinite ease-in-out 1200ms;
+}
+
+.name-letter-4 {
+    left: 56%;
+    animation: name-letters 15000ms infinite ease-in-out 1300ms;
+}
+
+.name-letter-5 {
+    left: 33%;
+    animation: name-letters 15000ms infinite ease-in-out 2000ms;
+}
+
+.name-letter-6 {
+    left: 37.5%;
+    animation: name-letters 15000ms infinite ease-in-out 2100ms;
+}
+
+.name-letter-7 {
+    left: 42.5%;
+    animation: name-letters 15000ms infinite ease-in-out 2200ms;
+}
+
+.name-letter-8 {
+    left: 47.5%;
+    animation: name-letters 15000ms infinite ease-in-out 2300ms;
+}
+
+.name-letter-9 {
+    left: 52.5%;
+    animation: name-letters 15000ms infinite ease-in-out 2400ms;
+}
+
+.name-letter-10 {
+    left: 58%;
+    animation: name-letters 15000ms infinite ease-in-out 2500ms;
+}
+
+.name-letter-11 {
+    left: 63%;
+    animation: name-letters 15000ms infinite ease-in-out 2600ms;
+}
+
+.name-letter-12 {
+    left: 68%;
+    animation: name-letters 15000ms infinite ease-in-out 2700ms;
+}
+
+.name h4 {
+    font-size: 1.5rem;
+}
+
+.name hr {
+    margin: .6rem auto 1rem;
+    width: 0%;
+    animation: line-out forwards 1200ms cubic-bezier(0,1.59,.6,.83) 500ms;
+}
+
 .card {
     background-color: rgb(250, 250, 255);
     filter: drop-shadow(0 -.2rem .1rem rgba(255, 255, 255, 1)) 
@@ -106,7 +232,7 @@ h6 {
 .headshot {
     min-width: 20rem;
     min-height: 20rem;
-    background: center 15% / cover no-repeat url(images/headshot.webp);
+    background: center 15% / cover no-repeat url(images/headshot_3.png);
     margin-bottom: 1rem;
 }
 
@@ -276,12 +402,24 @@ h6 {
 }
 
 @media screen and (min-width: 48rem) {
+    .desktop {
+        display: block;
+    }
+    
+    .mobile {
+        display: none;
+    }
+
     body {
         padding: 0 5rem;
     }
     
     h3 {
         margin-top: 0;
+    }
+
+    .name-letters {
+        height: 11rem;
     }
 
     .about {
@@ -301,6 +439,23 @@ h6 {
 }
 
 @media screen and (min-width: 32.25rem) {
+    h1 {
+        font-size: 5rem;
+        line-height: 6rem;
+    }
+
+    .name-letters span {
+        margin: -.8rem;
+    }
+
+    .nav-group-left {
+        margin-left: 2rem;
+    }
+    
+    .nav-group-right {
+        margin-right: 2rem;
+    }
+
     .work-link {
         gap: 3rem;
     }
@@ -355,5 +510,41 @@ h6 {
 
     .team-member-name {
         margin-left: 0;
+    }
+}
+
+@keyframes name-letters {
+    0% {
+        transform: translateY(0) scale(1, 1);
+    }
+    4% {
+        transform: translateY(0) scale(1.2, .8);
+    }
+    5% {
+        transform: translateY(-1rem) scale(.8, 1.2);
+    }
+    6% {
+        transform: translateY(0) scale(1.2, .8);
+    }
+    7% {
+        transform: translateY(0) scale(.9, 1.1);
+    }
+    8% {
+        transform: translateY(0) scale(1.05, .95);
+    }
+    9% {
+        transform: translateY(0) scale(.98, 1.02);
+    }
+    10% {
+        transform: translateY(0) scale(1, 1); 
+    }
+    100% {
+        transform: translateY(0) scale(1, 1); 
+    }
+}
+
+@keyframes line-out {
+    100% {
+        width: 33%;
     }
 }
