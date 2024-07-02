@@ -16,7 +16,7 @@ header {
     background-image: url(images/headerBG_4.png);
     background-color: rgb(255, 255, 255);
     background-repeat: repeat;
-    background-size: 75rem;
+    background-size: 60rem;
     filter: drop-shadow(0 0 .2rem rgba(56, 56, 76, 1));
     padding: 1rem 0;
     top: 0;
@@ -29,9 +29,16 @@ nav:hover {
 }
 
 nav {
+    padding: 0 .25rem;
     color: rgb(240, 240, 250);
     font-weight: 200;
     font-size: 1.25rem;
+    outline: .1rem solid radial-gradient(rgba(240, 240, 250, 1) 0%, rgba(240, 240, 250, 1) 100%);
+    transition: outline 600ms ease-in-out;
+}
+
+nav:hover {
+    outline: .1rem solid radial-gradient(rgba(240, 240, 250, 1) 0%, rgba(240, 240, 250, 1) 100%);
 }
 
 body {
@@ -103,14 +110,13 @@ h6 {
 }
 
 .nav {
-    /* padding: 0 .5rem; */
     border-radius: 2rem;
     filter: drop-shadow(0 0 .25rem rgba(245, 248, 252, 0));
 }
 
-.nav:hover {
+/* .nav:hover {
     filter: drop-shadow(0 0 .5rem rgba(245, 248, 252, .5));
-}
+} */
 
 .nav-group-left {
     margin-left: 1rem;
@@ -130,6 +136,11 @@ h6 {
 
 .nav-group-right nav {
     font-size: 1rem;
+}
+
+.linkedin {
+    margin: 1rem auto;
+    width: 2rem;
 }
 
 .name {
@@ -243,7 +254,7 @@ h6 {
     text-align: center;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 1rem;
+    margin: 1rem 0;
 }
 
 .work-link-btn {
