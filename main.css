@@ -61,9 +61,9 @@ section {
 }
 
 h1 {
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: 200;
-    line-height: 4rem;
+    line-height: 3rem;
 }
 
 h2 {
@@ -138,7 +138,7 @@ h6 {
 }
 
 .name-letters {
-    height: 7.5rem;
+    height: 6rem;
 }
 
 .name-letters span {
@@ -410,6 +410,11 @@ h6 {
         display: none;
     }
 
+    h1 {
+        font-size: 5rem;
+        line-height: 6rem;
+    }
+
     body {
         padding: 0 5rem;
     }
@@ -439,15 +444,6 @@ h6 {
 }
 
 @media screen and (min-width: 32.25rem) {
-    h1 {
-        font-size: 5rem;
-        line-height: 6rem;
-    }
-
-    .name-letters span {
-        margin: -.8rem;
-    }
-
     .nav-group-left {
         margin-left: 2rem;
     }
@@ -510,6 +506,17 @@ h6 {
 
     .team-member-name {
         margin-left: 0;
+    }
+}
+
+@media screen and (min-width: 32.25rem) and (max-width: 48rem) {
+    h1 {
+        font-size: 3rem;
+        line-height: 4rem;
+    }
+
+    .name-letters {
+        height: 7.5rem;
     }
 }
 
