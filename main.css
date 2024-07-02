@@ -148,22 +148,22 @@ h6 {
 }
 
 .name-letter-1 {
-    left: 41%;
+    left: 42%;
     animation: name-letters 15000ms infinite ease-in-out 1000ms;
 }
 
 .name-letter-2 {
-    left: 45%;
+    left: 46.5%;
     animation: name-letters 15000ms infinite ease-in-out 1100ms;
 }
 
 .name-letter-3 {
-    left: 50.5%;
+    left: 51.5%;
     animation: name-letters 15000ms infinite ease-in-out 1200ms;
 }
 
 .name-letter-4 {
-    left: 56%;
+    left: 56.5%;
     animation: name-letters 15000ms infinite ease-in-out 1300ms;
 }
 
@@ -208,7 +208,7 @@ h6 {
 }
 
 .name h4 {
-    font-size: 1.5rem;
+    font-size: 1rem;
 }
 
 .name hr {
@@ -427,6 +427,10 @@ h6 {
         height: 11rem;
     }
 
+    .name h4 {
+        font-size: 1.5rem;
+    }
+
     .about {
         display: flex;
         justify-content: space-between;
@@ -517,6 +521,10 @@ h6 {
 
     .name-letters {
         height: 7.5rem;
+    }
+
+    .name h4 {
+        font-size: 1.25rem;
     }
 }
 
