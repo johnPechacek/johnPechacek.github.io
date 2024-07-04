@@ -11,11 +11,25 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <header>
-    <div class="nav-group-left"><a class="nav" href="../"><nav>John<br />Pechacek</nav></a></div>
-    <div class="nav-group-right">
-        <a class="nav" href="../"><nav>Work</nav></a>
-        <div class="nav"><nav>About</nav></div>
-        <a class="nav" href="Resume"><nav>Resume</nav></a>
+    <div class="nav-group-right hamburger-menu mobile">
+        <a class="nav nav-work mobile" href="../"><nav>Work</nav></a>
+        <div class="nav nav-about mobile"><nav>About</nav></div>
+        <a class="nav nav-resume mobile" href="../Resume"><nav>Resume</nav></a>
+    </div>
+    <div class="header-container">
+        <div class="nav-group-left"><a class="nav" href="../"><nav>John<br />Pechacek</nav></a></div>
+        <div class="nav-group-right">
+            <a class="nav nav-work desktop" href="../"><nav>Work</nav></a>
+            <div class="nav nav-about desktop"><nav>About</nav></div>
+            <a class="nav nav-resume desktop" href="../Resume"><nav>Resume</nav></a>
+            <div class="nav hamburger-menu-btn mobile">
+                <nav class="hamburger-menu-icon">
+                    <div class="hamburger-menu-icon-line burger-line-1"></div>
+                    <div class="hamburger-menu-icon-line burger-line-2"></div>
+                    <div class="hamburger-menu-icon-line burger-line-3"></div>
+                </nav>
+            </div>
+        </div>
     </div>
 </header>
 <body>
@@ -34,4 +48,6 @@
         <div class="social-icon"><a href="https://www.linkedin.com/in/john-pechacek-574b8058"><img src="../images/icons8-linkedin.svg" alt="my linkedIn account"></a></div>
     </div>
 </body>
+
+<script src="script.js"></script>
 </html>
