@@ -39,7 +39,7 @@
 <body>
     <section class="summary">
         <h2>World of Genres - Word Knowledge</h2>
-        <h4>A gamified collection of middle school Spanish vocabulary activities, covering 150+ vocabulary words.</h4>
+        <h4>A gamified collection of middle school Spanish vocabulary activities, covering 50+ vocabulary words.</h4>
         <div class="summary-container">
             <div class="banner-image"></div>
             <div class="summary-subsections">
@@ -59,6 +59,7 @@
                             <p>UI Design</p>
                             <p>UI Development</p>
                             <p>Motion Design</p>
+                            <p>Documentation</p>
                         </div>
                     </div>
                 </div>
@@ -92,30 +93,40 @@
         <h3>The Solution</h3>
         <h5>A series of low stakes vocabulary activities, gamified with a simple reward system.</h5>
         <p>With such a tight deadline, I knew the design phase needed to be short and effective. I convinced the team to adopt a template approach, so that we were only finding a single solution to the problem instead of a separate solution for each of the three worlds in World of Genres. From that starting point, the team collectively ideated on what the template should be. We settled on the idea of teaching and drilling students with 5 short activities. Each activity would approach the same group of words from different angles, helping them stick better in the students' minds.</p>
-        <p>We had one artist on the team, and unique illustrations were needed for each of the 150+ vocabulary words, so reusing as much UI as possible was very important. For 4 of the 5 activities, I designed and developed reusable cards UI inspired by playing cards. This UI gave me an idea for a simple reward system.</p>
+        <p>We had one artist on the team, and unique illustrations were needed for each of the 50+ vocabulary words, so reusing as much UI as possible was very important. For 4 of the 5 activities, I designed and developed reusable cards UI inspired by playing cards. This UI gave me an idea for a simple reward system.</p>
         <div class="image-container"><img src="images/solitaireRef.png"></div>
         <p>I loved the solitaire game that came with Windows 95 growing up. It had an interesting feature where the user could customize the art on the back of the cards used in the game. Inspired by that concept, I created a pool of card back patterns and decals made to match the corresponding past, present, and future worlds in World of Genres.</p>
         <div class="image-container"><img src="images/WK_rewards.gif"></div>
-        <p>When the student completed any of the 5 activities they were presented with a new card back design from randomizing the patterns and decals available from the world they were currently in. They could then select from their growing collection of card back designs at any time.</p>
+        <p>When the student completed any of the 5 activities, they were presented with a new card back design from randomizing the patterns and decals available from the world they were currently in. They could then select from their growing collection of card back designs at any time.</p>
     </section>
     <hr />
     <section class="activities">
         <h3>Activities</h3>
+        <p>Students were given the freedom to choose the order in which they wanted to complete each of the 5 activities. Once all activities were completed, they would continue their journey through the past, present, or future world of the World of Genres.</p>
+        <p>Each of the 5 activities was conceived through a short series of design sessions that I guided the team through. We would ideate using notes and sketches in a session. Then, I would spend a few days mocking up lo-fidelity prototypes with the developer on the team using our proprietary authoring tool. We presented the prototypes to the team, and made incremental adjustments based on the team's feedback. This iterative design process was brief but quite effective and actually more efficient since it kept us from exploring poor solutions for too long.</p>
         <h4>Flash Cards</h4>
-        <p></p>
+        <p>The flash card activity was the ideal place for students to begin their Word Knowledge experience.</p>
         <div class="image-container"><img src="images/WK_flashCards.gif"></div>
+        <p>Students were presented with a carousel of flash cards. They would see the word first and a narrator would speak the word aloud for the student to hear. They could then click on the card to flip it over, revealing the an illustration of the word and a definition that was also read aloud by a narrator for the student to hear. Exploring all of the vocabulary words would enable the student to go back to the Word Knowledge menu.</p>
         <h4>Synonyms and Antonyms</h4>
-        <p></p>
+        <p>Judging words to be synonyms or antonyms of the vocabulary words is a great method for getting the words to stick in the students' minds.</p>
         <div class="image-container"><img src="images/WK_synAnt.gif"></div>
+        <p>The vocabulary words were presented at the top of the screen in another carousel component, and could be clicked to hear the word spoken by the narrator. The words to be judged as synonyms or antonyms of each vocabulary words, were presented as small piles of playing cards. The student would swipe them left or right, trying to sort each one into the correct group. The cards would glow green and disappear if the sorting was correct. If the sorting was incorrect, they would glow red, shake, fall, and then slide back up to be sorted again.</p>
         <h4>Matching</h4>
-        <p></p>
+        <p>The matching activity was intended to be more of a game than the other activies.</p>
+        <div class="image-container"><img src="images/marioRef.JPG"></div>
+        <p>It was inspired by memory card matching games like this one from Super Mario 3.</p>
         <div class="image-container"><img src="images/WK_matching_2.gif"></div>
+        <p>The student was presented with a card on the left showing a definition, and cards with each vocabulary word on the right. The vocabulary word cards would be shown for several seconds at the beginning of the activity for the student to quickly try and remember. All the vocabulary word cards would flip over and the student could start trying to find the word that matched the definition on the left. Clicking the definition card would change to one of the other remaining definitions, and clicking on a vocabulary word card would make a guess. If the guess was correct, both the definition card and the vocabulary card would glow green and disappear. If incorrect, both cards would glow red, and shake, then the selected vocabulary word card would flip back over.</p>
         <h4>Spelling</h4>
-        <p></p>
+        <p>Spelling is a great way to familiarize yourself with new words. Like taking notes, just the act of writing or typing the word helps the information to stick in the mind.</p>
         <div class="image-container"><img src="images/WK_spelling.gif"></div>
+        <p>The design of this activity is an outlier. At the time, our app was not equipped to engage the on screen keyboards of touch devices. We overcame this obstacle by designing our own, with a look and feel that was connected to the World of Genres. We wanted to design the machine to look and feel satisfying to interact with, like an old-school tactile hand-held device.</p>
+        <p>In the top left corner of the machine, students were presented with the illustration of words they were trying to spell. Next to that on the right, was a sentence with a blank where the word would go. Above these was a series of small lights showing the students progress towards correctly spelling all the words. They would use the machine's keyboard to type their answers and use the check-mark button to test their answers. If the answer was correct, the large light in the top right of the machine would glow green. If incorrect, the large light would glow red and the machine would shake. If they clicked on the speaker button, they could hear the word read aloud and briefly see the word on screen. This ensured that a student would never be stuck for too long. Finally, clicking the arrow buttons on the side would cycle through the remaining words.</p>
         <h4>Definitions</h4>
-        <p></p>
+        <p>The definitions activity was much like the matching activity, but instead of using the memory game aspect, it was a more straight forward multiple choice format using card components.</p>
         <div class="image-container"><img src="images/WK_definitions_2.gif"></div>
+        <p>Students were presented with a definition at the top of the screen, and would try to select the corresponding word from the selection of smaller cards at the bottom of the screen. Again, clicking a correct word would cause the selected word card and definition card to glow green and disappear. If the chosen card was incorrect, that card would glow red and shake. </p>
     </section>
 </body>
 
