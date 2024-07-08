@@ -24,8 +24,7 @@
 
 @media screen and (min-width: 32.25rem) {
     .banner-image {
-        /* height: 100%; */
         max-width: 13.9rem;
-        background-position: left;
+        background-position: top left;
     }
 }
