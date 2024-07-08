@@ -1,3 +1,31 @@
 .finished-screens-gif {
     max-width: 20rem;
 }
+
+.banner-image {
+    background: center / contain no-repeat url("images/homeward_demo.gif");
+}
+
+.team-responsibilities {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.banner-image {
+    min-height: 30.625rem;
+    max-width: 100%;
+}
+
+.summary-subsections {
+    flex-direction: column;
+    justify-content: start;
+}
+
+@media screen and (min-width: 32.25rem) {
+    .banner-image {
+        /* height: 100%; */
+        max-width: 13.9rem;
+        background-position: left;
+    }
+}
