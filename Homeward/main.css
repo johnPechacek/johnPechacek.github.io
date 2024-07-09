@@ -22,9 +22,62 @@
     justify-content: start;
 }
 
+.card-group {
+    margin: 0;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.feature-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.feature-group .card {
+    max-width: none;
+}
+
+.card {
+    max-width: 15rem;
+    height: 100%;
+    padding: 1rem;
+    gap: .5rem;
+}
+
+.users p {
+    margin: .25rem 0;
+    text-align: center;
+}
+
+.users .image-container {
+    margin: 0 auto;
+    width: 6rem;
+}
+
+.users img {
+    mix-blend-mode: multiply;
+
+}
+.solution h5 {
+    margin-bottom: 1rem;
+}
+
 @media screen and (min-width: 32.25rem) {
     .banner-image {
         max-width: 13.9rem;
         background-position: top left;
+    }
+
+    .feature-group {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1rem;
+        padding: 1rem 0;
+    }
+
+    .feature-group .card {
+        max-width: 15rem;
     }
 }
