@@ -119,6 +119,11 @@ table .image-container {
     padding: 0;
 }
 
+.problems-image {
+    mix-blend-mode: multiply;
+    height: 100%;
+}
+
 @media screen and (min-width: 32.25rem) {
     .banner-image {
         max-width: 13.9rem;
@@ -147,5 +152,17 @@ table .image-container {
     .test-results .image-container {
         width: 1.5rem;
         height: 1.5rem;
+    }
+}
+
+@media screen and (min-width: 48rem) {
+    .problems-group-1 {
+        display: grid;
+        grid-template-columns: .9fr .52fr .93fr;
+    }
+
+    .problems-group-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
     }
 }
