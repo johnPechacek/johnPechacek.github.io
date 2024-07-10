@@ -124,6 +124,10 @@ table .image-container {
     height: 100%;
 }
 
+.scenario-narrative-card {
+    max-width: 100%;
+}
+
 @media screen and (min-width: 32.25rem) {
     .banner-image {
         max-width: 13.9rem;
