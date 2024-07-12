@@ -40,6 +40,10 @@
     max-width: none;
 }
 
+.goal-group {
+    flex-direction: column;
+}
+
 .feature-title {
     margin: 0 0 1rem;
 }
@@ -51,7 +55,7 @@
     gap: .5rem;
 }
 
-.users p {
+.card-centered p {
     margin: .25rem 0;
     text-align: center;
 }
@@ -64,12 +68,19 @@
 .card .image-container {
     margin: 0 auto;
     width: 5rem;
+    height: 5rem;
 }
 
 .card img {
     mix-blend-mode: multiply;
     /* filter: grayscale(1); */
 }
+
+.card li {
+    font-weight: 200;
+
+}
+
 .solution h5 {
     margin-bottom: 1rem;
 }
@@ -124,8 +135,22 @@ table .image-container {
     height: 100%;
 }
 
-.scenario-narrative-card {
-    max-width: 100%;
+.quote {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.25rem;
+    line-height: 2rem;
+    font-weight: 300;
+    max-width: 75%;
+    margin: 2rem auto;
+}
+
+.quote-group hr {
+    width: 25%;
+    margin: 0 auto;
+}
+
+.quote b {
+    font-weight: 500;
 }
 
 @media screen and (min-width: 32.25rem) {
@@ -143,6 +168,10 @@ table .image-container {
 
     .feature-group .card {
         max-width: 15rem;
+    }
+
+    .goal-group {
+        flex-direction: row;
     }
     
     table {
