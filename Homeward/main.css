@@ -136,21 +136,28 @@ table .image-container {
 }
 
 .quote {
-    font-family: "Poppins", sans-serif;
+    margin: 2rem 0;
+    width: 100%;
+}
+
+.quote-group {
+    margin: 0 auto;
+    max-width: 85%;
+}
+
+.quote p {
     font-size: 1.25rem;
-    line-height: 2rem;
     font-weight: 300;
-    max-width: 75%;
-    margin: 2rem auto;
 }
 
 .quote-group hr {
-    width: 25%;
+    width: 50%;
     margin: 0 auto;
 }
 
 .quote b {
-    font-weight: 500;
+    font-weight: 600;
+    font-family: "IBM Plex Serif", serif;
 }
 
 @media screen and (min-width: 32.25rem) {
@@ -185,6 +192,18 @@ table .image-container {
     .test-results .image-container {
         width: 1.5rem;
         height: 1.5rem;
+    }
+
+    .quote {
+        font-size: 1.5rem;
+    }
+
+    .quote-group {
+        max-width: 75%;
+    }
+    
+    .quote-group hr {
+        width: 25%;
     }
 }
 
