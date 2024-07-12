@@ -85,7 +85,8 @@
     <hr />
     <section class="define">
         <h3>Define</h3>
-        <p>To understand the problem, we began by defining our key groups of users.</p>
+        <h4>Understanding Our Users</h4>
+        <p>We began solving the problem by taking a deep dive into the experiences of the people affected by the problem. We put these people into two groups.</p>
         <div class="image-group card-group">
             <div class="card card-centered users-primary">
                 <div class="image-container"><img src="images/primaryUsers.JPG" alt="Primary Users"></div>
@@ -100,9 +101,23 @@
                 <p>People who work in shelters or volunteer as fosters</p>
             </div>
         </div>
-        <p>To deeply understand what our primary and extreme users experience when encountering this problem, we created an empathy map.</p>
+        <p>We then sought out target primary and extreme users for interviews. Talking to them about their experiences helped us better understand their struggles and desires for specific solutions.</p>
+        <div class="quote-group">
+            <div class="quote">
+                <p>I’d like to see an <span><b>easier way to look up lost dogs.</b></span> I can’t even count how many times I’ve seen someone say “I remember a post but can’t find it now”. <span><b>Need to search by breed/color/sex...</b></span>So many posts say something like “found this baby” and you have to look at the picture to see the type of animal/color/etc.</p>
+            </div>
+            <hr />
+            <div class="quote">
+                <p>We end up picking up dogs that get out all the time. <span><b>It's almost never when vets or shelters are open so we can't get chips scanned.</b></span> We have a dog and can't really keep another one overnight.</p>
+            </div>
+            <hr />
+            <div class="quote">
+                <p>It's hard to <span><b>try to make sure you are posting on every possible site</b></span> to better the chance of the dog being found and weeding through the posts of people wanting to take the dog, not actually the owner. <span><b>Even if you have resolved the case, people can still and do reach out wanting to have the dog.</b></span></p>
+            </div>
+        </div>
+        <p>Armed with the knowledge we gained from these interviews, we engaged in empathy and journey mapping, to put ourselves in the shoes of our primary users and extreme users.</p>
         <div class="image-container"><img src="images/EmpathyMap-a140cbd2-1920w.webp" alt="Empathy Map"></div>
-        <p>In addition, we conducted competitor analysis to determine what features are available through competitor apps on the market.</p>
+        <p>Finally, we conducted competitor analysis to determine what features are available through competitor apps on the market. From this research it became clear that our differentiating feature would be an RFID microchip scan process.</p>
         <table class="competitor-analysis">
             <tr class="table-top">
                 <th>&nbsp;</th>
@@ -185,23 +200,6 @@
                 <td><div class="image-container"><img src="images/check.svg" alt="yes"></td>
             </tr>
         </table>
-        <p>Finally, we interviewed potential primary and extreme users. These were a few of the key insights we gained:</p>
-        <!-- <div class="image-container"><img src="images/homeward_3.JPG" alt="Key Insights"></div>
-        -->
-        <div class="quote-group">
-            <div class="quote">
-                <p>I’d like to see an <span><b>easier way to look up lost dogs.</b></span> I can’t even count how many times I’ve seen someone say “I remember a post but can’t find it now”. <span><b>Need to search by breed/color/sex...</b></span>So many posts say something like “found this baby” and you have to look at the picture to see the type of animal/color/etc.</p>
-            </div>
-            <hr />
-            <div class="quote">
-                <p>We end up picking up dogs that get out all the time. <span><b>It's almost never when vets or shelters are open so we can't get chips scanned.</b></span> We have a dog and can't really keep another one overnight.</p>
-            </div>
-            <hr />
-            <div class="quote">
-                <p>It's hard to <span><b>try to make sure you are posting on every possible site</b></span> to better the chance of the dog being found and weeding through the posts of people wanting to take the dog, not actually the owner. <span><b>Even if you have resolved the case, people can still and do reach out wanting to have the dog.</b></span></p>
-            </div>
-        </div>
-        <p>Based on this research, we honed in on the app's differentiating features.</p>
         <h4>Key Features</h4>
         <div class="image-group card-group feature-group">
             <div class="card feature">
@@ -223,8 +221,29 @@
                 <p>A step-by-step process to identify animals seamlessly within the app, via the AR virtual microchip scanner.</p>
             </div>
         </div>
-        <p>We created epics and user stories to help us develop these features.</p>
-        <div class="image-container"><img src="images/homeward_5.JPG" alt="Epics and User Stories"></div>
+        <h4>Epics and User Stories</h4>
+        <div class="epic-group">
+            <div class="epic">
+                <h6>Reporting a found pet</h6>
+                <hr />
+                <p>As a person who found a pet, I need a way to pin the location where I found the pet so other users looking can search by area.</p>
+            </div>
+            <div class="epic">
+                <h6>Reporting a lost pet</h6>
+                <hr />
+                <p>As someone who lost a pet, I need to be able to close out a case once resolved so that the pet feed is not cluttered with resolved requests.</p>
+            </div>
+            <div class="epic">
+                <h6>Searching for pets</h6>
+                <hr />
+                <p>As someone who has lost a pet, I need to be able to filter for different characteristics so that I can easily search for my pet.</p>
+            </div>
+            <div class="epic">
+                <h6>Microchip scanning</h6>
+                <hr />
+                <p>As someone who found a pet, I need my phone's camera to scan for a microchip so I can easily see if the dog is chipped.</p>
+            </div>
+        </div>
     </section>
     <hr />
     <section class="develop">

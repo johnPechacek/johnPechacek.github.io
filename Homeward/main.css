@@ -27,6 +27,19 @@
     justify-content: start;
 }
 
+.epic-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0 1rem;
+    margin-top: 1rem;
+}
+
+.epic {
+    max-width: 85%;
+    margin: 0 auto;
+}
+
 .card-group {
     margin: 0;
     flex-direction: row;
@@ -39,6 +52,7 @@
 .feature-group {
     display: flex;
     flex-direction: column;
+    margin-top: 1rem;
 }
 
 .feature-group .card {
@@ -209,6 +223,15 @@ table .image-container {
     
     .quote-group hr {
         width: 25%;
+    }
+
+    .epic-group {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .epic h6 {
+        text-align: center;
     }
 }
 
