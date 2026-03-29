@@ -1,0 +1,41 @@
+/* Color variables */
+$bg-dark: #020b11;
+$mg-1-dark: #020b11;
+$mg-2-dark: #041927;
+$mg-3-dark: #052235;
+$fg-1-dark: #a9c4d8;
+$fg-2-dark: #c7dbe8;
+$fg-3-dark: #e3eef5;
+
+$bg-light: #e3eef5;
+$mg-1-light: #a9c4d8;
+$mg-2-light: #c7dbe8;
+$mg-3-light: #e3eef5;
+$fg-1-light: #1b4662;
+$fg-2-light: #052235;
+$fg-3-light: #020b11;
+
+$accent: #e47038;
+
+/* Provide a color map if needed */
+$colors-dark: (
+  bg: $bg-dark,
+  mg-1: $mg-1-dark,
+  mg-2: $mg-2-dark,
+  mg-3: $mg-3-dark,
+  fg-1: $fg-1-dark,
+  fg-2: $fg-2-dark,
+  fg-3: $fg-3-dark,
+  accent: $accent,
+);
+
+$colors-light: (
+  bg: $bg-light,
+  mg-1: $mg-1-light,
+  mg-2: $mg-2-light,
+  mg-3: $mg-3-light,
+  fg-1: $fg-1-light,
+  fg-2: $fg-2-light,
+  fg-3: $fg-3-light,
+  accent: $accent,
+);

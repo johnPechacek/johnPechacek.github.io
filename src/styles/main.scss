@@ -1,0 +1,220 @@
+@use "sass:map";
+@use "variables" as *;
+
+/* Expose CSS custom properties for runtime theme switching. */
+/* Default to light theme, but prefer user's system preference when available. */
+:root {
+  --accent: #{$accent};
+  --bg: #{$bg-light};
+  --bg-glass: #{rgba($bg-light, 0.5)};
+  --glass-hover: #{rgba($fg-3-light, 0.1)};
+  --mg-1: #{$mg-1-light};
+  --mg-2: #{$mg-2-light};
+  --mg-3: #{$mg-3-light};
+  --fg-1: #{$fg-1-light};
+  --fg-2: #{$fg-2-light};
+  --fg-3: #{$fg-3-light};
+  color-scheme: light;
+}
+
+/* If the user prefers dark system theme, apply dark variables */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #{$bg-dark};
+    --bg-glass: #{rgba($bg-dark, 0.5)};
+    --glass-hover: #{rgba($fg-3-dark, 0.1)};
+    --mg-1: #{$mg-1-dark};
+    --mg-2: #{$mg-2-dark};
+    --mg-3: #{$mg-3-dark};
+    --fg-1: #{$fg-1-dark};
+    --fg-2: #{$fg-2-dark};
+    --fg-3: #{$fg-3-dark};
+    --accent: #{$accent};
+    color-scheme: dark;
+  }
+}
+
+/* Manual override classes (take precedence) */
+.theme-dark {
+  --bg: #{$bg-dark};
+  --bg-glass: #{rgba($bg-dark, 0.5)};
+  --glass-hover: #{rgba($fg-3-dark, 0.1)};
+  --mg-1: #{$mg-1-dark};
+  --mg-2: #{$mg-2-dark};
+  --mg-3: #{$mg-3-dark};
+  --fg-1: #{$fg-1-dark};
+  --fg-2: #{$fg-2-dark};
+  --fg-3: #{$fg-3-dark};
+  --accent: #{$accent};
+  color-scheme: dark;
+}
+
+.theme-light {
+  --bg: #{$bg-light};
+  --bg-glass: #{rgba($bg-light, 0.5)};
+  --glass-hover: #{rgba($fg-3-light, 0.1)};
+  --mg-1: #{$mg-1-light};
+  --mg-2: #{$mg-2-light};
+  --mg-3: #{$mg-3-light};
+  --fg-1: #{$fg-1-light};
+  --fg-2: #{$fg-2-light};
+  --fg-3: #{$fg-3-light};
+  --accent: #{$accent};
+  color-scheme: light;
+}
+
+/* Basic reset and typography */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  height: 100%;
+  scrollbar-gutter: stable;
+  font-family:
+    "Afacad",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+}
+body {
+  height: 100%;
+  margin: 0;
+  padding-top: 3rem;
+  font-family: "Alegreya", Georgia, serif;
+  background-color: var(--bg);
+  color: var(--fg-1);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Utilities */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.accent {
+  color: var(--accent);
+}
+
+/* Simple header styles */
+header.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--mg-2);
+  padding: 0 3.65rem 0 2rem;
+  overflow: visible;
+  background-color: var(--bg-glass);
+  backdrop-filter: blur(1rem);
+  -webkit-backdrop-filter: blur(1rem);
+}
+
+header.site-header nav {
+  display: flex;
+  align-items: center;
+  overflow: visible;
+}
+
+header.site-header a,
+header.site-header button {
+  font-family: "Afacad", sans-serif;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  color: var(--fg-1);
+  text-decoration: none;
+  padding: 0 1rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+
+  &:hover {
+    color: var(--accent);
+  }
+}
+
+header.site-header a.site-name {
+  font-family: "Alegreya", Georgia, serif;
+  font-size: 2rem;
+  color: var(--fg-3);
+  height: auto;
+  padding: 0;
+
+  &:hover {
+    color: var(--fg-3);
+  }
+}
+
+header.site-header a.active,
+header.site-header button.active {
+  background-color: var(--accent);
+  color: var(--bg);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Afacad", sans-serif;
+  margin-bottom: 0;
+}
+
+h1 {
+  margin: 0 0 0.5rem 0;
+  font-weight: 700;
+  font-size: 4rem;
+  color: var(--fg-3);
+}
+
+h2 {
+  font-size: 2.5rem;
+  color: var(--fg-2);
+}
+
+h3 {
+  font-size: 2rem;
+  color: var(--fg-2);
+}
+
+h4 {
+  font-size: 1.75rem;
+  color: var(--fg-2);
+}
+
+h5 {
+  font-size: 1.625rem;
+  color: var(--fg-2);
+}
+
+h6 {
+  font-size: 1.5rem;
+  color: var(--fg-2);
+}
+
+p {
+  font-size: 1.5rem;
+  margin-top: 0;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--mg-1);
+}

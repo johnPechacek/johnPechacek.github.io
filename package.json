@@ -1,0 +1,21 @@
+{
+  "name": "portfolio-website",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "/usr/local/Cellar/node/25.8.2/bin/node ./node_modules/.bin/astro dev",
+    "build": "/usr/local/Cellar/node/25.8.2/bin/node ./node_modules/.bin/astro build",
+    "preview": "/usr/local/Cellar/node/25.8.2/bin/node ./node_modules/.bin/astro preview",
+    "build:css": "sass src/styles:public/css",
+    "watch:css": "sass --watch src/styles:public/css"
+  },
+  "devDependencies": {
+    "astro": "^6.1.1",
+    "sass": "^1.98.0"
+  },
+  "dependencies": {
+    "@astrojs/react": "^5.0.2",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  }
+}

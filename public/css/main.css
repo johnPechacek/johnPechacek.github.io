@@ -1,0 +1,211 @@
+/* Color variables */
+/* Provide a color map if needed */
+/* Expose CSS custom properties for runtime theme switching. */
+/* Default to light theme, but prefer user's system preference when available. */
+:root {
+  --accent: #e47038;
+  --bg: #e3eef5;
+  --bg-glass: rgba(227, 238, 245, 0.5);
+  --glass-hover: rgba(2, 11, 17, 0.1);
+  --mg-1: #a9c4d8;
+  --mg-2: #c7dbe8;
+  --mg-3: #e3eef5;
+  --fg-1: #1b4662;
+  --fg-2: #052235;
+  --fg-3: #020b11;
+  color-scheme: light;
+}
+
+/* If the user prefers dark system theme, apply dark variables */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #020b11;
+    --bg-glass: rgba(2, 11, 17, 0.5);
+    --glass-hover: rgba(227, 238, 245, 0.1);
+    --mg-1: #020b11;
+    --mg-2: #041927;
+    --mg-3: #052235;
+    --fg-1: #a9c4d8;
+    --fg-2: #c7dbe8;
+    --fg-3: #e3eef5;
+    --accent: #e47038;
+    color-scheme: dark;
+  }
+}
+/* Manual override classes (take precedence) */
+.theme-dark {
+  --bg: #020b11;
+  --bg-glass: rgba(2, 11, 17, 0.5);
+  --glass-hover: rgba(227, 238, 245, 0.1);
+  --mg-1: #020b11;
+  --mg-2: #041927;
+  --mg-3: #052235;
+  --fg-1: #a9c4d8;
+  --fg-2: #c7dbe8;
+  --fg-3: #e3eef5;
+  --accent: #e47038;
+  color-scheme: dark;
+}
+
+.theme-light {
+  --bg: #e3eef5;
+  --bg-glass: rgba(227, 238, 245, 0.5);
+  --glass-hover: rgba(2, 11, 17, 0.1);
+  --mg-1: #a9c4d8;
+  --mg-2: #c7dbe8;
+  --mg-3: #e3eef5;
+  --fg-1: #1b4662;
+  --fg-2: #052235;
+  --fg-3: #020b11;
+  --accent: #e47038;
+  color-scheme: light;
+}
+
+/* Basic reset and typography */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  scrollbar-gutter: stable;
+  font-family: "Afacad", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  padding-top: 3rem;
+  font-family: "Alegreya", Georgia, serif;
+  background-color: var(--bg);
+  color: var(--fg-1);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Utilities */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.accent {
+  color: var(--accent);
+}
+
+/* Simple header styles */
+header.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--mg-2);
+  padding: 0 3.65rem 0 2rem;
+  overflow: visible;
+  background-color: var(--bg-glass);
+  backdrop-filter: blur(1rem);
+  -webkit-backdrop-filter: blur(1rem);
+}
+
+header.site-header nav {
+  display: flex;
+  align-items: center;
+  overflow: visible;
+}
+
+header.site-header a,
+header.site-header button {
+  font-family: "Afacad", sans-serif;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  color: var(--fg-1);
+  text-decoration: none;
+  padding: 0 1rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.2s, color 0.2s;
+}
+header.site-header a:hover,
+header.site-header button:hover {
+  color: var(--accent);
+}
+
+header.site-header a.site-name {
+  font-family: "Alegreya", Georgia, serif;
+  font-size: 2rem;
+  color: var(--fg-3);
+  height: auto;
+  padding: 0;
+}
+header.site-header a.site-name:hover {
+  color: var(--fg-3);
+}
+
+header.site-header a.active,
+header.site-header button.active {
+  background-color: var(--accent);
+  color: var(--bg);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Afacad", sans-serif;
+  margin-bottom: 0;
+}
+
+h1 {
+  margin: 0 0 0.5rem 0;
+  font-weight: 700;
+  font-size: 4rem;
+  color: var(--fg-3);
+}
+
+h2 {
+  font-size: 2.5rem;
+  color: var(--fg-2);
+}
+
+h3 {
+  font-size: 2rem;
+  color: var(--fg-2);
+}
+
+h4 {
+  font-size: 1.75rem;
+  color: var(--fg-2);
+}
+
+h5 {
+  font-size: 1.625rem;
+  color: var(--fg-2);
+}
+
+h6 {
+  font-size: 1.5rem;
+  color: var(--fg-2);
+}
+
+p {
+  font-size: 1.5rem;
+  margin-top: 0;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--mg-1);
+}
+
+/*# sourceMappingURL=main.css.map */

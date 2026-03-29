@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import PageLayout from '../../layouts/PageLayout.astro';
+
+const caseStudies = (await getCollection('case-studies')).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+---
+
+<PageLayout title="Case Studies">
+  <h1>Case Studies</h1>
+  <div class="case-studies-list">
+    {caseStudies.map((study) => (
+      <a href={`/case-studies/${study.slug}`} class="case-study-card">
+        <h2>{study.data.title}</h2>
+        <p>{study.data.description}</p>
+        <p class="date">{study.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</p>
+      </a>
+    ))}
+  </div>
+</PageLayout>
+
+<style>
+  .case-studies-list {
+    display: grid;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .case-study-card {
+    display: block;
+    padding: 1.5rem;
+    border: 1px solid var(--mg-2);
+    border-radius: 0.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.2s;
+  }
+
+  .case-study-card:hover {
+    background-color: var(--mg-1);
+  }
+
+  .case-study-card h2 {
+    margin: 0 0 0.5rem 0;
+  }
+
+  .case-study-card p {
+    margin: 0.5rem 0;
+  }
+
+  .date {
+    color: var(--fg-2);
+    font-size: 0.9rem;
+  }
+</style>

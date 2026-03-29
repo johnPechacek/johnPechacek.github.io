@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import { ClientRouter } from 'astro:transitions';
+import Header from '../components/Header.jsx';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+const rawCaseStudies = await getCollection('case-studies');
+const caseStudies = rawCaseStudies.sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+).map(study => ({
+  slug: study.id,
+  title: study.data.title,
+}));
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Afacad:wght@400;500;600;700&family=Alegreya:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css">
+    <ClientRouter />
+  </head>
+  <body>
+    <Header client:load caseStudies={caseStudies} currentPath={Astro.url.pathname} transition:persist />
+    <main class="container">
+      <slot />
+    </main>
+  </body>
+</html>
