@@ -7,6 +7,8 @@ skills: ["Product Design", "User Research", "UI/UX", "Feature Design"]
 
 # Designing Buck List
 
+![Buck List hero — buck profile screen in the Moultrie app](/images/buck-list-hero.png)
+
 **Role:** Product Designer
 **Timeline:** April to August 2025
 **Team:** 2 Designers, Product Manager, Engineering, Machine Learning

@@ -1,8 +1,45 @@
 ---
-import { default as About } from '../content/about/index.md';
+import { getEntry, render } from 'astro:content';
 import PageLayout from '../layouts/PageLayout.astro';
+
+const about = await getEntry('about', 'index');
+const { Content } = await render(about);
 ---
 
 <PageLayout title="About Me">
-  <About />
+  <div class="about-layout">
+    <div class="about-headshot-wrap">
+      <img src="/images/headshot.png" alt="John Pechacek" class="headshot" />
+    </div>
+    <div class="about-text">
+      <Content />
+    </div>
+  </div>
 </PageLayout>
+
+<style is:global>
+  .about-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .about-headshot-wrap {
+    width: 50%;
+    flex-shrink: 0;
+  }
+
+  .about-headshot-wrap .headshot {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    margin: 0;
+  }
+
+  .about-text {
+    flex: 1;
+    min-width: 0;
+  }
+</style>

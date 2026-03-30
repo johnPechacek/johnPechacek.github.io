@@ -163,4 +163,49 @@ const caseStudies = rawCaseStudies.sort(
   ::view-transition-new(toc-sidebar):not(:only-child) {
     animation: none;
   }
+
+  /* Section scroll-in animation */
+  .section-animate {
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  }
+
+  .section-animate.section-hidden {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
 </style>
+
+<script>
+  function initSectionAnimations() {
+    const article = document.querySelector('.case-study-content article');
+    if (!article) return;
+
+    const elements = article.querySelectorAll(':scope > *');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.remove('section-hidden');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    elements.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      const inViewport = rect.top < window.innerHeight && rect.bottom >= 0;
+
+      el.classList.add('section-animate');
+
+      if (!inViewport) {
+        el.classList.add('section-hidden');
+        observer.observe(el);
+      }
+    });
+  }
+
+  document.addEventListener('astro:page-load', initSectionAnimations);
+</script>
