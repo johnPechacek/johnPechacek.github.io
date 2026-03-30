@@ -80,6 +80,20 @@ const caseStudies = rawCaseStudies.sort(
     min-width: 0;
   }
 
+  @media (max-width: 900px) {
+    .case-study-wrapper {
+      grid-template-columns: 1fr;
+    }
+
+    .toc-sidebar {
+      display: none;
+    }
+
+    .case-study-content {
+      padding: 2rem;
+    }
+  }
+
   /* Table of contents */
   .toc-list,
   .toc-sub-list {
