@@ -1,0 +1,29 @@
+---
+// Import necessary SCSS variables if needed
+import '../styles/main.scss';
+---
+
+<div class="screen-group">
+  {#each images as image (image)}
+    <img src={image} alt="" class="screen-image" />
+  {/each}
+</div>
+
+<style>
+.screen-group {
+  display: flex;
+  flex-direction: row; /* Default to row on desktop */
+  gap: 2rem; /* Gap between images */
+}
+
+@media (max-width: 900px) {
+  .screen-group {
+    flex-direction: column; /* Switch to column on mobile */
+  }
+}
+
+.screen-image {
+  border-radius: 8px; /* Rounded corners for images */
+  width: 100%; /* Fill the width of the container */
+}
+</style>
