@@ -15,7 +15,9 @@ $fg-1-light: #1b4662;
 $fg-2-light: #052235;
 $fg-3-light: #020b11;
 
-$accent: #e47038;
+$accent-dark: #e47038;
+$accent-light: #a84c1a; // #a84c1a on #e3eef5 = 4.797:1 contrast (WCAG AA pass)
+$accent: $accent-dark; // backwards-compat alias
 
 /* Provide a color map if needed */
 $colors-dark: (

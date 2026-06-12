@@ -1,0 +1,64 @@
+---
+interface Props {
+  value: string;
+  context?: string;
+  label: string;
+}
+
+const { value, context, label } = Astro.props;
+---
+
+<div class="stat-card">
+  <div class="stat-number">
+    <span class="stat-value">{value}</span>
+    {context && <span class="stat-context">{context}</span>}
+  </div>
+  <div class="stat-label">{label}</div>
+</div>
+
+<style>
+  .stat-card {
+    flex: 1 1 0;
+    min-width: 0;
+    border: 1px solid var(--mg-2);
+    border-radius: 0.5rem;
+    padding: 1.25rem 1.5rem;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .stat-number {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .stat-value {
+    font-family: "Afacad", sans-serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--fg-3);
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .stat-context {
+    font-family: "Afacad", sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--fg-1);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: "Afacad", sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--fg-1);
+    text-transform: lowercase;
+    letter-spacing: 0.02em;
+  }
+</style>

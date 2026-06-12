@@ -4,5 +4,368 @@ import PageLayout from '../layouts/PageLayout.astro';
 ---
 
 <PageLayout title="Resume">
-  <Resume />
+  <div class="resume-layout">
+    <!-- Sticky left identity rail -->
+    <aside class="resume-rail">
+      <div class="rail-inner">
+        <p class="rail-name">John Pechacek</p>
+        <p class="rail-role">Product Designer</p>
+        <div class="rail-contact">
+          <a href="mailto:johnapechacek@gmail.com" class="rail-link">johnapechacek@gmail.com</a>
+          <a href="#" class="rail-link"><!-- TODO: real LinkedIn URL -->linkedin</a>
+        </div>
+        <button class="print-btn" onclick="window.print()">download pdf</button>
+      </div>
+    </aside>
+
+    <!-- Scrollable document column -->
+    <div class="resume">
+      <Resume />
+    </div>
+  </div>
 </PageLayout>
+
+<style is:global>
+  /* ── Two-column layout ────────────────────────────────────────── */
+  .resume-layout {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 0;
+    align-items: start;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* ── Left rail ────────────────────────────────────────────────── */
+  .resume-rail {
+    position: sticky;
+    top: calc(3rem + 2rem); /* header height + breathing room */
+  }
+
+  .rail-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .rail-name {
+    font-family: "Afacad", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--fg-3);
+    margin: 0;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  .rail-role {
+    font-family: "Afacad", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--accent);
+    text-transform: lowercase;
+    margin: 0 0 0.5rem;
+    letter-spacing: 0.02em;
+  }
+
+  .rail-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .rail-link {
+    font-family: "Afacad", sans-serif;
+    font-size: 0.9rem;
+    color: var(--fg-1);
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: var(--accent);
+    }
+  }
+
+  .print-btn {
+    font-family: "Afacad", sans-serif;
+    font-size: 0.85rem;
+    text-transform: lowercase;
+    letter-spacing: 0.02em;
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 0.5rem;
+    padding: 0.35rem 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    width: fit-content;
+  }
+
+  .print-btn:hover {
+    background-color: var(--accent);
+    color: var(--bg);
+  }
+
+  /* Stack to single column on narrow viewports */
+  @media (max-width: 700px) {
+    .resume-layout {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .resume-rail {
+      position: static;
+    }
+  }
+
+  /* ── Resume document column ───────────────────────────────────── */
+  .resume {
+    font-family: "Alegreya", Georgia, serif;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: var(--fg-1);
+    border-left: 1px solid var(--mg-2);
+    padding-left: 3rem;
+    padding-top: 0.25rem;
+  }
+
+  /* Hide the duplicated identity content in the markdown */
+  .resume > h1:first-child,
+  .resume > h1:first-child + p,
+  .resume > h1:first-child + p + p,
+  .resume > h1:first-child + p + p + p {
+    display: none;
+  }
+
+  /* ── Horizontal rules ─────────────────────────────────────────── */
+  .resume hr {
+    border: none;
+    border-top: 1px solid var(--mg-2);
+    margin: 1.75rem 0;
+  }
+
+  /* ── Section headings (h2) ────────────────────────────────────── */
+  .resume h2 {
+    font-family: "Afacad", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--fg-3);
+    margin: 2rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--mg-2);
+  }
+
+  /* ── Company headings (h3) ────────────────────────────────────── */
+  .resume h3 {
+    font-family: "Afacad", sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--fg-3);
+    margin: 1.5rem 0 0.1rem;
+  }
+
+  .resume h2 + h3 {
+    margin-top: 0;
+  }
+
+  /* ── Role + date line ─────────────────────────────────────────── */
+  .resume h3 + p {
+    font-family: "Afacad", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 400;
+    margin: 0 0 0.65rem;
+    color: var(--fg-2);
+  }
+
+  .resume h3 + p strong {
+    font-weight: 600;
+    color: var(--fg-3);
+  }
+
+  .resume h3 + p + p:not(:has(+ ul)) {
+    font-family: "Afacad", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 400;
+    margin: -0.4rem 0 0.65rem;
+    color: var(--fg-2);
+  }
+
+  .resume h3 + p + p:not(:has(+ ul)) strong {
+    font-weight: 600;
+    color: var(--fg-3);
+  }
+
+  /* ── Bullet lists ─────────────────────────────────────────────── */
+  .resume ul {
+    margin: 0 0 1.25rem;
+    padding-left: 1.4rem;
+  }
+
+  .resume ul li {
+    font-size: 1rem;
+    line-height: 1.55;
+    margin-bottom: 0.5rem;
+    color: var(--fg-1);
+  }
+
+  .resume ul li strong {
+    font-weight: 700;
+    color: var(--fg-3);
+  }
+
+  /* ── Skills ───────────────────────────────────────────────────── */
+  .resume .skills-category-label {
+    font-family: "Afacad", sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--fg-2);
+    margin: 1rem 0 0.4rem;
+  }
+
+  .resume .skills-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin: 0 0 0.75rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .resume .skills-chips li {
+    font-family: "Afacad", sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--fg-2);
+    border: 1px solid var(--mg-2);
+    border-radius: 999px;
+    padding: 0.15rem 0.6rem;
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  /* ── Education ────────────────────────────────────────────────── */
+  .resume h2:last-of-type ~ p strong {
+    font-family: "Afacad", sans-serif;
+    font-weight: 600;
+    color: var(--fg-3);
+  }
+
+  /* ── Print: collapse to single column, show identity in doc ──── */
+  @media print {
+    body {
+      background: #fff !important;
+      color: #111 !important;
+      padding-top: 0 !important;
+    }
+
+    header.site-header,
+    .print-btn,
+    footer {
+      display: none !important;
+    }
+
+    .resume-layout {
+      grid-template-columns: 1fr !important;
+      gap: 0 !important;
+      max-width: none;
+    }
+
+    .resume-rail {
+      position: static;
+      margin-bottom: 1rem;
+    }
+
+    .rail-name {
+      font-size: 1.6rem;
+    }
+
+    .container {
+      max-width: none;
+      padding: 0.6in 0.65in;
+      margin: 0;
+    }
+
+    /* Show the hidden identity block from markdown in print */
+    .resume > h1:first-child,
+    .resume > h1:first-child + p,
+    .resume > h1:first-child + p + p,
+    .resume > h1:first-child + p + p + p {
+      display: none !important;
+    }
+
+    .resume {
+      font-size: 0.8rem;
+      line-height: 1.4;
+      border-left: none;
+      padding-left: 0;
+    }
+
+    .resume h2 {
+      font-size: 0.75rem;
+      margin: 0.8rem 0 0.4rem;
+      padding-bottom: 0.2rem;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .resume h3 {
+      font-size: 0.95rem;
+      margin-top: 0.9rem;
+    }
+
+    .resume h3 + p,
+    .resume h3 + p + p:not(:has(+ ul)) {
+      font-size: 0.8rem;
+    }
+
+    .resume ul {
+      margin-bottom: 0.6rem;
+    }
+
+    .resume ul li {
+      font-size: 0.75rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .resume hr {
+      margin: 0.9rem 0;
+    }
+
+    .resume .skills-chips li {
+      font-size: 0.7rem;
+      padding: 0.1rem 0.45rem;
+    }
+
+    @page {
+      margin: 0;
+    }
+  }
+</style>
+
+<script>
+  function transformSkillsSection() {
+    const resume = document.querySelector('.resume');
+    if (!resume) return;
+
+    const paragraphs = Array.from(resume.querySelectorAll('p'));
+    paragraphs.forEach(p => {
+      const children = Array.from(p.childNodes).filter(n => n.nodeType !== 3 || n.textContent.trim() !== '');
+      if (children.length === 1 && children[0].tagName === 'STRONG') {
+        p.classList.add('skills-category-label');
+        const strong = children[0];
+        p.innerHTML = strong.textContent.replace(/:$/, '');
+        const next = p.nextElementSibling;
+        if (next && next.tagName === 'UL') {
+          next.classList.add('skills-chips');
+        }
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', transformSkillsSection);
+  document.addEventListener('astro:page-load', transformSkillsSection);
+</script>

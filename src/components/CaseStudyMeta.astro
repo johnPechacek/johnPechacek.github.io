@@ -1,0 +1,100 @@
+---
+interface Props {
+  role: string;
+  timeline: string;
+  team: string;
+  skills?: string[];
+}
+
+const { role, timeline, team, skills = [] } = Astro.props;
+
+const fields = [
+  { label: 'role', value: role },
+  { label: 'timeline', value: timeline },
+  { label: 'team', value: team },
+];
+---
+
+<div class="case-study-meta">
+  {fields.map(({ label, value }) => (
+    <div class="meta-row">
+      <span class="meta-label">{label}</span>
+      <span class="meta-value">{value}</span>
+    </div>
+  ))}
+  {skills.length > 0 && (
+    <div class="meta-row meta-skills-row">
+      <span class="meta-label">skills</span>
+      <div class="meta-skills">
+        {skills.map((skill) => (
+          <span class="skill-chip">{skill}</span>
+        ))}
+      </div>
+    </div>
+  )}
+</div>
+
+<style>
+  .case-study-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem 2rem;
+    border: 1px solid var(--mg-2);
+    border-radius: 0.5rem;
+    padding: 1.25rem 1.5rem;
+    background-color: transparent;
+    margin: 1.5rem 0;
+  }
+
+  @media (max-width: 600px) {
+    .case-study-meta {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .meta-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .meta-skills-row {
+    grid-column: 1 / -1;
+  }
+
+  .meta-label {
+    font-family: "Afacad", sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--fg-1);
+    text-transform: lowercase;
+    letter-spacing: 0.04em;
+  }
+
+  .meta-value {
+    font-family: "Alegreya", serif;
+    font-size: 1rem;
+    color: var(--fg-2);
+    line-height: 1.4;
+  }
+
+  .meta-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.1rem;
+  }
+
+  .skill-chip {
+    font-family: "Afacad", sans-serif;
+    font-size: 0.78rem;
+    font-weight: 400;
+    color: var(--fg-2);
+    border: 1px solid var(--mg-2);
+    border-radius: 999px;
+    padding: 0.15rem 0.65rem;
+    text-transform: lowercase;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+  }
+</style>

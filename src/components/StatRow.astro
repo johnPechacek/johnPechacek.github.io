@@ -1,0 +1,24 @@
+---
+// StatRow wraps multiple StatCard components in a responsive flex row.
+// Usage: wrap <StatCard> children inside <StatRow>.
+---
+
+<div class="stat-row">
+  <slot />
+</div>
+
+<style>
+  .stat-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1.75rem 0;
+  }
+
+  @media (max-width: 900px) {
+    .stat-row {
+      flex-direction: column;
+    }
+  }
+</style>

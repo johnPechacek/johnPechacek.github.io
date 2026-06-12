@@ -1,18 +1,35 @@
 ---
 interface Props {
   images: { src: string; alt: string }[];
+  caption?: string;
 }
 
-const { images } = Astro.props;
+const { images, caption } = Astro.props;
 ---
 
-<div class="screen-group">
-  {images.map(image => (
-    <img src={image.src} alt={image.alt} class="screen-image" />
-  ))}
-</div>
+{caption ? (
+  <figure class="screen-figure">
+    <div class="screen-group">
+      {images.map(image => (
+        <img src={image.src} alt={image.alt} class="screen-image" />
+      ))}
+    </div>
+    <figcaption class="screen-caption">{caption}</figcaption>
+  </figure>
+) : (
+  <div class="screen-group">
+    {images.map(image => (
+      <img src={image.src} alt={image.alt} class="screen-image" />
+    ))}
+  </div>
+)}
 
 <style>
+  .screen-figure {
+    margin: 0;
+    padding: 0;
+  }
+
   .screen-group {
     display: flex;
     flex-direction: row;
@@ -30,5 +47,13 @@ const { images } = Astro.props;
     flex: 1;
     min-width: 0;
     height: auto;
+  }
+
+  .screen-caption {
+    font-family: "Afacad", sans-serif;
+    font-size: 1.1rem;
+    color: var(--fg-1);
+    text-align: center;
+    margin-top: 0.75rem;
   }
 </style>

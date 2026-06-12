@@ -21,6 +21,8 @@
   &.open:not(.active) {
     background-color: var(--glass-hover);
   }
+  /* Active state handled by header.site-header button.active in main.scss:
+     no background, color: var(--fg-3), box-shadow accent underbar */
 }
 
 .work-dropdown-menu {

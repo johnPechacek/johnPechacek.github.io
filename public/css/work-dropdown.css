@@ -20,6 +20,10 @@
 .work-dropdown-trigger.open:not(.active) {
   background-color: var(--glass-hover);
 }
+.work-dropdown-trigger {
+  /* Active state handled by header.site-header button.active in main.scss:
+     no background, color: var(--fg-3), box-shadow accent underbar */
+}
 
 .work-dropdown-menu {
   background-color: var(--bg-glass);

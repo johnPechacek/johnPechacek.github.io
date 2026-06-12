@@ -11,11 +11,19 @@ skills:
   ]
 ---
 
+import StatRow from "../../components/StatRow.astro";
+import StatCard from "../../components/StatCard.astro";
+import CaseStudyMeta from "../../components/CaseStudyMeta.astro";
+import PullQuote from "../../components/PullQuote.astro";
+
 # Hunt Planning Research
 
-**Role:** Product Designer (research lead)
-**Timeline:** September 2025 to January 2026
-**Team:** Design Team, Cross-Functional Workshop Participants
+<CaseStudyMeta
+  role="Product Designer (research lead)"
+  timeline="September 2025 to January 2026"
+  team="Design Team, Cross-Functional Workshop Participants"
+  skills={["User Research", "Design Workshop", "Product Strategy", "Cross-functional Leadership"]}
+/>
 
 **Outcome:**
 A multi-method research project into how hunters plan their hunts, culminating in Moultrie's first cross-functional design workshop. The research reframed how the team understands hunt planning, and that framing became the reference point for a major product initiative now in development. One concept from the workshop is confirmed for that initiative.
@@ -43,6 +51,13 @@ I was asked to understand why the planning features weren't landing and what a b
 ## Research
 
 I planned the project as a funnel: start with what the company already knew, establish the competitive bar, go deep with interviews to find the right questions, then validate at scale with a survey.
+
+<StatRow>
+  <StatCard value="8" label="user interviews" />
+  <StatCard value="151" label="survey responses" />
+  <StatCard value="13" label="workshop participants" />
+  <StatCard value="4+" label="apps analyzed" />
+</StatRow>
 
 ### Existing Research
 
@@ -84,6 +99,8 @@ Synthesizing across methods, three insights changed how the team talks about hun
 
 **The window is short and schedule-driven.** Hunters decide based on when they're free, mostly 1 to 3 days out, and the plan stays fluid until morning. Tools should adapt to changing conditions, not ask hunters to commit to itineraries.
 
+<PullQuote>Concepts get discarded when strategy changes. A correct model of the user doesn't.</PullQuote>
+
 To make the reframing concrete for a December leadership presentation, I designed concept screens. The one I focused on was a per-property dashboard surfacing the highest-impact planning information at a glance: buck activity, wind direction, camera highlights, when a stand was last hunted. The concepts were deliberately provocations, single high-fidelity screens meant to spark discussion rather than specify a direction. They did their job. The discussion that followed set up the more interesting work.
 
 ---
@@ -112,7 +129,7 @@ What I can describe is what carried forward. The team now has a working model of
 
 ## Reflection
 
-This project didn't produce a feature recommendation that got built. It produced something more durable: a clear picture of what hunters are doing and where the experience fails them, and that framing survived a pivot. Concepts get discarded when strategy changes. A correct model of the user doesn't.
+This project didn't produce a feature recommendation that got built. It produced something more durable: a clear picture of what hunters are doing and where the experience fails them, and that framing survived a pivot.
 
 The survey result that contradicted my interview-based assumption is the part of the process I'd defend hardest. Eight interviews generate conviction, and conviction from a small sample is exactly the thing a survey exists to check. Mine didn't survive the check, and the recommendations were better for it.
 

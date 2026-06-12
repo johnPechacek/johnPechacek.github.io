@@ -3,7 +3,7 @@ title: About Me
 description: Learn more about me
 ---
 
-# About Me
+## about me
 
 The part of design I like most is the research end. I want to understand why someone makes a decision, and I enjoy discovering the gap between what people actually need and what they say they want. The work in this portfolio mostly lives in that gap: research that reframed how a company understood a problem, and a feature built around what hunters do rather than what they asked for.
 

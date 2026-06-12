@@ -2,12 +2,17 @@
 import { getCollection } from 'astro:content';
 import { ClientRouter } from 'astro:transitions';
 import Header from '../components/Header.jsx';
+import Footer from '../components/Footer.astro';
 
 interface Props {
   title: string;
+  description?: string;
 }
 
-const { title } = Astro.props;
+const {
+  title,
+  description = "John Pechacek — product designer with a decade of research-led design across consumer mobile, web, and institutional software.",
+} = Astro.props;
 const rawCaseStudies = await getCollection('case-studies');
 const caseStudies = rawCaseStudies.sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime()
@@ -22,7 +27,13 @@ const caseStudies = rawCaseStudies.sort(
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title} | Portfolio</title>
+    <title>{title} — John Pechacek</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={`${title} — John Pechacek`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={`${Astro.site ?? Astro.url.origin}/images/headshot.png`} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Afacad:wght@400;500;600;700&family=Alegreya:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -34,5 +45,8 @@ const caseStudies = rawCaseStudies.sort(
     <main class="container">
       <slot />
     </main>
+    <div class="container">
+      <Footer />
+    </div>
   </body>
 </html>

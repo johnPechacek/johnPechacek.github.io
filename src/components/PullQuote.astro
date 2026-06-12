@@ -1,0 +1,40 @@
+---
+// PullQuote — oversized italic serif quote with an accent rule above.
+// Usage: <PullQuote>Your quoted text here.</PullQuote>
+---
+
+<blockquote class="pull-quote">
+  <div class="pull-quote-rule" aria-hidden="true"></div>
+  <p class="pull-quote-text"><slot /></p>
+</blockquote>
+
+<style>
+  .pull-quote {
+    margin: 2.5rem 0;
+    padding: 0;
+    border: none;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .pull-quote-rule {
+    width: 3rem;
+    height: 2px;
+    background-color: var(--accent);
+    border-radius: 1px;
+    flex-shrink: 0;
+  }
+
+  .pull-quote-text {
+    font-family: "Alegreya", serif;
+    font-style: italic;
+    font-size: 1.75rem;
+    color: var(--fg-3);
+    line-height: 1.45;
+    margin: 0;
+    max-width: 52ch;
+  }
+</style>

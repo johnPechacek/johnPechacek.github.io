@@ -4,7 +4,7 @@
 /* Expose CSS custom properties for runtime theme switching. */
 /* Default to light theme, but prefer user's system preference when available. */
 :root {
-  --accent: #e47038;
+  --accent: #a84c1a;
   --bg: #e3eef5;
   --bg-glass: rgba(227, 238, 245, 0.5);
   --glass-hover: rgba(2, 11, 17, 0.1);
@@ -58,7 +58,7 @@
   --fg-1: #1b4662;
   --fg-2: #052235;
   --fg-3: #020b11;
-  --accent: #e47038;
+  --accent: #a84c1a;
   color-scheme: light;
 }
 
@@ -158,8 +158,9 @@ header.site-header a.site-name:hover {
 
 header.site-header a.active,
 header.site-header button.active {
-  background-color: var(--accent);
-  color: var(--bg);
+  background: none;
+  color: var(--fg-3);
+  box-shadow: inset 0 -3px 0 0 var(--accent);
 }
 
 /* Hamburger button — mobile only, needs high specificity to beat header.site-header button */
@@ -366,6 +367,7 @@ h6 {
 p,
 li {
   font-size: 1.5rem;
+  line-height: 1.6;
   margin-top: 0;
 }
 

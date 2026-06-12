@@ -4,7 +4,7 @@
 /* Expose CSS custom properties for runtime theme switching. */
 /* Default to light theme, but prefer user's system preference when available. */
 :root {
-  --accent: #{$accent};
+  --accent: #{$accent-light};
   --bg: #{$bg-light};
   --bg-glass: #{rgba($bg-light, 0.5)};
   --glass-hover: #{rgba($fg-3-light, 0.1)};
@@ -29,7 +29,7 @@
     --fg-1: #{$fg-1-dark};
     --fg-2: #{$fg-2-dark};
     --fg-3: #{$fg-3-dark};
-    --accent: #{$accent};
+    --accent: #{$accent-dark};
     color-scheme: dark;
   }
 }
@@ -45,7 +45,7 @@
   --fg-1: #{$fg-1-dark};
   --fg-2: #{$fg-2-dark};
   --fg-3: #{$fg-3-dark};
-  --accent: #{$accent};
+  --accent: #{$accent-dark};
   color-scheme: dark;
 }
 
@@ -59,7 +59,7 @@
   --fg-1: #{$fg-1-light};
   --fg-2: #{$fg-2-light};
   --fg-3: #{$fg-3-light};
-  --accent: #{$accent};
+  --accent: #{$accent-light};
   color-scheme: light;
 }
 
@@ -167,8 +167,9 @@ header.site-header a.site-name {
 
 header.site-header a.active,
 header.site-header button.active {
-  background-color: var(--accent);
-  color: var(--bg);
+  background: none;
+  color: var(--fg-3);
+  box-shadow: inset 0 -3px 0 0 var(--accent);
 }
 
 /* Hamburger button — mobile only, needs high specificity to beat header.site-header button */
@@ -367,6 +368,7 @@ h6 {
 p,
 li {
   font-size: 1.5rem;
+  line-height: 1.6;
   margin-top: 0;
 }
 

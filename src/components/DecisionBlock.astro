@@ -1,0 +1,65 @@
+---
+interface Props {
+  considered: string;
+  chose: string;
+  why: string;
+}
+
+const { considered, chose, why } = Astro.props;
+
+const rows = [
+  { kicker: 'considered', text: considered },
+  { kicker: 'chose', text: chose },
+  { kicker: 'why', text: why },
+];
+---
+
+<div class="decision-block">
+  {rows.map(({ kicker, text }) => (
+    <div class="decision-row">
+      <span class="decision-kicker">{kicker}</span>
+      <span class="decision-text">{text}</span>
+    </div>
+  ))}
+</div>
+
+<style>
+  .decision-block {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    margin: 2rem 0;
+    padding-left: 0.25rem;
+  }
+
+  .decision-row {
+    display: grid;
+    grid-template-columns: 5.5rem 1fr;
+    gap: 0.75rem;
+    align-items: baseline;
+  }
+
+  @media (max-width: 600px) {
+    .decision-row {
+      grid-template-columns: 1fr;
+      gap: 0.15rem;
+    }
+  }
+
+  .decision-kicker {
+    font-family: "Afacad", sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: lowercase;
+    letter-spacing: 0.02em;
+    padding-top: 0.25em;
+  }
+
+  .decision-text {
+    font-family: "Alegreya", serif;
+    font-size: 1rem;
+    color: var(--fg-2);
+    line-height: 1.55;
+  }
+</style>
