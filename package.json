@@ -10,11 +10,12 @@
     "watch:css": "sass --watch src/styles:public/css"
   },
   "devDependencies": {
-    "astro": "^6.1.1",
+    "@astrojs/mdx": "^5.0.6",
+    "astro": "^6.3.3",
     "sass": "^1.98.0"
   },
   "dependencies": {
-    "@astrojs/react": "^5.0.2",
+    "@astrojs/react": "^5.0.5",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   }

@@ -18,7 +18,7 @@ const resumeCollection = defineCollection({
 });
 
 const caseStudiesCollection = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/case-studies' }),
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/case-studies' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
