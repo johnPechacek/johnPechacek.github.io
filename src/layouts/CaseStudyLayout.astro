@@ -3,6 +3,9 @@ import { getCollection } from 'astro:content';
 import { ClientRouter } from 'astro:transitions';
 import Header from '../components/Header.jsx';
 import TableOfContents from '../components/TableOfContents.jsx';
+import CaseStudyMeta from '../components/CaseStudyMeta.astro';
+import StatRow from '../components/StatRow.astro';
+import StatCard from '../components/StatCard.astro';
 import Footer from '../components/Footer.astro';
 
 interface Props {
@@ -10,9 +13,16 @@ interface Props {
   description: string;
   date: Date;
   skills: string[];
+  role: string;
+  timeline: string;
+  team: string;
+  outcome: string;
+  heroImage?: string;
+  heroAlt?: string;
+  metrics?: { value: string; context?: string; label: string }[];
 }
 
-const { title, description, date } = Astro.props;
+const { title, description, date, role, timeline, team, outcome, heroImage, heroAlt, metrics } = Astro.props;
 const skills = Astro.props.skills || [];
 
 const formattedDate = date.toLocaleDateString('en-US', {
@@ -54,6 +64,21 @@ const nextStudy = caseStudies[(currentIndex + 1) % caseStudies.length];
   </head>
   <body>
     <Header client:load caseStudies={caseStudies} currentPath={Astro.url.pathname} transition:persist />
+    <div class="case-study-intro">
+      <h1>{title}</h1>
+      {heroImage && (
+        <img class="case-study-hero" src={heroImage} alt={heroAlt ?? ''} />
+      )}
+      <CaseStudyMeta role={role} timeline={timeline} team={team} skills={skills} />
+      <p class="case-study-outcome">{outcome}</p>
+      {metrics && metrics.length > 0 && (
+        <StatRow>
+          {metrics.map(m => (
+            <StatCard value={m.value} context={m.context} label={m.label} />
+          ))}
+        </StatRow>
+      )}
+    </div>
     <div class="case-study-wrapper">
       <aside class="toc-sidebar" transition:name="toc-sidebar">
         <TableOfContents client:load />
@@ -77,6 +102,33 @@ const nextStudy = caseStudies[(currentIndex + 1) % caseStudies.length];
 </html>
 
 <style is:global>
+  /* Full-width intro zone above two-column body */
+  .case-study-intro {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2.5rem 3rem 2rem;
+    border-bottom: 1px solid var(--mg-2);
+  }
+
+  .case-study-hero {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 0.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .case-study-outcome {
+    margin: 0 0 0.5rem;
+    max-width: 72ch;
+  }
+
+  @media (max-width: 900px) {
+    .case-study-intro {
+      padding: 1.5rem 2rem 1.5rem;
+    }
+  }
+
   /* Case study two-column layout */
   .case-study-wrapper {
     display: grid;

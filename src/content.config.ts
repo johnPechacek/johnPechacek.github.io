@@ -24,6 +24,17 @@ const caseStudiesCollection = defineCollection({
     description: z.string(),
     date: z.date(),
     skills: z.array(z.string()),
+    role: z.string(),
+    timeline: z.string(),
+    team: z.string(),
+    outcome: z.string(),
+    heroImage: z.string().optional(),
+    heroAlt: z.string().optional(),
+    metrics: z.array(z.object({
+      value: z.string(),
+      context: z.string().optional(),
+      label: z.string(),
+    })).optional(),
   }),
 });
 

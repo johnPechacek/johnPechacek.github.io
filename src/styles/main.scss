@@ -208,14 +208,26 @@ header.site-header .hamburger-btn {
   transition: all 400ms cubic-bezier(1, -0.01, 0, 1);
 }
 
-.burger-line-1 { transform: translateY(0.25rem); }
-.burger-line-2 { transform: translateY(1rem); }
-.burger-line-3 { transform: translateY(1.75rem); }
+.burger-line-1 {
+  transform: translateY(0.25rem);
+}
+.burger-line-2 {
+  transform: translateY(1rem);
+}
+.burger-line-3 {
+  transform: translateY(1.75rem);
+}
 
 .hamburger-icon-x {
-  .burger-line-1 { transform: translateY(1rem) rotate(765deg); }
-  .burger-line-2 { height: 0; }
-  .burger-line-3 { transform: translateY(1rem) rotate(-765deg); }
+  .burger-line-1 {
+    transform: translateY(1rem) rotate(765deg);
+  }
+  .burger-line-2 {
+    height: 0;
+  }
+  .burger-line-3 {
+    transform: translateY(1rem) rotate(-765deg);
+  }
 }
 
 /* Mobile menu */
@@ -241,7 +253,7 @@ header.site-header .hamburger-btn {
 
   &.mobile-menu-open {
     transform: translateX(0);
-    transition: transform 400ms cubic-bezier(0, 1, .15, .99);
+    transition: transform 400ms cubic-bezier(0, 1, 0.15, 0.99);
     pointer-events: auto;
   }
 }
@@ -289,7 +301,7 @@ header.site-header .hamburger-btn {
   padding-left: 1rem;
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     top: 50%;

@@ -72,14 +72,6 @@ export default function TableOfContents() {
   return (
     <nav className="toc" aria-label="Table of contents">
       <ul className="toc-list">
-        <li className="toc-item">
-          <button
-            className={`toc-link toc-h2${activeId === null ? ' active' : ''}`}
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          >
-            <span className="toc-text">overview</span>
-          </button>
-        </li>
         {nested.map(h2 => {
           const isActiveSection = activeSection?.id === h2.id;
           return (

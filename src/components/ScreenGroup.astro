@@ -5,48 +5,127 @@ interface Props {
 }
 
 const { images, caption } = Astro.props;
+const n = images.length;
+const center = (n - 1) / 2;
+
+const screens = images.map((image, i) => {
+  const offset = i - center;
+  // z-order increases with each screen — the last one sits closest to the viewer
+  const z = i + 1;
+  return { ...image, offset, z };
+});
 ---
 
-{caption ? (
-  <figure class="screen-figure">
-    <div class="screen-group">
-      {images.map(image => (
-        <img src={image.src} alt={image.alt} class="screen-image" />
-      ))}
-    </div>
-    <figcaption class="screen-caption">{caption}</figcaption>
-  </figure>
-) : (
-  <div class="screen-group">
-    {images.map(image => (
-      <img src={image.src} alt={image.alt} class="screen-image" />
+<figure class="screen-figure">
+  <div class="deck-overlay" aria-hidden="true"></div>
+  <div class="screen-group" style={`--n:${n}`}>
+    {screens.map(screen => (
+      <img
+        src={screen.src}
+        alt={screen.alt}
+        class="screen-image"
+        style={`--offset:${screen.offset}; z-index:${screen.z};`}
+      />
     ))}
   </div>
-)}
+  {caption && <figcaption class="screen-caption">{caption}</figcaption>}
+</figure>
 
 <style>
   .screen-figure {
-    margin: 0;
+    margin: 6rem 0 3rem;
     padding: 0;
+    --spread: 400px;
+    --zoom: 1.45;
   }
 
-  .screen-group {
-    display: flex;
-    flex-direction: row;
-    gap: 2rem;
-  }
-
-  @media (max-width: 900px) {
-    .screen-group {
-      flex-direction: column;
+  /* Content center is ~675px (article maxes at 72ch above 1066px vw,
+     then narrows). Keep: center + spread + (260 * zoom / 2) < vw.
+     Above 1066px:  maxSum = vw - 675
+     Below 1066px:  maxSum = vw/2 - 160   (article narrows with vw) */
+  @media (max-width: 1260px) {
+    .screen-figure {
+      --spread: 240px;
+      --zoom: 1.15;
     }
   }
 
+  @media (max-width: 1050px) {
+    .screen-figure {
+      --spread: 150px;
+      --zoom: 1.05;
+    }
+  }
+
+  /* Full-viewport layer that washes out the page (uses --bg, so it
+     lightens on light theme / darkens on dark). No blur — keeps it
+     cheap to composite on HiDPI displays. */
+  .deck-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 80;
+  }
+
+  .screen-figure.is-active .deck-overlay {
+    opacity: 0.8;
+  }
+
+  /* The deck reserves a fixed block in flow (sized to the resting
+     state) so the centered prose layout never shifts. */
+  .screen-group {
+    position: relative;
+    height: 600px;
+    margin: 1rem 0;
+    z-index: 1;
+  }
+
   .screen-image {
-    border-radius: 8px;
-    flex: 1;
-    min-width: 0;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 260px;
+    /* Force a uniform box across screens with slightly different
+       source dimensions, then crop to fill. */
+    aspect-ratio: 375 / 852;
     height: auto;
+    object-fit: cover;
+    object-position: top center;
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    /* Scale from the bottom edge so growth rises into the empty
+       space above, never down into the caption. */
+    transform-origin: center bottom;
+    transform: translateX(calc(var(--offset) * 180px - 50%)) scale(1);
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.5s ease;
+    will-change: transform;
+  }
+
+  /* Active state: spread wider and zoom up from the bottom edge */
+  .screen-figure.is-active .screen-image {
+    transform: translateX(calc(var(--offset) * var(--spread) - 50%)) scale(var(--zoom));
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.6);
+  }
+
+  /* Always above the overlay (z-index 80) so the exit transition
+     never flashes — the overlay fades, the cards stay on top. */
+  .screen-group,
+  .screen-caption {
+    position: relative;
+    z-index: 90;
+  }
+
+  /* At intermediate desktop widths: no scroll zoom/overlay.
+     Instead, hovering a card pops it to the front. Inline z-index
+     reasserts itself as soon as :hover ends, so order self-resets. */
+  @media (min-width: 901px) and (max-width: 1260px) {
+    .screen-image:hover {
+      z-index: 20 !important;
+    }
   }
 
   .screen-caption {
@@ -54,6 +133,59 @@ const { images, caption } = Astro.props;
     font-size: 1.1rem;
     color: var(--fg-1);
     text-align: center;
-    margin-top: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  /* Small screens: plain stacked layout, no deck / overlay / zoom */
+  @media (max-width: 900px) {
+    .deck-overlay {
+      display: none;
+    }
+
+    .screen-group {
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .screen-image {
+      position: static;
+      width: 100%;
+      max-width: 320px;
+      aspect-ratio: auto;
+      transform: none;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    .screen-figure.is-active .screen-image {
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .screen-image,
+    .deck-overlay {
+      transition: none;
+    }
   }
 </style>
+
+<script>
+  // Activate a deck when it's centered in the viewport; deactivate
+  // once it scrolls out of the central band.
+  const decks = document.querySelectorAll<HTMLElement>(".screen-figure");
+  if (decks.length && window.matchMedia("(min-width: 1261px)").matches) {
+    const observer = new IntersectionObserver(
+      entries => {
+        for (const entry of entries) {
+          entry.target.classList.toggle("is-active", entry.isIntersecting);
+        }
+      },
+      // Thin band across the vertical center of the viewport
+      { rootMargin: "-42% 0px -42% 0px", threshold: 0 }
+    );
+    decks.forEach(deck => observer.observe(deck));
+  }
+</script>
