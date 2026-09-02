@@ -5,15 +5,14 @@ import PageLayout from '../layouts/PageLayout.astro';
 const about = await getEntry('about', 'index');
 const { Content } = await render(about);
 
-const rawCaseStudies = await getCollection('case-studies');
+const rawCaseStudies = await getCollection('case-studies', ({ data }) => !data.draft);
 const caseStudies = rawCaseStudies.sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime()
 );
 
-// Pull the two featured studies by slug
+// Pull the featured studies by slug
 const buckList = caseStudies.find(s => s.id === 'designing-buck-list');
-const huntPlanning = caseStudies.find(s => s.id === 'hunt-planning-research');
-const featured = [buckList, huntPlanning].filter(Boolean);
+const featured = [buckList].filter(Boolean);
 ---
 
 <PageLayout title="John Pechacek — Product Designer">

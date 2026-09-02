@@ -28,6 +28,7 @@ const caseStudiesCollection = defineCollection({
     timeline: z.string(),
     team: z.string(),
     outcome: z.string(),
+    draft: z.boolean().optional().default(false),
     heroImage: z.string().optional(),
     heroAlt: z.string().optional(),
     metrics: z.array(z.object({
