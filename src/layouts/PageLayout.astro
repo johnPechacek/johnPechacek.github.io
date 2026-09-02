@@ -13,7 +13,7 @@ const {
   title,
   description = "John Pechacek — product designer with a decade of research-led design across consumer mobile, web, and institutional software.",
 } = Astro.props;
-const rawCaseStudies = await getCollection('case-studies');
+const rawCaseStudies = await getCollection('case-studies', ({ data }) => !data.draft);
 const caseStudies = rawCaseStudies.sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime()
 ).map(study => ({

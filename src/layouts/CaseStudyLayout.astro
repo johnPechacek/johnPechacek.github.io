@@ -31,7 +31,7 @@ const formattedDate = date.toLocaleDateString('en-US', {
   day: 'numeric',
 });
 
-const rawCaseStudies = await getCollection('case-studies');
+const rawCaseStudies = await getCollection('case-studies', ({ data }) => !data.draft);
 const caseStudies = rawCaseStudies.sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime()
 ).map(study => ({
@@ -41,7 +41,7 @@ const caseStudies = rawCaseStudies.sort(
 
 // Next case study (wraps around)
 const currentIndex = caseStudies.findIndex(s => s.title === title);
-const nextStudy = caseStudies[(currentIndex + 1) % caseStudies.length];
+const nextStudy = caseStudies.length > 1 ? caseStudies[(currentIndex + 1) % caseStudies.length] : null;
 ---
 
 <!doctype html>
