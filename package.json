@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "/usr/local/Cellar/node/25.8.2/bin/node ./node_modules/.bin/astro dev",
-    "build": "/usr/local/Cellar/node/25.8.2/bin/node ./node_modules/.bin/astro build",
-    "preview": "/usr/local/Cellar/node/25.8.2/bin/node ./node_modules/.bin/astro preview",
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
     "build:css": "sass src/styles:public/css",
     "watch:css": "sass --watch src/styles:public/css"
   },
