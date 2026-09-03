@@ -27,6 +27,13 @@ const featured = [buckList].filter(Boolean);
     </div>
   </section>
 
+  <!-- About prose (h2 + paragraphs from markdown) -->
+  <section class="about-section">
+    <div class="about-text">
+      <Content />
+    </div>
+  </section>
+
   <!-- Featured work -->
   <section class="featured-work">
     <h2 class="section-label">my work</h2>
@@ -48,13 +55,6 @@ const featured = [buckList].filter(Boolean);
           </a>
         );
       })}
-    </div>
-  </section>
-
-  <!-- About prose (h2 + paragraphs from markdown) -->
-  <section class="about-section">
-    <div class="about-text">
-      <Content />
     </div>
   </section>
 </PageLayout>
