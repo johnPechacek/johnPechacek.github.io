@@ -6,4 +6,5 @@ export default defineConfig({
   site: "https://johnpechacek.github.io",
   integrations: [react(), mdx()],
   transitions: true,
+  server: { port: Number(process.env.PORT) || 4321 },
 });

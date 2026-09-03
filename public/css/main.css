@@ -146,8 +146,9 @@ header.site-header button:hover {
 }
 
 header.site-header a.site-name {
-  font-family: "Alegreya", Georgia, serif;
+  font-family: "Afacad", sans-serif;
   font-size: 2rem;
+  font-weight: 600;
   color: var(--fg-3);
   height: auto;
   padding: 0;
@@ -386,7 +387,6 @@ article img {
 article figure {
   margin: 2rem 0;
 }
-
 article figure img {
   margin: 0 0 0.75rem;
   border-radius: 0.5rem;
