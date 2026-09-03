@@ -39,6 +39,10 @@ const caseStudies = rawCaseStudies.sort(
     <link href="https://fonts.googleapis.com/css2?family=Afacad:wght@400;500;600;700&family=Alegreya:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/main.css">
     <ClientRouter />
+    <script data-goatcounter="https://johnapechacek.goatcounter.com/count" data-goatcounter-settings='{"no_onload": true}' async src="//gc.zgo.at/count.js"></script>
+    <script>
+      document.addEventListener('astro:page-load', () => window.goatcounter?.count());
+    </script>
   </head>
   <body>
     <Header client:load caseStudies={caseStudies} currentPath={Astro.url.pathname} transition:persist />
