@@ -35,14 +35,15 @@ const featured = [buckList].filter(Boolean);
         const hasThumbnail = study.id === 'designing-buck-list';
         return (
           <a href={`/case-studies/${study.id}`} class="work-card">
-            <div class={`work-card-thumb ${hasThumbnail ? 'work-card-thumb--image' : 'work-card-thumb--tinted'}`}>
-              {hasThumbnail && (
+            {hasThumbnail && (
+              <div class="work-card-thumb">
                 <img src="/images/bucklist-hero.png" alt={study.data.title} class="work-card-img" />
-              )}
-            </div>
+              </div>
+            )}
             <div class="work-card-body">
               <h3 class="work-card-title">{study.data.title}</h3>
               <p class="work-card-desc">{study.data.description}</p>
+              <span class="work-card-link">View case study →</span>
             </div>
           </a>
         );
@@ -144,27 +145,17 @@ const featured = [buckList].filter(Boolean);
   }
 
   .work-cards {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
-  }
-
-  @media (max-width: 700px) {
-    .work-cards {
-      grid-template-columns: 1fr;
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
   }
 
   .work-card {
     display: flex;
     flex-direction: column;
-    border: 1px solid var(--mg-2);
-    border-radius: 0.5rem;
-    overflow: hidden;
     text-decoration: none;
     color: inherit;
     cursor: pointer;
-    transition: background-color 0.2s;
   }
 
   .work-card *,
@@ -173,39 +164,31 @@ const featured = [buckList].filter(Boolean);
     cursor: pointer;
   }
 
-  .work-card:hover {
-    background-color: var(--glass-hover);
-  }
-
   .work-card-thumb {
     width: 100%;
-    height: 180px;
-    flex-shrink: 0;
+    border-radius: 0.75rem;
     overflow: hidden;
-  }
-
-  .work-card-thumb--image {
-    background-color: var(--mg-1);
-  }
-
-  .work-card-thumb--tinted {
-    background-color: var(--mg-2);
   }
 
   .work-card-img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
     display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .work-card:hover .work-card-img {
+    transform: scale(1.015);
   }
 
   .work-card-body {
-    padding: 1.25rem 1.25rem 1.5rem;
+    padding: 1.5rem 0 0;
+    max-width: 40rem;
   }
 
   .work-card-title {
     font-family: "Afacad", sans-serif;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-weight: 600;
     color: var(--fg-3);
     margin: 0 0 0.5rem;
@@ -214,10 +197,23 @@ const featured = [buckList].filter(Boolean);
 
   .work-card-desc {
     font-family: "Alegreya", Georgia, serif;
-    font-size: 1rem;
+    font-size: 1.1rem;
     line-height: 1.5;
     color: var(--fg-2);
-    margin: 0;
+    margin: 0 0 0.6rem;
+  }
+
+  .work-card-link {
+    display: inline-block;
+    font-family: "Afacad", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--accent);
+    transition: transform 0.2s ease;
+  }
+
+  .work-card:hover .work-card-link {
+    transform: translateX(0.2rem);
   }
 
   /* ── About section ────────────────────────────────────────────── */
