@@ -64,7 +64,7 @@ Buck List grew out of design exploration I was doing for a different feature. De
 
 Designing Deer Survey for web, I wanted to streamline that review process, so I designed tools for categorizing images into persistent buck profiles that could hold tine counts, notes, and a name. When I presented the work to stakeholders, the profiles concept changed the conversation. Leadership saw more customer value in tracking individual bucks than in the survey feature itself. Deer Survey for web went to the backburner, and the roadmap was reprioritized around what became Buck List.
 
-The exploration wasn't assigned. It surfaced an opportunity that shifted what the team built next, which is part of why I think speculative design work inside a real project is worth the time it takes.
+The exploration wasn't assigned — it's a case for why speculative design work inside a real project pays off.
 
 ---
 
@@ -79,7 +79,7 @@ My job was turning those findings into design priorities. Two stats did most of 
   <StatCard value="77%" label="wanted to know which cameras a buck appears on" />
 </StatRow>
 
-The first finding directly drove the decision to lead every profile with last-seen time. The second drove leading with last-seen location alongside it. Both needs share a requirement: a system that connects images to individual animals over time. That requirement is what shaped the product approach.
+The first finding directly drove the decision to lead every profile with last-seen time. The second drove leading with last-seen location alongside it.
 
 ---
 
@@ -89,7 +89,7 @@ We built Buck List as a system for identifying and tracking individual bucks acr
 
 Phase 1 is manual. Users review recent images, assign them to profiles, and build a record of which bucks are on their property. Each profile captures a tagged image gallery, a profile photo, antler point counts, notes, and automatically surfaces when and where the buck was last seen. Phase 2 uses AI to suggest matches between new images and existing profiles and to flag potential unknowns, with users confirming before anything is applied.
 
-The relationship between the phases is the core of the design strategy. Phase 1 is not a placeholder until the AI arrives. The tagging users do in Phase 1 is the training data Phase 2 depends on, which meant every friction decision in the manual experience was also a data quality decision.
+The relationship between the phases is the core of the design strategy. Phase 1 is not a placeholder until the AI arrives — every friction decision in the manual experience was also a data quality decision.
 
 <PullQuote>A manual flow that users abandon doesn't just fail on its own terms. It starves the model.</PullQuote>
 
@@ -101,7 +101,7 @@ The product owner set three targets in the initial one-pager:
 2. By February of CY26, at least 10,000 unique, useful bucks identified, where "useful" means tagged in more than one setting and at more than one time of day.
 3. CSAT for users of Buck Profiles measures 10% higher than for non-users in gallery surveys.
 
-These targets shaped the design priorities. The 30% adoption bar meant profile creation had to be nearly effortless. The "useful bucks" definition meant the system had to encourage repeat tagging over time, not one-and-done profiles.
+The 30% adoption bar meant profile creation had to be nearly effortless. The "useful bucks" definition meant the system had to encourage repeat tagging over time, not one-and-done profiles.
 
 ---
 
@@ -109,7 +109,7 @@ These targets shaped the design priorities. The 30% adoption bar meant profile c
 
 ### Designing the Profile
 
-The priority when designing the profile was minimizing friction. The more effort profile creation requires, the fewer profiles users make, and a thin dataset going into Phase 2 is a problem.
+The priority when designing the profile was minimizing friction.
 
 <DecisionBlock
   considered="An exact age year field — hunters do think about a buck's age when deciding whether to target it."
@@ -139,7 +139,7 @@ For Phase 2, the goal was to make AI useful without making it autonomous.
 
 About three weeks before development started, a research spike came back with bad news. The bounding box data from smart tagging that we planned to use for automatic profile image cropping was not going to be available in a usable way.
 
-Without automatic cropping, the fallback was full trail camera images as profile thumbnails. That creates two problems. Trail camera images often capture multiple deer, so a full-image thumbnail doesn't tell you which buck a profile is for. And the app already uses full images as thumbnails for camera albums, so profile cards would have looked identical to an existing pattern while doing something different.
+Without automatic cropping, the fallback was full trail camera images as profile thumbnails — and that created two problems.
 
 <DecisionBlock
   considered="Full trail-camera images as profile thumbnails — the fallback once bounding box data fell through."
@@ -147,9 +147,9 @@ Without automatic cropping, the fallback was full trail camera images as profile
   why="Full-image thumbnails are ambiguous when a frame contains multiple deer, and they collide visually with the existing camera-album pattern. A manual crop keeps the profile card legible as its own pattern, which everything downstream of profile creation depends on."
 />
 
-The fallback was on the table mostly because no single function had the full picture. ML understood why the bounding boxes failed, engineering understood the implementation cost of alternatives, the product owner understood the timeline, and design understood what the thumbnail problem would do to the experience. There was no real disagreement to overcome, just a gap in shared understanding, and closing that gap was the work. I made the case for a manual cropping step during profile creation and worked through the implementation with engineering. We tested a Syncfusion library first; it didn't give us the control we needed and felt clunky. We moved to a custom solution, which took more refinement but gave us full control over the interaction. I simplified the controls, added a movable selection area, and reduced the precision the crop required.
+The fallback was on the table mostly because no single function had the full picture. ML understood why the bounding boxes failed, engineering understood the implementation cost of alternatives, the product owner understood the timeline, and design understood what the thumbnail problem would do to the experience. There was no real disagreement to overcome, just a gap in shared understanding, and closing that gap was the work. I made the case for a manual cropping step and worked through a custom cropping implementation with engineering after an off-the-shelf library proved too limiting, simplifying the controls and reducing the precision the crop required.
 
-The result wasn't the automated experience we planned, but it kept the profile card legible as its own pattern, which everything downstream of profile creation depends on.
+The result wasn't the automated experience we planned, but it worked.
 
 ---
 
@@ -163,7 +163,7 @@ Phase 1 launched in time for opening day of deer season. Against the three targe
 
 **CSAT: still being collected at the time of writing.**
 
-Beyond the targets, the platform now holds a structured dataset of how individual animals move across a property, which cameras they appear on, and when they show up. That is what the survey said hunters wanted, and it is what Phase 2 needs to function. The 2025 season generated the training data, and AI-assisted identification is planned for the coming season.
+Beyond the targets, the platform now holds a structured dataset of how individual animals move across a property, which cameras they appear on, and when they show up — the training data Phase 2 needs, generated by exactly the behavior the survey said hunters wanted.
 
 From a business standpoint, the system adds meaningful value to Moultrie's premium hunt planning subscription. Internal forecasts project $11.8M in new revenue in FY27, driven by acquisition and retention gains as the feature deepens what the subscription offers.
 
@@ -171,8 +171,8 @@ From a business standpoint, the system adds meaningful value to Moultrie's premi
 
 ## Reflection
 
-The bounding box pivot taught me the most, and not because something went wrong. The problem only got solved because someone held all four contexts at once: what the model could do, what engineering could build, what the timeline allowed, and what the experience required. Nobody was wrong and nobody was blocking. The functions just couldn't see each other's constraints, and translating between them turned out to be the design work that mattered most on this project. That's the kind of work I want more of.
+The bounding box pivot taught me the most: translating between functions that can't see each other's constraints turned out to be the design work that mattered most on this project. That's the kind of work I want more of.
 
-The comparison flyout is where I'd push harder with another pass. It works for easy identifications and compromises on hard ones, and that's exactly the kind of thing a usability testing round would have caught early. We didn't have time before the season deadline. The triage flow shipped without instrumentation too, so I can't tell you how bulk tagging performs against individual tagging, which is a gap I'd close before iterating on either. Both are the cost of the deadline, and both are things I'd fight for earlier in the schedule next time rather than treating as nice-to-haves that fall off the end.
+The comparison flyout is where I'd push harder with another pass — a usability testing round would have caught its hard-case compromise early, but we didn't have time before the season deadline. The triage flow also shipped without instrumentation, so I can't tell you how bulk tagging performs against individual tagging. Both are costs of the deadline, and both are things I'd fight for earlier in the schedule next time.
 
 Phase 2 is the real test of the strategy. Phase 1 proved users will do the manual work and that the data flywheel turns. Whether the model performs well enough to earn their trust is the open question, and it's a hard one. Buck identification challenges experienced hunters working from good daylight photos. Doing it reliably from nighttime trail camera images is a different problem. The system was designed so that even when the AI is wrong, the user catches it before it costs them anything. The coming season will show whether that's enough.
