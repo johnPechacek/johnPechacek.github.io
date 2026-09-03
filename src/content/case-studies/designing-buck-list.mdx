@@ -211,6 +211,11 @@ Without automatic cropping, the fallback was full trail camera images as profile
   why="Full-image thumbnails are ambiguous when a frame contains multiple deer, and they collide visually with the existing camera-album pattern. A manual crop keeps the profile card legible as its own pattern, which everything downstream of profile creation depends on."
 />
 
+<figure>
+  <img src="/images/crop-2.png" alt="Crop Buck Photo screen with a resizable frame over a trail camera image and a slider to adjust the crop area" />
+  <figcaption>The manual crop step: a resizable frame over the trail camera image, with a slider to adjust crop size and a prompt to center the buck.</figcaption>
+</figure>
+
 The fallback was on the table mostly because no single function had the full picture. ML understood why the bounding boxes failed, engineering understood the implementation cost of alternatives, the product owner understood the timeline, and design understood what the thumbnail problem would do to the experience. There was no real disagreement to overcome, just a gap in shared understanding, and closing that gap was the work. I made the case for a manual cropping step and worked through a custom cropping implementation with engineering after an off-the-shelf library proved too limiting, simplifying the controls and reducing the precision the crop required.
 
 The result wasn't the automated experience we planned, but it worked.
