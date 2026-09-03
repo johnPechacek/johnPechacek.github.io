@@ -9,12 +9,12 @@ import PageLayout from '../layouts/PageLayout.astro';
     <aside class="resume-rail">
       <div class="rail-inner">
         <p class="rail-name">John Pechacek</p>
-        <p class="rail-role">Product Designer</p>
+        <p class="rail-role">Senior UX Designer</p>
         <div class="rail-contact">
           <a href="mailto:johnapechacek@gmail.com" class="rail-link">johnapechacek@gmail.com</a>
-          <a href="#" class="rail-link"><!-- TODO: real LinkedIn URL -->linkedin</a>
+          <a href="https://www.linkedin.com/in/johnapechacek" class="rail-link" target="_blank" rel="noopener noreferrer">linkedin</a>
         </div>
-        <button class="print-btn" onclick="window.print()">download pdf</button>
+        <a class="print-btn" href="/John-Pechacek-Resume.pdf" download="John-Pechacek-Resume.pdf">download pdf</a>
       </div>
     </aside>
 
@@ -88,10 +88,12 @@ import PageLayout from '../layouts/PageLayout.astro';
   }
 
   .print-btn {
+    display: inline-block;
     font-family: "Afacad", sans-serif;
     font-size: 0.85rem;
     text-transform: lowercase;
     letter-spacing: 0.02em;
+    text-decoration: none;
     background: transparent;
     color: var(--accent);
     border: 1px solid var(--accent);

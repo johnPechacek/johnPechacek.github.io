@@ -11,7 +11,7 @@ interface Props {
 
 const {
   title,
-  description = "John Pechacek — product designer with a decade of research-led design across consumer mobile, web, and institutional software.",
+  description = "John Pechacek — senior UX designer with 12 years of research-led design across consumer mobile and institutional software.",
 } = Astro.props;
 const rawCaseStudies = await getCollection('case-studies', ({ data }) => !data.draft);
 const caseStudies = rawCaseStudies.sort(
