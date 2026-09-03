@@ -8,7 +8,7 @@ timeline: "April to August 2025"
 team: "2 Designers, Product Manager, Engineering, Machine Learning"
 outcome: "Launched Buck List, a system for identifying and tracking individual bucks across trail camera images. I led design for the feature and owned the design decisions, working closely with a second designer through exploration."
 heroImage: /images/bucklist-hero.png
-heroAlt: "Buck List hero — buck profile screen in the Moultrie app"
+heroAlt: "Buck List hero. Buck profile screen in the Moultrie app"
 metrics:
   - value: "27%"
     context: "vs 30% target"
@@ -64,7 +64,12 @@ Buck List grew out of design exploration I was doing for a different feature. De
 
 Designing Deer Survey for web, I wanted to streamline that review process, so I designed tools for categorizing images into persistent buck profiles that could hold tine counts, notes, and a name. When I presented the work to stakeholders, the profiles concept changed the conversation. Leadership saw more customer value in tracking individual bucks than in the survey feature itself. Deer Survey for web went to the backburner, and the roadmap was reprioritized around what became Buck List.
 
-The exploration wasn't assigned — it's a case for why speculative design work inside a real project pays off.
+<figure>
+  <img src="/images/lofiBP.png" alt="Early lo-fi wireframe of a buck profile screen, with placeholder fields for name, age, points, last seen, favorite spots, and notes above a grid of image placeholders" />
+  <figcaption>The original lo-fi concept of a buck profile — whimsical, but it's what got people excited.</figcaption>
+</figure>
+
+The exploration wasn't assigned. It's a case for why speculative design work inside a real project pays off.
 
 ---
 
@@ -89,7 +94,7 @@ We built Buck List as a system for identifying and tracking individual bucks acr
 
 Phase 1 is manual. Users review recent images, assign them to profiles, and build a record of which bucks are on their property. Each profile captures a tagged image gallery, a profile photo, antler point counts, notes, and automatically surfaces when and where the buck was last seen. Phase 2 uses AI to suggest matches between new images and existing profiles and to flag potential unknowns, with users confirming before anything is applied.
 
-The relationship between the phases is the core of the design strategy. Phase 1 is not a placeholder until the AI arrives — every friction decision in the manual experience was also a data quality decision.
+The relationship between the phases is the core of the design strategy. Phase 1 is not a placeholder until the AI arrives. Every friction decision in the manual experience was also a data quality decision.
 
 <PullQuote>A manual flow that users abandon doesn't just fail on its own terms. It starves the model.</PullQuote>
 
@@ -112,7 +117,7 @@ The 30% adoption bar meant profile creation had to be nearly effortless. The "us
 The priority when designing the profile was minimizing friction.
 
 <DecisionBlock
-  considered="An exact age year field — hunters do think about a buck's age when deciding whether to target it."
+  considered="An exact age year field. Hunters do think about a buck's age when deciding whether to target it."
   chose="A simple toggle between young and mature."
   why="Estimating age from a trail camera image is genuinely uncertain. Asking users to enter an exact year produces guesses more than data. The toggle captures the decision hunters are actually making without asking for precision the images can't support."
 />
@@ -130,7 +135,7 @@ The harder part was giving users something to compare against when an image wasn
 For Phase 2, the goal was to make AI useful without making it autonomous.
 
 <DecisionBlock
-  considered="A more automated approach — the case for it was real: confirmation adds steps to a workflow we'd spent the whole project removing steps from."
+  considered="A more automated approach. The case for it was real: confirmation adds steps to a workflow we'd spent the whole project removing steps from."
   chose="Users confirm before any match or new-buck flag is applied."
   why="A bad match quietly corrupts the data a hunter is planning around. A bad new-buck flag fills the list with noise. And in a system where user tagging is also training data, silent errors compound. A slower system users trust produces better data than a faster one they second-guess."
 />
@@ -139,10 +144,10 @@ For Phase 2, the goal was to make AI useful without making it autonomous.
 
 About three weeks before development started, a research spike came back with bad news. The bounding box data from smart tagging that we planned to use for automatic profile image cropping was not going to be available in a usable way.
 
-Without automatic cropping, the fallback was full trail camera images as profile thumbnails — and that created two problems.
+Without automatic cropping, the fallback was full trail camera images as profile thumbnails. That created two problems.
 
 <DecisionBlock
-  considered="Full trail-camera images as profile thumbnails — the fallback once bounding box data fell through."
+  considered="Full trail-camera images as profile thumbnails. The fallback once bounding box data fell through."
   chose="A manual crop step during profile creation."
   why="Full-image thumbnails are ambiguous when a frame contains multiple deer, and they collide visually with the existing camera-album pattern. A manual crop keeps the profile card legible as its own pattern, which everything downstream of profile creation depends on."
 />
@@ -163,7 +168,7 @@ Phase 1 launched in time for opening day of deer season. Against the three targe
 
 **CSAT: still being collected at the time of writing.**
 
-Beyond the targets, the platform now holds a structured dataset of how individual animals move across a property, which cameras they appear on, and when they show up — the training data Phase 2 needs, generated by exactly the behavior the survey said hunters wanted.
+Beyond the targets, the platform now holds a structured dataset of how individual animals move across a property, which cameras they appear on, and when they show up. That is the training data Phase 2 needs, generated by exactly the behavior the survey said hunters wanted.
 
 From a business standpoint, the system adds meaningful value to Moultrie's premium hunt planning subscription. Internal forecasts project $11.8M in new revenue in FY27, driven by acquisition and retention gains as the feature deepens what the subscription offers.
 
@@ -173,6 +178,6 @@ From a business standpoint, the system adds meaningful value to Moultrie's premi
 
 The bounding box pivot taught me the most: translating between functions that can't see each other's constraints turned out to be the design work that mattered most on this project. That's the kind of work I want more of.
 
-The comparison flyout is where I'd push harder with another pass — a usability testing round would have caught its hard-case compromise early, but we didn't have time before the season deadline. The triage flow also shipped without instrumentation, so I can't tell you how bulk tagging performs against individual tagging. Both are costs of the deadline, and both are things I'd fight for earlier in the schedule next time.
+The comparison flyout is where I'd push harder with another pass. A usability testing round would have caught its hard-case compromise early, but we didn't have time before the season deadline. The triage flow also shipped without instrumentation, so I can't tell you how bulk tagging performs against individual tagging. Both are costs of the deadline, and both are things I'd fight for earlier in the schedule next time.
 
 Phase 2 is the real test of the strategy. Phase 1 proved users will do the manual work and that the data flywheel turns. Whether the model performs well enough to earn their trust is the open question, and it's a hard one. Buck identification challenges experienced hunters working from good daylight photos. Doing it reliably from nighttime trail camera images is a different problem. The system was designed so that even when the AI is wrong, the user catches it before it costs them anything. The coming season will show whether that's enough.

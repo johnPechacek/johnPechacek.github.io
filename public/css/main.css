@@ -383,4 +383,20 @@ article img {
   margin: 2rem 0;
 }
 
+article figure {
+  margin: 2rem 0;
+}
+
+article figure img {
+  margin: 0 0 0.75rem;
+  border-radius: 0.5rem;
+}
+
+article figcaption {
+  font-family: "Afacad", sans-serif;
+  font-size: 0.95rem;
+  color: var(--fg-1);
+  text-align: center;
+}
+
 /*# sourceMappingURL=main.css.map */
