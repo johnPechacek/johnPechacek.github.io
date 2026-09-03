@@ -153,9 +153,45 @@ Hunters reviewing images from a session might be sorting through hundreds of pho
 
 The harder part was giving users something to compare against when an image wasn't obvious. Fitting two trail camera images side by side and expecting users to read subtle biological cues like tine count, spread, and brow tine shape is asking a lot on a phone screen. We solved it with a flyout sheet of profile pictures. Users can pull it up while viewing a new image, browse their existing bucks, and dismiss it when ready. The tradeoff: for a hard identification, asking users to hold an incoming image in memory while browsing the flyout is a real limitation. For easy decisions it works well. For harder ones it is a compromise, and I come back to it in the reflection.
 
+<ScreenGroup
+  caption="The flyout sheet uses larger profile pictures than the gallery grid, making it easier to recognize the same buck across pictures taken in different contexts."
+  images={[
+    {
+      src: "/images/flyout-1.png",
+      alt: "Flyout sheet of buck profile pictures open over an image detail view",
+    },
+    {
+      src: "/images/flyout-2.png",
+      alt: "Flyout sheet showing a larger profile picture for comparison against the incoming image",
+    },
+    {
+      src: "/images/flyout-3.png",
+      alt: "Flyout sheet dismissing after a buck profile is selected for tagging",
+    },
+  ]}
+/>
+
 ### A Guided AI Confirmation Flow
 
 For Phase 2, the goal was to make AI useful without making it autonomous.
+
+<ScreenGroup
+  caption="AI confirmation flow: a prompt on the buck profile surfaces new matches, then users toggle between the full profile photo and the current photo to confirm."
+  images={[
+    {
+      src: "/images/ai-1.png",
+      alt: "Buck profile screen with a prompt saying new photos were found that match this buck, with options to review or dismiss",
+    },
+    {
+      src: "/images/ai-2.png",
+      alt: "Confirm this match screen with the current photo selected in full, alongside a thumbnail of the profile photo",
+    },
+    {
+      src: "/images/ai-3.png",
+      alt: "Confirm this match screen with the profile photo toggled to full size for comparison against the current photo",
+    },
+  ]}
+/>
 
 <DecisionBlock
   considered="A more automated approach. The case for it was real: confirmation adds steps to a workflow we'd spent the whole project removing steps from."
