@@ -137,7 +137,7 @@ export default function Header({ caseStudies, currentPath = '' }) {
             <span className="mobile-menu-check">
               {isResumeActive && <img src="/icons/np-check-icon.svg" alt="" width="12" height="10" />}
             </span>
-            resume
+            my career
           </a>
         </li>
       </ul>
@@ -151,7 +151,7 @@ export default function Header({ caseStudies, currentPath = '' }) {
         <nav className="desktop-nav">
           <a href="/" className={isAboutActive ? 'active' : ''}>about me</a>
           <WorkDropdown caseStudies={caseStudies} isActive={isWorkActive} currentPath={path} />
-          <a href="/resume" className={isResumeActive ? 'active' : ''}>resume</a>
+          <a href="/resume" className={isResumeActive ? 'active' : ''}>my career</a>
         </nav>
         <button
           className="hamburger-btn"

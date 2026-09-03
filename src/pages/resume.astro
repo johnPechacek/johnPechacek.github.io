@@ -1,96 +1,130 @@
 ---
-import { default as Resume } from '../content/resume/index.md';
 import PageLayout from '../layouts/PageLayout.astro';
+import { resumePdf, summary, timeline, skills } from '../data/resume';
 ---
 
-<PageLayout title="Resume">
-  <div class="resume-layout">
-    <!-- Sticky left identity rail -->
-    <aside class="resume-rail">
-      <div class="rail-inner">
-        <p class="rail-name">John Pechacek</p>
-        <p class="rail-role">Senior UX Designer</p>
-        <div class="rail-contact">
-          <a href="mailto:johnapechacek@gmail.com" class="rail-link">johnapechacek@gmail.com</a>
-          <a href="https://www.linkedin.com/in/johnapechacek" class="rail-link" target="_blank" rel="noopener noreferrer">linkedin</a>
-        </div>
-        <a class="print-btn" href="/John-Pechacek-Resume.pdf" download="John-Pechacek-Resume.pdf">download pdf</a>
-      </div>
-    </aside>
+<PageLayout title="My Career">
+  <div class="career-page">
+    <h1 class="career-title">my career</h1>
 
-    <!-- Scrollable document column -->
-    <div class="resume">
-      <Resume />
-    </div>
+    <p class="career-summary">{summary}</p>
+
+    <a class="download-btn" href={resumePdf} download="John-Pechacek-Resume.pdf">
+      <svg class="download-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M12 16L7 11L8.4 9.55L11 12.15V4H13V12.15L15.6 9.55L17 11L12 16ZM6 20C5.45 20 4.97917 19.8042 4.5875 19.4125C4.19583 19.0208 4 18.55 4 18V15H6V18H18V15H20V18C20 18.55 19.8042 19.0208 19.4125 19.4125C19.0208 19.8042 18.55 20 18 20H6Z" fill="currentColor"/>
+      </svg>
+      <span>download my resume</span>
+    </a>
+
+    <!-- ── Skills ────────────────────────────────────────────── -->
+    <section class="skills-section">
+      <h2 class="section-heading">skills</h2>
+      {skills.map((group) => (
+        <div class="skills-group">
+          <p class="skills-category-label">{group.label}</p>
+          <ul class="skills-chips">
+            {group.items.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      ))}
+    </section>
+
+    <!-- ── Timeline: newest first, scroll down to travel back.
+         Projects sit above the role marker they belong to, since they
+         happened after that role began. ─────────────────────────── -->
+    <section class="timeline-section">
+      <h2 class="section-heading">timeline</h2>
+
+      <div class="timeline" id="timeline">
+        <div class="tl-spine" aria-hidden="true">
+          <div class="tl-spine-fill" id="tl-spine-fill"></div>
+        </div>
+
+        <p class="tl-cap tl-now" aria-hidden="true"><span class="tl-cap-dot"></span>now</p>
+
+        {timeline.map((entry) => (
+          <>
+            {entry.projects?.map((project) => (
+              <div class="tl-row is-project" data-node>
+                <div class="tl-year" aria-hidden="true"></div>
+                <div class="tl-dot-col" aria-hidden="true"></div>
+                <div class="tl-card">
+                  <h4 class="tl-card-title" data-anchor>
+                    <button type="button" class="tl-focus-btn">{project.name}</button>
+                  </h4>
+                  <div class="tl-card-body">
+                    <p class="tl-card-detail" set:html={project.detail} />
+                  </div>
+                </div>
+              </div>
+            ))}
+
+            <div class:list={['tl-row', 'is-marker', `is-${entry.kind}`]} data-node>
+              <div class="tl-year" aria-hidden="true">{entry.year}</div>
+              <div class="tl-dot-col" aria-hidden="true"><span class="tl-dot"></span></div>
+              <div class="tl-head">
+                {/* The spine plots the date, so the range is kept for screen
+                    readers and print only. */}
+                <p class="tl-range">{entry.range}</p>
+                {entry.tag && <p class="tl-tag">{entry.tag}</p>}
+                <h3 class="tl-org" data-anchor>
+                  <button type="button" class="tl-focus-btn">
+                    {entry.kind === 'role' ? entry.org : entry.title}
+                  </button>
+                </h3>
+                <p class:list={['tl-job', entry.kind !== 'role' && 'is-school']}>
+                  {entry.kind === 'role' ? entry.title : entry.org}
+                </p>
+                {entry.note && <p class="tl-note">{entry.note}</p>}
+              </div>
+            </div>
+          </>
+        ))}
+
+        <p class="tl-cap tl-start" aria-hidden="true"><span class="tl-cap-dot"></span>start</p>
+      </div>
+    </section>
   </div>
 </PageLayout>
 
 <style is:global>
-  /* ── Two-column layout ────────────────────────────────────────── */
-  .resume-layout {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 0;
-    align-items: start;
-    max-width: 900px;
+  .career-page {
+    max-width: 780px;
     margin: 0 auto;
+
+    /* The --mg-* neutrals collapse into the background in the dark theme,
+       so the timeline derives its own line colors from the foreground. */
+    --tl-line: color-mix(in srgb, var(--fg-1) 26%, transparent);
+    --tl-line-strong: color-mix(in srgb, var(--fg-1) 50%, transparent);
+    --tl-surface: color-mix(in srgb, var(--fg-1) 6%, var(--bg));
   }
 
-  /* ── Left rail ────────────────────────────────────────────────── */
-  .resume-rail {
-    position: sticky;
-    top: calc(3rem + 2rem); /* header height + breathing room */
-  }
-
-  .rail-inner {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .rail-name {
+  .career-title {
     font-family: "Afacad", sans-serif;
-    font-size: 1.5rem;
+    font-size: 3rem;
     font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
     color: var(--fg-3);
-    margin: 0;
-    line-height: 1.15;
-    letter-spacing: -0.01em;
+    margin: 0 0 1.25rem;
   }
 
-  .rail-role {
+  .career-summary {
+    font-family: "Alegreya", Georgia, serif;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: var(--fg-1);
+    margin: 0 0 1.5rem;
+  }
+
+  /* ── Download button ──────────────────────────────────────────── */
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
     font-family: "Afacad", sans-serif;
     font-size: 0.95rem;
     font-weight: 500;
-    color: var(--accent);
-    text-transform: lowercase;
-    margin: 0 0 0.5rem;
-    letter-spacing: 0.02em;
-  }
-
-  .rail-contact {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-    margin-bottom: 1.25rem;
-  }
-
-  .rail-link {
-    font-family: "Afacad", sans-serif;
-    font-size: 0.9rem;
-    color: var(--fg-1);
-    text-decoration: none;
-    transition: color 0.2s;
-
-    &:hover {
-      color: var(--accent);
-    }
-  }
-
-  .print-btn {
-    display: inline-block;
-    font-family: "Afacad", sans-serif;
-    font-size: 0.85rem;
     text-transform: lowercase;
     letter-spacing: 0.02em;
     text-decoration: none;
@@ -98,166 +132,479 @@ import PageLayout from '../layouts/PageLayout.astro';
     color: var(--accent);
     border: 1px solid var(--accent);
     border-radius: 0.5rem;
-    padding: 0.35rem 0.85rem;
+    padding: 0.4rem 0.9rem 0.4rem 0.75rem;
     cursor: pointer;
-    transition: background-color 0.2s, color 0.2s;
+    transition: background-color 0.15s ease-out, color 0.15s ease-out;
     width: fit-content;
   }
 
-  .print-btn:hover {
+  .download-btn:hover {
     background-color: var(--accent);
     color: var(--bg);
   }
 
-  /* Stack to single column on narrow viewports */
-  @media (max-width: 700px) {
-    .resume-layout {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-
-    .resume-rail {
-      position: static;
-    }
+  .download-icon {
+    display: block;
+    flex-shrink: 0;
   }
 
-  /* ── Resume document column ───────────────────────────────────── */
-  .resume {
-    font-family: "Alegreya", Georgia, serif;
-    font-size: 1.05rem;
-    line-height: 1.55;
-    color: var(--fg-1);
-    border-left: 1px solid var(--mg-2);
-    padding-left: 3rem;
-    padding-top: 0.25rem;
+  /* ── Sections ─────────────────────────────────────────────────── */
+  .skills-section,
+  .timeline-section {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--tl-line);
   }
 
-  /* Hide the duplicated identity content in the markdown */
-  .resume > h1:first-child,
-  .resume > h1:first-child + p,
-  .resume > h1:first-child + p + p,
-  .resume > h1:first-child + p + p + p {
-    display: none;
+  /* Room for the last node to travel up to the reading line */
+  .timeline-section {
+    padding-bottom: 4rem;
   }
 
-  /* ── Horizontal rules ─────────────────────────────────────────── */
-  .resume hr {
-    border: none;
-    border-top: 1px solid var(--mg-2);
-    margin: 1.75rem 0;
-  }
-
-  /* ── Section headings (h2) ────────────────────────────────────── */
-  .resume h2 {
+  .section-heading {
     font-family: "Afacad", sans-serif;
-    font-size: 1.5rem;
-    font-weight: 600;
-    text-transform: none;
-    letter-spacing: 0;
-    color: var(--fg-3);
-    margin: 2rem 0 1rem;
-    padding-bottom: 0.4rem;
-    border-bottom: 1px solid var(--mg-2);
-  }
-
-  /* ── Company headings (h3) ────────────────────────────────────── */
-  .resume h3 {
-    font-family: "Afacad", sans-serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--fg-3);
-    margin: 1.5rem 0 0.1rem;
-  }
-
-  .resume h2 + h3 {
-    margin-top: 0;
-  }
-
-  /* ── Role + date line ─────────────────────────────────────────── */
-  .resume h3 + p {
-    font-family: "Afacad", sans-serif;
-    font-size: 0.95rem;
-    font-weight: 400;
-    margin: 0 0 0.65rem;
-    color: var(--fg-2);
-  }
-
-  .resume h3 + p strong {
+    font-size: 2rem;
     font-weight: 600;
     color: var(--fg-3);
+    margin: 0 0 1.5rem;
   }
 
-  .resume h3 + p + p:not(:has(+ ul)) {
-    font-family: "Afacad", sans-serif;
-    font-size: 0.95rem;
-    font-weight: 400;
-    margin: -0.4rem 0 0.65rem;
-    color: var(--fg-2);
+  .skills-group {
+    margin-bottom: 1.25rem;
   }
 
-  .resume h3 + p + p:not(:has(+ ul)) strong {
-    font-weight: 600;
-    color: var(--fg-3);
-  }
-
-  /* ── Bullet lists ─────────────────────────────────────────────── */
-  .resume ul {
-    margin: 0 0 1.25rem;
-    padding-left: 1.4rem;
-  }
-
-  .resume ul li {
-    font-size: 1rem;
-    line-height: 1.55;
-    margin-bottom: 0.5rem;
-    color: var(--fg-1);
-  }
-
-  .resume ul li strong {
-    font-weight: 700;
-    color: var(--fg-3);
-  }
-
-  /* ── Skills ───────────────────────────────────────────────────── */
-  .resume .skills-category-label {
+  .skills-category-label {
     font-family: "Afacad", sans-serif;
     font-size: 0.8rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--fg-2);
-    margin: 1rem 0 0.4rem;
+    margin: 0 0 0.5rem;
   }
 
-  .resume .skills-chips {
+  .skills-chips {
     display: flex;
     flex-wrap: wrap;
     gap: 0.35rem;
-    margin: 0 0 0.75rem;
+    margin: 0;
     padding: 0;
     list-style: none;
   }
 
-  .resume .skills-chips li {
+  .skills-chips li {
     font-family: "Afacad", sans-serif;
     font-size: 0.85rem;
     font-weight: 400;
     color: var(--fg-2);
-    border: 1px solid var(--mg-2);
+    border: 1px solid var(--tl-line);
     border-radius: 999px;
     padding: 0.15rem 0.6rem;
     line-height: 1.4;
     margin: 0;
   }
 
-  /* ── Education ────────────────────────────────────────────────── */
-  .resume h2:last-of-type ~ p strong {
+  /* ── Timeline ─────────────────────────────────────────────────── */
+  .timeline {
+    --tl-year-col: 3.25rem;
+    --tl-gap: 1.25rem;
+    --tl-marker-col: 1rem;
+    /* horizontal center of the spine, measured from .timeline's left edge */
+    --tl-spine-x: calc(var(--tl-year-col) + var(--tl-gap) + (var(--tl-marker-col) / 2));
+    /* horizontal run of a project's connector line */
+    --tl-connector-w: calc(var(--tl-gap) + (var(--tl-marker-col) / 2));
+
+    position: relative;
+    padding-bottom: 0.5rem;
+
+    /* Cards opening and closing changes the height of content above the
+       viewport. Scroll anchoring would silently compensate for that, which
+       fights the click-to-focus scroll and lands it a card-height short. */
+    overflow-anchor: none;
+  }
+
+  .tl-spine {
+    position: absolute;
+    top: 0.55rem;
+    bottom: 0.55rem;
+    left: calc(var(--tl-spine-x) - 1px);
+    width: 2px;
+    background: var(--tl-line);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .tl-spine-fill {
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 0;
+    background: var(--accent);
+    opacity: 0.85;
+    border-radius: 2px;
+    will-change: height;
+  }
+
+  /* ── Caps at either end of the spine ──────────────────────────── */
+  .tl-cap {
+    display: grid;
+    grid-template-columns: var(--tl-year-col) var(--tl-marker-col) 1fr;
+    gap: 0 var(--tl-gap);
+    align-items: center;
     font-family: "Afacad", sans-serif;
+    font-size: 0.75rem;
     font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--fg-2);
+    margin: 0;
+  }
+
+  .tl-cap::before {
+    content: "";
+  }
+
+  .tl-now {
+    margin-bottom: 1.75rem;
+  }
+
+  .tl-start {
+    margin-top: 0.75rem;
+  }
+
+  .tl-cap-dot {
+    justify-self: center;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .tl-start .tl-cap-dot {
+    background: var(--tl-line-strong);
+  }
+
+  /* ── Rows ─────────────────────────────────────────────────────── */
+  .tl-row {
+    position: relative;
+    display: grid;
+    grid-template-columns: var(--tl-year-col) var(--tl-marker-col) 1fr;
+    gap: 0 var(--tl-gap);
+    cursor: pointer;
+
+    /* --f is the focus weight (1 = under the reading line, 0 = far away),
+       written by the scroll loop below. */
+    --f: 1;
+  }
+
+  .tl-row *,
+  .tl-row *::before,
+  .tl-row *::after {
+    cursor: pointer;
+  }
+
+  /* The heading is the real control: clicking anywhere on the row is a
+     mouse convenience, but the button is what keyboards reach. */
+  .tl-focus-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+    letter-spacing: inherit;
+    background: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
+
+  .tl-focus-btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+    border-radius: 0.15rem;
+  }
+
+  .tl-row:hover .tl-card {
+    border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  }
+
+  .tl-row.is-marker:hover .tl-org {
+    color: var(--accent);
+  }
+
+  .tl-row.is-marker {
+    padding: 2.75rem 0;
+  }
+
+  .tl-row.is-project {
+    padding-bottom: 1.6rem;
+  }
+
+  /* Horizontal connector running from the spine to the project card,
+     pinned to the card's title so it holds still as the card expands */
+  .tl-row.is-project::before {
+    content: "";
+    position: absolute;
+    top: 1.35rem;
+    left: var(--tl-spine-x);
+    width: var(--tl-connector-w);
+    height: 2px;
+    margin-top: -1px;
+    background: var(--tl-line);
+    opacity: calc(0.35 + 0.65 * var(--f));
+    transition: background-color 0.2s ease-out;
+  }
+
+  .tl-row.is-project.is-current::before {
+    background: var(--accent);
+  }
+
+  /* Scroll-driven focus: everything but the spine anchors fades and shrinks */
+  .tl-head,
+  .tl-card {
+    opacity: calc(0.35 + 0.65 * var(--f));
+    transform: scale(calc(0.92 + 0.08 * var(--f)));
+    transform-origin: left center;
+    min-width: 0;
+  }
+
+  .tl-year {
+    font-family: "Afacad", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.5;
+    color: var(--fg-2);
+    text-align: right;
+    padding-top: 0.2rem;
+    opacity: calc(0.4 + 0.6 * var(--f));
+    transition: color 0.2s ease-out;
+  }
+
+  /* Milestone heads lead with the tag line, which sits higher */
+  .tl-row.is-milestone .tl-year {
+    padding-top: 0;
+  }
+
+  .tl-row.is-current .tl-year {
+    color: var(--accent);
+  }
+
+  .tl-dot-col {
+    display: flex;
+    justify-content: center;
+    padding-top: 0.5rem;
+  }
+
+  .tl-dot {
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--tl-line-strong);
+    transition: background-color 0.2s ease-out, border-color 0.2s ease-out,
+      box-shadow 0.2s ease-out;
+  }
+
+  .tl-row.is-current .tl-dot {
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+  }
+
+  /* Education/certification reads as a different class of event */
+  .tl-row.is-milestone .tl-dot-col {
+    padding-top: 0.3rem;
+  }
+
+  .tl-row.is-milestone .tl-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+
+  .tl-row.is-milestone.is-current .tl-dot {
+    background: var(--bg);
+    border-color: var(--accent);
+  }
+
+  /* ── Marker heads ─────────────────────────────────────────────── */
+  /* Visually hidden: the year in the gutter carries this on screen, but
+     assistive tech and print still get the full range. */
+  .tl-range {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .tl-tag {
+    font-family: "Afacad", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin: 0 0 0.2rem;
+  }
+
+  .tl-org {
+    font-family: "Afacad", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--fg-3);
+    margin: 0;
+    transition: color 0.15s ease-out;
+  }
+
+  .tl-job {
+    font-family: "Afacad", sans-serif;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--accent);
+    margin: 0.1rem 0 0;
+  }
+
+  .tl-row.is-milestone .tl-org {
+    font-size: 1.15rem;
+    font-weight: 600;
+  }
+
+  .tl-job.is-school {
+    font-size: 0.95rem;
+    color: var(--fg-2);
+  }
+
+  .tl-note {
+    font-family: "Afacad", sans-serif;
+    font-size: 0.95rem;
+    color: var(--fg-2);
+    margin: 0.35rem 0 0;
+  }
+
+  /* ── Project cards ────────────────────────────────────────────── */
+  .tl-card {
+    background: var(--tl-surface);
+    border: 1px solid var(--tl-line);
+    border-radius: 0.65rem;
+    padding: 0.7rem 1.1rem 0.75rem;
+    transition: border-color 0.2s ease-out;
+  }
+
+  .tl-row.is-current .tl-card {
+    border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  }
+
+  .tl-card-title {
+    font-family: "Afacad", sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--fg-3);
+    margin: 0;
+  }
+
+  /* Collapsed to the title until the card is the current node.
+     Leaving focus eases in, arriving eases out. */
+  .tl-card-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition: grid-template-rows 0.28s ease-in, opacity 0.16s ease-in;
+  }
+
+  .tl-row.is-current .tl-card-body {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    transition: grid-template-rows 0.32s ease-out, opacity 0.26s ease-out 0.06s;
+  }
+
+  .tl-card-detail {
+    overflow: hidden;
+    min-height: 0;
+    font-family: "Alegreya", Georgia, serif;
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--fg-1);
+    margin: 0;
+    padding-top: 0.35rem;
+  }
+
+  .tl-card-detail strong {
+    font-weight: 700;
     color: var(--fg-3);
   }
 
-  /* ── Print: collapse to single column, show identity in doc ──── */
+  /* ── Narrow viewports ─────────────────────────────────────────── */
+  @media (max-width: 640px) {
+    .career-title {
+      font-size: 2.4rem;
+    }
+
+    .timeline {
+      --tl-year-col: 0rem;
+      --tl-gap: 0.85rem;
+      --tl-spine-x: calc(var(--tl-marker-col) / 2);
+    }
+
+    .tl-row,
+    .tl-cap {
+      grid-template-columns: var(--tl-marker-col) 1fr;
+    }
+
+    /* No room for a year gutter here, so the year becomes a label line
+       above the role instead of disappearing entirely. */
+    .tl-row.is-marker .tl-year {
+      grid-column: 2;
+      text-align: left;
+      padding-top: 0;
+      margin-bottom: 0.1rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+    }
+
+    .tl-row.is-marker .tl-dot-col {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .tl-row.is-marker .tl-head {
+      grid-column: 2;
+    }
+
+    .tl-row.is-project .tl-year {
+      display: none;
+    }
+
+    /* The spacer that fills the year column on desktop would shift the
+       two-column grid by one cell here. */
+    .tl-cap::before {
+      display: none;
+    }
+  }
+
+  /* ── Reduced motion: hold everything open at full weight ──────── */
+  @media (prefers-reduced-motion: reduce) {
+    .tl-head,
+    .tl-card,
+    .tl-year,
+    .tl-row.is-project::before {
+      opacity: 1;
+      transform: none;
+    }
+
+    .tl-card-body {
+      grid-template-rows: 1fr;
+      opacity: 1;
+      transition: none;
+    }
+  }
+
+  /* ── Print: flatten the timeline into a plain document ────────── */
   @media print {
     body {
       background: #fff !important;
@@ -266,24 +613,9 @@ import PageLayout from '../layouts/PageLayout.astro';
     }
 
     header.site-header,
-    .print-btn,
+    .download-btn,
     footer {
       display: none !important;
-    }
-
-    .resume-layout {
-      grid-template-columns: 1fr !important;
-      gap: 0 !important;
-      max-width: none;
-    }
-
-    .resume-rail {
-      position: static;
-      margin-bottom: 1rem;
-    }
-
-    .rail-name {
-      font-size: 1.6rem;
     }
 
     .container {
@@ -292,52 +624,110 @@ import PageLayout from '../layouts/PageLayout.astro';
       margin: 0;
     }
 
-    /* Show the hidden identity block from markdown in print */
-    .resume > h1:first-child,
-    .resume > h1:first-child + p,
-    .resume > h1:first-child + p + p,
-    .resume > h1:first-child + p + p + p {
+    .career-page {
+      max-width: none;
+      font-size: 0.8rem;
+    }
+
+    .career-title {
+      font-size: 1.6rem;
+    }
+
+    .career-summary {
+      font-size: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .timeline {
+      --tl-year-col: 2.5rem;
+      --tl-marker-col: 0rem;
+      --tl-gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .tl-spine,
+    .tl-dot-col,
+    .tl-cap,
+    .tl-row.is-project::before {
       display: none !important;
     }
 
-    .resume {
-      font-size: 0.8rem;
-      line-height: 1.4;
-      border-left: none;
-      padding-left: 0;
+    .tl-row {
+      grid-template-columns: 2.5rem 1fr;
+      break-inside: avoid;
     }
 
-    .resume h2 {
-      font-size: 0.75rem;
-      margin: 0.8rem 0 0.4rem;
-      padding-bottom: 0.2rem;
-      border-bottom: 1px solid #ccc;
+    .tl-row.is-marker {
+      padding: 0.6rem 0 0.4rem;
     }
 
-    .resume h3 {
+    .tl-row.is-project {
+      padding-bottom: 0.35rem;
+    }
+
+    .tl-head,
+    .tl-card,
+    .tl-year {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    .tl-card {
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    /* Every card prints expanded */
+    .tl-card-body {
+      grid-template-rows: 1fr !important;
+      opacity: 1 !important;
+    }
+
+    /* Paper has no spine to plot dates on, so bring the ranges back */
+    .tl-range {
+      position: static;
+      width: auto;
+      height: auto;
+      margin: 0 0 0.1rem;
+      overflow: visible;
+      clip: auto;
+      clip-path: none;
+      white-space: normal;
+      font-family: "Afacad", sans-serif;
+      font-weight: 600;
+      color: #444;
+    }
+
+    .tl-org {
       font-size: 0.95rem;
-      margin-top: 0.9rem;
     }
 
-    .resume h3 + p,
-    .resume h3 + p + p:not(:has(+ ul)) {
-      font-size: 0.8rem;
-    }
-
-    .resume ul {
-      margin-bottom: 0.6rem;
-    }
-
-    .resume ul li {
+    .tl-job,
+    .tl-range,
+    .tl-tag,
+    .tl-note,
+    .tl-card-title {
       font-size: 0.75rem;
-      margin-bottom: 0.25rem;
     }
 
-    .resume hr {
-      margin: 0.9rem 0;
+    .tl-card-detail {
+      font-size: 0.75rem;
+      line-height: 1.35;
+      padding-top: 0.1rem;
     }
 
-    .resume .skills-chips li {
+    .skills-section {
+      margin-top: 1rem;
+      padding-top: 0.75rem;
+    }
+
+    .skills-heading {
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .skills-chips li {
       font-size: 0.7rem;
       padding: 0.1rem 0.45rem;
     }
@@ -349,25 +739,172 @@ import PageLayout from '../layouts/PageLayout.astro';
 </style>
 
 <script>
-  function transformSkillsSection() {
-    const resume = document.querySelector('.resume');
-    if (!resume) return;
+  let cleanup: (() => void) | null = null;
 
-    const paragraphs = Array.from(resume.querySelectorAll('p'));
-    paragraphs.forEach(p => {
-      const children = Array.from(p.childNodes).filter(n => n.nodeType !== 3 || n.textContent.trim() !== '');
-      if (children.length === 1 && children[0].tagName === 'STRONG') {
-        p.classList.add('skills-category-label');
-        const strong = children[0];
-        p.innerHTML = strong.textContent.replace(/:$/, '');
-        const next = p.nextElementSibling;
-        if (next && next.tagName === 'UL') {
-          next.classList.add('skills-chips');
+  function initTimeline() {
+    cleanup?.();
+    cleanup = null;
+
+    const timeline = document.getElementById('timeline');
+    const fill = document.getElementById('tl-spine-fill');
+    const spine = timeline?.querySelector<HTMLElement>('.tl-spine');
+    if (!timeline || !fill || !spine) return;
+
+    const rows = Array.from(timeline.querySelectorAll<HTMLElement>('[data-node]'));
+    if (!rows.length) return;
+
+    // Each row is measured at its heading, not its box. A heading holds still
+    // while the card underneath it expands, so the current node can't flip
+    // back and forth as cards open and close.
+    const anchors = rows.map(
+      (row) => row.querySelector<HTMLElement>('[data-anchor]') ?? row
+    );
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // The reading line: the height at which a node becomes current.
+    const FOCUS = 0.38;
+    // How far a node can drift from the reading line before it bottoms out.
+    const FALLOFF = 0.5;
+
+    let ticking = false;
+    let currentIndex = -1;
+    // While a click-to-focus scroll is in flight, hold the focused node still
+    // so the layout stays exactly as it was measured. Releasing early lets a
+    // passing card open mid-flight and the landing overshoots by its height.
+    let lockedIndex = -1;
+    let settleTimer = 0;
+    let bailTimer = 0;
+
+    // A collapsed body still has its padding, so the height a card gives back
+    // is the difference between the two states, not its full measure. Read it
+    // now, before the first update() marks anything current.
+    const collapsedBodyHeight =
+      timeline.querySelector<HTMLElement>('.tl-card-body')?.offsetHeight ?? 0;
+
+    const setCurrent = (index: number) => {
+      if (index === currentIndex) return;
+      rows[currentIndex]?.classList.remove('is-current');
+      rows[index].classList.add('is-current');
+      currentIndex = index;
+    };
+
+    const update = () => {
+      ticking = false;
+      const vh = window.innerHeight;
+      const focusY = vh * FOCUS;
+      const range = vh * FALLOFF;
+      const atEnd = window.scrollY >= document.documentElement.scrollHeight - vh - 2;
+
+      // Current = the last node whose heading has crossed the reading line.
+      // Monotonic, so opening one card never steals focus from it.
+      let nextIndex = 0;
+
+      for (let i = 0; i < rows.length; i++) {
+        const rect = anchors[i].getBoundingClientRect();
+        const y = rect.top + rect.height / 2;
+
+        if (y <= focusY) nextIndex = i;
+
+        if (!reduceMotion) {
+          const t = Math.min(Math.abs(y - focusY) / range, 1);
+          // smoothstep, so the drop-off starts gently and then bites
+          const f = 1 - t * t * (3 - 2 * t);
+          rows[i].style.setProperty('--f', f.toFixed(3));
         }
       }
+
+      // The page runs out before the final node can reach the reading line,
+      // so hand it focus once there is nowhere left to scroll.
+      if (atEnd) nextIndex = rows.length - 1;
+
+      if (lockedIndex < 0) setCurrent(nextIndex);
+
+      // Fill the spine down to the reading line, so the leading edge always
+      // sits level with whatever node is current.
+      const spineRect = spine.getBoundingClientRect();
+      const filled = atEnd
+        ? spineRect.height
+        : Math.min(Math.max(focusY - spineRect.top, 0), spineRect.height);
+      fill.style.height = `${filled}px`;
+    };
+
+    const releaseLock = () => {
+      window.clearTimeout(settleTimer);
+      window.clearTimeout(bailTimer);
+      lockedIndex = -1;
+      update();
+    };
+
+    const onScroll = () => {
+      if (lockedIndex >= 0) {
+        // Release once the scroll has actually come to rest.
+        window.clearTimeout(settleTimer);
+        settleTimer = window.setTimeout(releaseLock, 140);
+      }
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    };
+
+    // Scroll a node up to the reading line. The node losing focus collapses on
+    // the way, so subtract the height it is giving back — otherwise the
+    // landing overshoots by the size of that card's body.
+    const focusRow = (index: number) => {
+      let collapsing = 0;
+      if (currentIndex >= 0 && currentIndex < index) {
+        const body = rows[currentIndex].querySelector<HTMLElement>('.tl-card-body');
+        if (body) collapsing = Math.max(0, body.offsetHeight - collapsedBodyHeight);
+      }
+
+      const rect = anchors[index].getBoundingClientRect();
+      const target = Math.max(
+        0,
+        window.scrollY + rect.top + rect.height / 2 - window.innerHeight * FOCUS - collapsing
+      );
+
+      lockedIndex = index;
+      setCurrent(index);
+
+      window.clearTimeout(settleTimer);
+      window.clearTimeout(bailTimer);
+      // If the scroll never moves (already at the target, or clamped at the
+      // end of the document) no scroll event arrives to settle the lock.
+      settleTimer = window.setTimeout(releaseLock, 300);
+      bailTimer = window.setTimeout(releaseLock, 3000);
+
+      window.scrollTo({ top: target, behavior: reduceMotion ? 'auto' : 'smooth' });
+    };
+
+    const onRowClick = (event: MouseEvent, index: number) => {
+      // Don't hijack the click that ends a text selection.
+      if (window.getSelection()?.toString()) return;
+      if ((event.target as HTMLElement).closest('a')) return;
+      focusRow(index);
+    };
+
+    const clickHandlers = rows.map((row, index) => {
+      const handler = (event: MouseEvent) => onRowClick(event, index);
+      row.addEventListener('click', handler);
+      return handler;
     });
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+
+    cleanup = () => {
+      window.clearTimeout(settleTimer);
+      window.clearTimeout(bailTimer);
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      rows.forEach((row, i) => row.removeEventListener('click', clickHandlers[i]));
+    };
   }
 
-  document.addEventListener('DOMContentLoaded', transformSkillsSection);
-  document.addEventListener('astro:page-load', transformSkillsSection);
+  document.addEventListener('DOMContentLoaded', initTimeline);
+  document.addEventListener('astro:page-load', initTimeline);
+  document.addEventListener('astro:before-swap', () => {
+    cleanup?.();
+    cleanup = null;
+  });
 </script>
