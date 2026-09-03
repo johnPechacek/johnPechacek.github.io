@@ -94,6 +94,24 @@ We built Buck List as a system for identifying and tracking individual bucks acr
 
 Phase 1 is manual. Users review recent images, assign them to profiles, and build a record of which bucks are on their property. Each profile captures a tagged image gallery, a profile photo, antler point counts, notes, and automatically surfaces when and where the buck was last seen. Phase 2 uses AI to suggest matches between new images and existing profiles and to flag potential unknowns, with users confirming before anything is applied.
 
+<ScreenGroup
+  caption="A Buck List profile: browse bucks from the gallery, open a profile to see last-seen time and location, then tag new images directly from the image detail view."
+  images={[
+    {
+      src: "/images/BL-1.png",
+      alt: "Buck List tab in the Moultrie app gallery, showing a list of named buck profiles",
+    },
+    {
+      src: "/images/BL-2.png",
+      alt: "A buck profile screen showing last-seen time and location above a grid of tagged images",
+    },
+    {
+      src: "/images/BL-3.png",
+      alt: "Image detail view showing an image tagged to two buck profiles, Ghost and Titan",
+    },
+  ]}
+/>
+
 The relationship between the phases is the core of the design strategy. Phase 1 is not a placeholder until the AI arrives. Every friction decision in the manual experience was also a data quality decision.
 
 <PullQuote>A manual flow that users abandon doesn't just fail on its own terms. It starves the model.</PullQuote>
@@ -115,6 +133,11 @@ The 30% adoption bar meant profile creation had to be nearly effortless. The "us
 ### Designing the Profile
 
 The priority when designing the profile was minimizing friction.
+
+<figure>
+  <img src="/images/BL-2.png" alt="A buck profile screen showing last-seen time and location above a grid of tagged images" />
+  <figcaption>The finished profile screen: last-seen time and location lead, with the tagged image grid below.</figcaption>
+</figure>
 
 <DecisionBlock
   considered="An exact age year field. Hunters do think about a buck's age when deciding whether to target it."
