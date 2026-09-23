@@ -1,0 +1,120 @@
+---
+// TryPrototype — callout with a primary link to a live prototype and a few tasks to try.
+// Usage: <TryPrototype href="https://..." tasks={["...", "..."]}>Intro text.</TryPrototype>
+interface Props {
+  href: string;
+  tasks?: string[];
+  label?: string;
+}
+
+const { href, tasks = [], label = 'Open the prototype' } = Astro.props;
+---
+
+<aside class="try-prototype">
+  <span class="try-kicker">try it yourself</span>
+  <div class="try-text"><slot /></div>
+  {tasks.length > 0 && (
+    <ol class="try-tasks">
+      {tasks.map(task => <li>{task}</li>)}
+    </ol>
+  )}
+  <a class="try-btn" href={href} target="_blank" rel="noopener noreferrer">
+    {label}
+    <svg class="try-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <path d="M5 2h7v7M12 2 2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    <span class="visually-hidden">(opens in a new tab)</span>
+  </a>
+</aside>
+
+<style>
+  .try-prototype {
+    border: 1px solid var(--mg-2);
+    border-radius: 0.5rem;
+    padding: 1.5rem 1.75rem;
+    margin: 2.5rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .try-kicker {
+    font-family: "Afacad", sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+  }
+
+  .try-text {
+    font-family: "Alegreya", serif;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: var(--fg-2);
+    margin: 0;
+  }
+
+  /* MDX wraps slotted text in its own <p>; drop the article's paragraph spacing */
+  .try-text :global(p) {
+    margin: 0;
+  }
+
+  .try-tasks {
+    font-family: "Alegreya", serif;
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--fg-2);
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+
+  .try-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: fit-content;
+    align-self: center;
+    margin-top: 0.5rem;
+    font-family: "Afacad", sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    background-color: var(--accent);
+    color: var(--bg);
+    border: 1px solid var(--accent);
+    border-radius: 0.5rem;
+    padding: 0.6rem 1.1rem;
+    transition: background-color 0.15s ease-out, color 0.15s ease-out;
+  }
+
+  .try-btn:hover {
+    background-color: transparent;
+    color: var(--accent);
+  }
+
+  .try-btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .try-icon {
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 600px) {
+    .try-prototype {
+      padding: 1.25rem;
+    }
+  }
+</style>

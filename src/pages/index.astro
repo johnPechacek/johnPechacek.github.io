@@ -11,8 +11,9 @@ const caseStudies = rawCaseStudies.sort(
 );
 
 // Pull the featured studies by slug
-const buckList = caseStudies.find(s => s.id === 'designing-buck-list');
-const featured = [buckList].filter(Boolean);
+const featured = ['designing-buck-list', 'testing-hunt-log']
+  .map(slug => caseStudies.find(s => s.id === slug))
+  .filter(Boolean);
 ---
 
 <PageLayout title="John Pechacek — Senior UX Designer">
@@ -27,34 +28,31 @@ const featured = [buckList].filter(Boolean);
     </div>
   </section>
 
-  <!-- About prose (h2 + paragraphs from markdown) -->
-  <section class="about-section">
-    <div class="about-text">
-      <Content />
-    </div>
-  </section>
-
   <!-- Featured work -->
   <section class="featured-work">
     <h2 class="section-label">my work</h2>
     <div class="work-cards">
-      {featured.map((study) => {
-        const hasThumbnail = study.id === 'designing-buck-list';
-        return (
-          <a href={`/case-studies/${study.id}`} class="work-card">
-            {hasThumbnail && (
-              <div class="work-card-thumb">
-                <img src="/images/bucklist-hero.png" alt={study.data.title} class="work-card-img" />
-              </div>
-            )}
-            <div class="work-card-body">
-              <h3 class="work-card-title">{study.data.title}</h3>
-              <p class="work-card-desc">{study.data.description}</p>
-              <span class="work-card-link">View case study →</span>
+      {featured.map((study) => (
+        <a href={`/case-studies/${study.id}`} class="work-card">
+          {study.data.heroImage && (
+            <div class="work-card-thumb">
+              <img src={study.data.heroImage} alt={study.data.heroAlt ?? study.data.title} class="work-card-img" />
             </div>
-          </a>
-        );
-      })}
+          )}
+          <div class="work-card-body">
+            <h3 class="work-card-title">{study.data.title}</h3>
+            <p class="work-card-desc">{study.data.description}</p>
+            <span class="work-card-link">View case study →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- About prose (h2 + paragraphs from markdown) -->
+  <section class="about-section">
+    <div class="about-text">
+      <Content />
     </div>
   </section>
 </PageLayout>
@@ -131,7 +129,8 @@ const featured = [buckList].filter(Boolean);
 
   /* ── Featured work ────────────────────────────────────────────── */
   .featured-work {
-    padding: 0 0 3rem;
+    padding: 2rem 0 3rem;
+    border-top: 1px solid var(--mg-2);
   }
 
   .section-label {
