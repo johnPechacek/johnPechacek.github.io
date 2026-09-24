@@ -11,7 +11,7 @@ const caseStudies = (await getCollection('case-studies', ({ data }) => !data.dra
   <h1>Case Studies</h1>
   <div class="case-studies-list">
     {caseStudies.map((study) => (
-      <a href={`/case-studies/${study.slug}`} class="case-study-card">
+      <a href={`/case-studies/${study.id}`} class="case-study-card">
         <h2>{study.data.title}</h2>
         <p>{study.data.description}</p>
         <p class="date">{study.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</p>

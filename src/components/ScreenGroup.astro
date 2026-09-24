@@ -24,6 +24,8 @@ const screens = images.map((image, i) => {
         src={screen.src}
         alt={screen.alt}
         class="screen-image"
+        loading="lazy"
+        decoding="async"
         style={`--offset:${screen.offset}; z-index:${screen.z};`}
       />
     ))}

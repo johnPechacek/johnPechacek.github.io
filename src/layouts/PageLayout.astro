@@ -32,7 +32,7 @@ const caseStudies = rawCaseStudies.sort(
     <meta property="og:title" content={`${title} — John Pechacek`} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content={`${Astro.site ?? Astro.url.origin}/images/headshot.png`} />
+    <meta property="og:image" content={new URL("/images/headshot.jpg", Astro.site ?? Astro.url.origin).href} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
