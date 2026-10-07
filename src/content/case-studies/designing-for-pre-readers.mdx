@@ -2,29 +2,27 @@
 title: Designing for Pre-Readers
 heroImage: /images/pa-hero.webp
 heroAlt: "Pre-K Spanish reading activities on tablets: the Counting Syllables activity with a hippo helper, the ¿Cuántas sílabas hay? title screen, and a reward screen of costumed characters"
-description: A suite of Pre-K Spanish reading activities for 3 to 5 year olds, designed with educational experts and tested with children who couldn't read yet.
+description: A suite of Pre-K Spanish reading activities for 3 to 5 year olds, designed with educational experts and tested with a native Spanish-speaking pre-reader.
 date: 2020-11-30
 skills: ["UX Design", "Usability Testing", "Motion Design", "Cross-functional Facilitation"]
 role: "UX/UI Design Lead, Istation"
 timeline: "April to November 2020"
-team: "Product Owner, Project Manager, Educational Experts, Artist, Animator, Developers, QA"
-outcome: "I led design for seven Spanish activities that teach pre-reading skills to 3 to 5 year olds, from sketch-led sessions with the team's educational experts through prototypes tested with children who couldn't read yet. The suite covers 25% of all pre-K U.S. reading standards, and a collectible character system I designed and rigged gives kids a reason to replay activities and practice."
+team: "Product Owner, Junior Designer, Lead Developer, Junior Developer, Lead Artist, Artist, 3 Curriculum Specialists, 2 QA"
+outcome: "I led design for seven Spanish activities that teach pre-reading skills to 3 to 5 year olds, from sketch-led sessions with the team's educational experts through prototypes tested with a pre-reader from the target audience. The suite covers 25% of all pre-K U.S. reading standards, and a collectible character system I designed and rigged gives kids a reason to replay activities and practice."
 metrics:
   - value: "7"
     label: "activities in the suite"
   - value: "25%"
     label: "of pre-K U.S. reading standards covered"
   - value: "3"
-    label: "prototype versions tested with pre-readers"
+    label: "prototype versions tested with a pre-reader"
 ---
 
 import Clip from "../../components/Clip.astro";
 import DecisionBlock from "../../components/DecisionBlock.astro";
 import PullQuote from "../../components/PullQuote.astro";
 
-{/* TODO(John): confirm your title on this project and the team roles (the old page listed 10 people without roles; I inferred Animator from a testimonial). */}
-
-This is earlier work from Istation, which makes reading assessment and instruction software for schools. The students it was for were 3 to 5 years old and couldn't read yet. Every instruction, label and piece of feedback had to work without words, which is why we tested with children instead of guessing.
+This is earlier work from Istation, which makes reading assessment and instruction software for schools. The students it was for were 3 to 5 years old and couldn't read yet. Every instruction, label and piece of feedback had to work without words, which is why we tested with a child instead of guessing.
 
 ---
 
@@ -72,9 +70,7 @@ I built low-fidelity prototypes in Adobe XD so we could test early and change de
   <figcaption>Three versions of Counting Syllables, prototyped in Adobe XD with correct and incorrect answer states.</figcaption>
 </figure>
 
-The team felt it was critical to test with pre-reading students specifically. We paid them in pizza, and they were thrilled to help.
-
-{/* TODO(John): how many kids, how many sessions, and who moderated? Even rough numbers make this section stronger. */}
+The team felt it was critical to test with a pre-reader. We were only able to test with one student, but as a native Spanish speaker of Pre-K age, she was exactly who the activities were for. We paid her in pizza, and she was thrilled to help.
 
 Counting Syllables shows how testing shaped the design. We tested three versions of the same activity.
 
@@ -90,12 +86,12 @@ Counting Syllables shows how testing shaped the design. We tested three versions
 <DecisionBlock
   considered="Simple Tap, where students place counters in any order and tap a counter again to remove it. It tested as intuitive. Plus/Minus, which adds and removes counters with buttons."
   chose="Disabled States, which only lets students fill counters left to right."
-  why="Simple Tap was easy for kids but taught the wrong habit. Teachers have students place counters left to right to prepare them for reading left to right. Plus/Minus kept the order but relied on symbols pre-readers don't know yet. I assumed an enforced order would feel restrictive. Testing proved me wrong. Students enjoyed Disabled States the most."
+  why="Simple Tap was easy to use but taught the wrong habit. Teachers have students place counters left to right to prepare them for reading left to right. Plus/Minus kept the order but relied on symbols pre-readers don't know yet. I assumed an enforced order would feel restrictive, but our tester enjoyed Disabled States the most."
 />
 
-<PullQuote>The version kids found easiest wasn't the one that taught them to read. The design had to satisfy both the children and the experts.</PullQuote>
+<PullQuote>The easiest version wasn't the one that taught kids to read. The design had to satisfy both the children and the experts.</PullQuote>
 
-Testing caught one more problem. Students didn't think to tap a placed counter to remove it, so we added an eraser button.
+Testing caught one more problem. Our tester didn't think to tap a placed counter to remove it, so we added an eraser button.
 
 <Clip
   caption="The finished Counting Syllables activity: counters fill left to right, and the eraser clears them."
@@ -110,12 +106,12 @@ Testing caught one more problem. Students didn't think to tap a placed counter t
 
 The last principle, replayability, needed a reason for kids to come back. I designed a reward system where students collect friendly characters, then choose one to accompany them through the activities. The companion offers help when a student gets stuck.
 
-The team's artist drew the characters. I vectorized them and built a puppet rig with motion design animations to plug every character into, and the team's developer put the rig and assets together as unlockable characters. Costume variants on the shared rig added up to hundreds of unlockable characters.
+The team's lead artist drew the characters. I vectorized them and built a puppet rig with motion design animations to plug every character into, and the team's developer put the rig and assets together as unlockable characters. Costume variants on the shared rig added up to hundreds of unlockable characters.
 
 <Clip
-  caption="From sketch to unlockable character: the artist's sketch, the puppet rig I built, and costume variants on the same rig."
+  caption="From sketch to unlockable character: the lead artist's sketch, the puppet rig I built, and costume variants on the same rig."
   items={[
-    { src: "/images/pa-character-sketch.webp", alt: "The artist's pencil sketch of a moose character", label: "Artist's sketch" },
+    { src: "/images/pa-character-sketch.webp", alt: "The lead artist's pencil sketch of a moose character", label: "Artist's sketch" },
     { src: "/video/pa-rig.mp4", alt: "A panda character animating on the puppet rig: blinking, smiling and bouncing", label: "Puppet rig" },
     { src: "/video/pa-costumes.mp4", alt: "A hippo character cycling through costume variants on the same rig", label: "Costume variants" },
   ]}
@@ -144,6 +140,6 @@ The suite added seven activities to Istation's Spanish content library and cover
 
 This project changed how I think about intuitive design. The most intuitive version of Counting Syllables was the wrong one, and only testing with real users next to subject matter experts could show that. Neither group alone would have landed on the final design.
 
-It also reinforced something I still push for on every project: test with the real users, even when they're hard to test with. Pre-readers caught problems no adult reviewer would have, like not knowing to tap a counter again to remove it.
+It also reinforced something I still push for on every project: test with the real users, even when they're hard to test with. Even one pre-reader caught problems no adult reviewer would have, like not knowing to tap a counter again to remove it.
 
 {/* TODO(John): add one thing you'd do differently. One possibility: instrumenting the activities so you could see replay rates and know whether the reward system drove practice. */}
