@@ -26,6 +26,11 @@ interface Props {
 const { title, description, date, role, timeline, team, outcome, heroImage, heroAlt, metrics } = Astro.props;
 const skills = Astro.props.skills || [];
 
+// Link previews use a JPEG of the hero (og-<name>.jpg), since some platforms skip WebP
+const ogImage = heroImage
+  ? heroImage.replace(/([^/]+)\.webp$/, 'og-$1.jpg')
+  : '/images/headshot.jpg';
+
 const formattedDate = date.toLocaleDateString('en-US', {
   year: 'numeric',
   month: 'long',
@@ -55,7 +60,7 @@ const nextStudy = caseStudies.length > 1 ? caseStudies[(currentIndex + 1) % case
     <meta property="og:title" content={`${title} — John Pechacek`} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="article" />
-    <meta property="og:image" content={new URL("/images/headshot.jpg", Astro.site ?? Astro.url.origin).href} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site ?? Astro.url.origin).href} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

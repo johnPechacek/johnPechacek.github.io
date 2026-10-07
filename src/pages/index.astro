@@ -17,12 +17,13 @@ const featured = ['designing-buck-list', 'testing-hunt-log', 'designing-for-pre-
   .filter(Boolean);
 ---
 
-<PageLayout title="John Pechacek — Senior UX Designer">
+<PageLayout title="Senior UX Designer">
   <!-- Hero lockup -->
   <section class="hero">
     <div class="hero-text">
       <h1 class="hero-name">John Pechacek</h1>
       <p class="hero-role">Senior UX Designer</p>
+      <p class="hero-pitch">I design in Figma, then turn those designs into live web prototypes people can test from anywhere. Working prototypes let studies test what clickable mockups can't fake, and let me fix problems between sessions instead of waiting for another round. My design team now tests the same way.</p>
     </div>
     <div class="hero-headshot-wrap">
       <img src="/images/headshot.webp" alt="John Pechacek" class="hero-headshot" />
@@ -91,6 +92,15 @@ const featured = ['designing-buck-list', 'testing-hunt-log', 'designing-for-pre-
     margin: 0 0 1rem;
     text-transform: lowercase;
     letter-spacing: 0.03em;
+  }
+
+  .hero-pitch {
+    font-family: "Alegreya", Georgia, serif;
+    font-size: 1.25rem;
+    line-height: 1.55;
+    color: var(--fg-2);
+    margin: 0;
+    max-width: 36rem;
   }
 
   .hero-headshot-wrap {

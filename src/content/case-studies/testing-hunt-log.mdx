@@ -10,10 +10,9 @@ timeline: "April to July 2026"
 team: "Product Owner, UX Researcher (plan review), Senior Researcher (co-moderation)"
 outcome: "I pushed for and ran a moderated usability study of Hunt Log, a new feature whose logs will help train the company's AI hunt planning recommendations. I built the prototype as a working web app instead of linked Figma screens, which let us fix problems between sessions and test the fixes before the study ended. Hunt Log is now in development."
 metrics:
-  - value: "6/6"
-    label: "testers completed a full log"
-  - value: "2 days"
-    label: "to four working task flows"
+  - value: "89%"
+    context: "24 of 27"
+    label: "tasks completed without help"
   - value: "3"
     label: "follow-on studies by another designer"
 ---
@@ -68,7 +67,7 @@ A linked Figma prototype couldn't test what this study needed. Testers had to lo
 
 Saved hunts showed up on the map and in lists, and the summary pulled real past weather for the date and time the tester entered. All four task flows were working two days after the first commit.
 
-The AI tool didn't get everything right. It placed drawing points by tapping the map, which isn't how the live app works, so I corrected it to the real model of a fixed crosshair you pan the map under. Testers needed to be reacting to our design, not the prototype's quirks.
+The AI tool didn't get everything right. It placed drawing points by tapping the map, which isn't how the live app works, so I corrected it to the real model of a fixed crosshair you pan the map under. Testers needed to be reacting to our design, not the prototype's quirks. I also caught a bug before the first session that would have undermined the study. The edit task loaded a hard-coded sample hunt instead of the one the tester had just logged, so testers would have been asked to edit someone else's.
 
 <ScreenGroup
   caption="Part of the log flow in the prototype: set your approach, crop a real photo from your phone, and review the saved log."
@@ -101,23 +100,9 @@ The AI tool didn't get everything right. It placed drawing points by tapping the
 
 ---
 
-## When Unmoderated Testing Broke
-
-My first plan was an unmoderated study on our existing Maze account, with heatmaps showing where testers tapped. Unmoderated testing would have reached more hunters with less of the team's time. I gave every task its own URL and added Maze's heatmap snippet to the prototype so it could follow each tester's path.
-
-It didn't survive the dry runs. On iOS, the heatmap data collection crashed the Maze test, and teammates couldn't get through it. Hunt Log is designed for phones, so a test that broke on iPhones wasn't usable.
-
-<DecisionBlock
-  considered="Staying unmoderated and debugging the Maze integration."
-  chose="Moderated remote sessions over Teams."
-  why="The crash was inside a third-party script I didn't control, and the study was more valuable run soon than run at scale. Moderation also let me ask follow-up questions, which turned out to matter more than anything a heatmap could have shown."
-/>
-
-I took the Maze code out and made every task start from the map, the same way the real app works. Before the first session I also caught a bug that would have undermined the study. The edit task loaded a hard-coded sample hunt instead of the one the tester had just logged, and edits didn't save. Testers would have logged a hunt, then been asked to edit someone else's.
-
----
-
 ## The Study
+
+My first plan was an unmoderated study on our existing Maze account, with heatmaps showing where testers tapped. In dry runs, the heatmap script crashed Maze tests on iOS, and a phone-first feature can't be tested by a study that breaks on iPhones. So I switched to moderated remote sessions, which turned out to be the better call: the follow-up questions they allowed mattered more than anything a heatmap could have shown.
 
 I ran six 45-minute think-aloud sessions with hunters from our research panel, three from the southeast, two from the northeast and one from the northwest. They shared their screens and worked through five tasks, then answered seven debrief questions. A UX researcher reviewed my test plan, and a senior researcher co-moderated some of the sessions.
 
@@ -135,7 +120,7 @@ I wrote each task as an outcome, not an instruction, so none of them named a but
 
 ### Logging Was Easy
 
-Every tester completed a full log without friction.
+Testers finished 24 of the 27 task attempts on record without help, and every one of them completed a full log.
 
 <PullQuote>"You can't get any easier, man."</PullQuote>
 

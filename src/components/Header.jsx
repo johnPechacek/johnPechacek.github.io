@@ -61,8 +61,10 @@ export default function Header({ caseStudies, currentPath = '' }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [tocHeadings]);
 
-  const isAboutActive = path === '/';
-  const isResumeActive = path === '/resume';
+  // GitHub Pages serves directory URLs with a trailing slash
+  const cleanPath = path.length > 1 ? path.replace(/\/$/, '') : path;
+  const isAboutActive = cleanPath === '/';
+  const isResumeActive = cleanPath === '/resume';
   const isWorkActive = path.startsWith('/case-studies');
 
   const scrollTo = (id) => {
