@@ -1,17 +1,18 @@
 ---
 import { getEntry, render, getCollection } from 'astro:content';
+import { isVisible } from '../utils/caseStudies';
 import PageLayout from '../layouts/PageLayout.astro';
 
 const about = await getEntry('about', 'index');
 const { Content } = await render(about);
 
-const rawCaseStudies = await getCollection('case-studies', ({ data }) => !data.draft);
+const rawCaseStudies = await getCollection('case-studies', isVisible);
 const caseStudies = rawCaseStudies.sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime()
 );
 
 // Pull the featured studies by slug
-const featured = ['designing-buck-list', 'testing-hunt-log']
+const featured = ['designing-buck-list', 'testing-hunt-log', 'designing-for-pre-readers', 'fixing-pre-k-assessment-data']
   .map(slug => caseStudies.find(s => s.id === slug))
   .filter(Boolean);
 ---
@@ -32,11 +33,11 @@ const featured = ['designing-buck-list', 'testing-hunt-log']
   <section class="featured-work">
     <h2 class="section-label">my work</h2>
     <div class="work-cards">
-      {featured.map((study) => (
+      {featured.map((study, i) => (
         <a href={`/case-studies/${study.id}`} class="work-card">
           {study.data.heroImage && (
             <div class="work-card-thumb">
-              <img src={study.data.heroImage} alt={study.data.heroAlt ?? study.data.title} class="work-card-img" />
+              <img src={study.data.heroImage} alt={study.data.heroAlt ?? study.data.title} class="work-card-img" loading={i < 2 ? 'eager' : 'lazy'} />
             </div>
           )}
           <div class="work-card-body">

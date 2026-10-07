@@ -1,0 +1,130 @@
+---
+title: Fixing Pre-K Assessment Data
+heroImage: /images/itc-hero.webp
+heroAlt: "Introduction to Computers activities on tablets: popping balloons by clicking, a startled character caught peeking out from behind a square in the mouse-moving game, and a puzzle assembled by dragging pieces"
+description: A short, playful experience that teaches 3 to 5 year olds to use a mouse or tablet before their first assessment, so the assessment measures what they know instead of their mouse skills.
+date: 2021-01-01
+skills: ["UX Research", "Interaction Design", "Motion Design", "UI Development"]
+role: "UX/UI Design Lead, Istation"
+timeline: "2019 to 2023, as design lead"
+team: "Product Owner, Project Manager, Subject Matter Expert, Artist, Developer, QA"
+outcome: "Teacher interviews showed that many of Istation's youngest students were using a computer for the first time during their first assessment, and the data from that age group was unreliable. I designed a short experience that teaches the mouse and tablet skills the assessments assume, one skill at a time, before students take their first test. Preschool assessment data accuracy rose 40% year over year."
+metrics:
+  - value: "40%"
+    label: "year-over-year increase in preschool assessment data accuracy"
+  - value: "5"
+    label: "teachers interviewed"
+  - value: "3"
+    label: "motor skills taught in sequence"
+---
+
+import Clip from "../../components/Clip.astro";
+import PullQuote from "../../components/PullQuote.astro";
+
+{/* TODO(John): confirm dates and your title on this project. */}
+
+This is earlier work from Istation, which makes reading assessment and instruction software for schools. The problem didn't come from a roadmap. It came from teachers telling us the data from their youngest students was wrong.
+
+---
+
+## Problem
+
+The project started with conversations with Pre-K and kindergarten teachers about using Istation with very young students. I interviewed five of them, and they were frustrated.
+
+The thinking at Istation was that students this age would already be comfortable with technology. That was true for some of these teachers' students. But an alarming number had their first ever interaction with a computer when they took their first Istation assessment.
+
+The assessments assumed every student could use a mouse. For a 4 year old, that's a hard motor skill. During assessments, teachers were moving around the room helping students one at a time, and the data we collected from this age group was inaccurate.
+
+<PullQuote>If a child can't drag the answer into place, the assessment can't tell whether they knew it.</PullQuote>
+
+That turned a classroom complaint into a product question: how might we improve the accuracy of the data we gather from our youngest students?
+
+---
+
+## Breaking Down Click and Drag
+
+The team took a fresh look at the assessments our youngest students take. They use several question types, and the most complex ones require clicking and dragging.
+
+Clicking and dragging feels like second nature to adults. Like driving a car, it's actually several things at once: understanding how the mouse relates to objects on the screen, and having enough control of a few separate motor skills to do them at the same time.
+
+So instead of teaching click and drag as one action, the experience breaks it into its parts and teaches them in order:
+
+1. Moving the mouse
+2. Clicking
+3. Clicking and dragging
+
+{/* TODO(John): did the team consider other fixes, like simplifying the assessment's interactions or having teachers run a practice session? If so, a DecisionBlock here would show why preparing students was the right call. */}
+
+---
+
+## Designing the Sequence
+
+A friendly character opens the experience. With the help of moving illustrations, he explains what a computer is and how the mouse moves things on the screen. Before each skill, an animated hand and mouse demonstrate exactly what to do.
+
+<figure>
+  <img src="/images/itc-hand-mouse.webp" loading="lazy" alt="Illustration of a cartoon hand resting on a computer mouse with its index finger raised over the left button" />
+  <figcaption>The animated hand and mouse that demonstrate each skill before students try it.</figcaption>
+</figure>
+
+### Moving the Mouse
+
+Students move the cursor through 16 circles. The circles move as if the cursor were pushing through real objects, so every small hand movement gets a visible reaction. Once every circle has been touched, they collapse into a square, and the character uses it as a hiding place. He pops out from different sides, and students try to catch him with the cursor for 60 seconds.
+
+<Clip
+  caption="Moving the mouse: push through the circles, then catch the character as he pops out from behind the square."
+  items={[
+    { src: "/video/itc-moving.mp4", alt: "A cursor pushing through a grid of blue circles that turn yellow, then collapse into a square a character hides behind" },
+  ]}
+/>
+
+### Clicking
+
+Students pop balloons by clicking them and see how many they can pop before a 60-second timer runs out.
+
+<Clip
+  caption="Clicking: pop as many balloons as you can in 60 seconds."
+  items={[
+    { src: "/video/itc-clicking.mp4", alt: "Red balloons popping with confetti as they're clicked, with a counter at the top" },
+  ]}
+/>
+
+{/* TODO(John): the moving and clicking games end after 60 seconds whether or not the student "wins." Was that deliberate, so no child gets stuck before their assessment? If so, say it here; it's a strong design choice. */}
+
+### Clicking and Dragging
+
+Finally, students drag the pieces of a simple 2-piece puzzle into place, then a slightly harder 4-piece puzzle. When they finish, the character comes back to congratulate them, and they go on to their first assessment.
+
+<Clip
+  caption="Clicking and dragging: a 2-piece puzzle, then a 4-piece puzzle."
+  items={[
+    { src: "/video/itc-dragging.mp4", alt: "Puzzle pieces dragged into a dashed outline, first two halves of a rectangle and then four quarters of a circle" },
+  ]}
+/>
+
+### Tablets
+
+Students on tablets get a shorter version. It introduces what a tablet is, then teaches tapping, then tapping and dragging.
+
+---
+
+## Designing It and Building It
+
+I interviewed the teachers and led the collaborative design sessions with the whole team. I also built parts of it. I implemented the artist's assets to create four tutorial animations, and I developed the interactive elements for three of the activities.
+
+{/* TODO(John): if building it yourself changed the design (e.g., tuning the circles' push or the character's timing in the product), add a sentence. It connects to the "seams between disciplines" theme in your about me. */}
+
+---
+
+## Outcomes
+
+After launch, preschool assessment data accuracy rose 40% year over year.
+
+{/* TODO(John): define the 40%. What was measured (e.g., assessments flagged invalid, teacher interventions, score consistency), across how many students, and over what period? A one-line definition makes this metric credible. */}
+
+---
+
+## Reflection
+
+The most valuable part of this project happened before any design work. Istation's assumption that young kids are natural technology users came from inside the company. Teachers in the room every day could see what the data couldn't.
+
+It's also where I first saw that data is only as good as the experience that collects it. I've come back to that idea in my work since.

@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { isVisible } from '../utils/caseStudies';
 import { ClientRouter } from 'astro:transitions';
 import Header from '../components/Header.jsx';
 import Footer from '../components/Footer.astro';
@@ -13,7 +14,7 @@ const {
   title,
   description = "John Pechacek — senior UX designer with 12 years of research-led design across consumer mobile and institutional software.",
 } = Astro.props;
-const rawCaseStudies = await getCollection('case-studies', ({ data }) => !data.draft);
+const rawCaseStudies = await getCollection('case-studies', isVisible);
 const caseStudies = rawCaseStudies.sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime()
 ).map(study => ({

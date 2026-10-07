@@ -1,9 +1,10 @@
 ---
 import { getCollection, render } from 'astro:content';
+import { isVisible } from '../../utils/caseStudies';
 import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
 
 export async function getStaticPaths() {
-  const caseStudies = await getCollection('case-studies', ({ data }) => !data.draft);
+  const caseStudies = await getCollection('case-studies', isVisible);
   return caseStudies.map((entry) => ({
     params: { slug: entry.id },
     props: { entry },

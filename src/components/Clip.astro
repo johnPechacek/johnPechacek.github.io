@@ -1,0 +1,101 @@
+---
+// Looping screen recordings (mp4) or stills, one per cell, with optional labels.
+// Videos only play while on screen, and stay paused with controls under reduced motion.
+interface Props {
+  items: { src: string; alt: string; poster?: string; label?: string }[];
+  caption?: string;
+}
+
+const { items, caption } = Astro.props;
+const cols = Math.min(items.length, 3);
+---
+
+<figure class="clip-figure">
+  <div class="clip-grid" style={`--cols:${cols}`}>
+    {items.map(item => (
+      <div class="clip-cell">
+        {item.src.endsWith('.mp4') ? (
+          <video
+            class="clip-media"
+            data-clip
+            muted
+            loop
+            playsinline
+            preload="none"
+            poster={item.poster ?? item.src.replace(/\.mp4$/, '.webp')}
+            aria-label={item.alt}
+          >
+            <source src={item.src} type="video/mp4" />
+          </video>
+        ) : (
+          <img class="clip-media" src={item.src} alt={item.alt} loading="lazy" decoding="async" />
+        )}
+        {item.label && <span class="clip-label">{item.label}</span>}
+      </div>
+    ))}
+  </div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<script>
+  function initClips() {
+    const videos = document.querySelectorAll<HTMLVideoElement>('video[data-clip]');
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      videos.forEach(v => (v.controls = true));
+      return;
+    }
+    const observer = new IntersectionObserver(
+      entries => {
+        for (const { target, isIntersecting } of entries) {
+          const video = target as HTMLVideoElement;
+          if (isIntersecting) video.play().catch(() => (video.controls = true));
+          else video.pause();
+        }
+      },
+      { threshold: 0.4 }
+    );
+    videos.forEach(v => observer.observe(v));
+  }
+
+  document.addEventListener('astro:page-load', initClips);
+</script>
+
+<style>
+  .clip-figure {
+    margin: 3rem 0;
+  }
+
+  .clip-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .clip-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .clip-media {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    border-radius: 0.5rem;
+  }
+
+  .clip-label {
+    font-family: 'Afacad', sans-serif;
+    font-size: 0.95rem;
+    color: var(--fg-1);
+    text-align: center;
+  }
+
+  @media (max-width: 700px) {
+    .clip-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
