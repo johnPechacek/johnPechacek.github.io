@@ -5,6 +5,6 @@ description: Learn more about me
 
 ## about me
 
-If there's a thread through my career, it's working the seams between disciplines. My background is in animation and motion design, which taught me not just how movement enhances an experience but when it gets in the way. I spent a year as a front-end engineer at Istation, building the kinds of designs I used to hand off, and I've never communicated with developers the same way since. The most interesting problems live in those seams, and they don't get solved by anyone who stays on their own side.
+My background in animation taught me how to use movement to make interfaces feel fluid without the motion getting in the way. I'm not strictly right-brained, though. I like to think of myself as middle-brained. I spent a year as a front-end engineer at Istation, down in the developer trenches. Now when a button sits too far from the edge of the screen, I open Chrome DevTools, see how it was built, and suggest the specific changes to the structure and properties that will fix it.
 
-I live in Birmingham, Alabama with my wife, two boys, and a dog. I play video games and tell myself it counts as research.
+I live in Birmingham, Alabama with my wife, two boys, and a dog.
