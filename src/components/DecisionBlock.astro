@@ -3,13 +3,15 @@ interface Props {
   considered: string;
   chose: string;
   why: string;
+  /** Label for the `chose` row, e.g. 'recommended' when the team went another way. */
+  choseLabel?: string;
 }
 
-const { considered, chose, why } = Astro.props;
+const { considered, chose, why, choseLabel = 'chose' } = Astro.props;
 
 const rows = [
   { kicker: 'considered', text: considered },
-  { kicker: 'chose', text: chose },
+  { kicker: choseLabel, text: chose },
   { kicker: 'why', text: why },
 ];
 ---

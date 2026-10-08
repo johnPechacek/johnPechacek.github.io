@@ -23,9 +23,8 @@ import ScreenGroup from "../../components/ScreenGroup.astro";
 import StatRow from "../../components/StatRow.astro";
 import StatCard from "../../components/StatCard.astro";
 import DecisionBlock from "../../components/DecisionBlock.astro";
-import PullQuote from "../../components/PullQuote.astro";
 
-Every profile users built also fed a structured dataset for AI-assisted identification, planned for release this coming season. That was the design strategy from the start: Phase 1 had to be worth using on its own, and it had to generate the training data Phase 2 needs to exist.
+Every profile users built also trains a machine learning model for automatic identification, currently in beta. Phase 1 had to be worth using on its own, and it had to generate the data Phase 2 needs to exist.
 
 ---
 
@@ -35,7 +34,7 @@ Hunters are more likely to hunt a trophy buck successfully if they understand th
 
 Our app had no tools for collecting or categorizing trail camera images at the level of an individual animal. Hunters were working around it with basic photo albums.
 
-For Moultrie, that was also a business problem. The premium hunt planning subscription is built on helping hunters make better decisions, and individual buck tracking was a core hunter behavior it didn't serve. Solving it well would strengthen the subscription's value and unlock a structured dataset that could eventually power AI identification, something no photo album could ever produce.
+For Moultrie, that was also a business problem. The premium hunt planning subscription is built on helping hunters make better decisions, and individual buck tracking was a core hunter behavior it didn't serve. Solving it well would strengthen the subscription's value.
 
 ---
 
@@ -91,7 +90,7 @@ The first finding directly drove the decision to lead every profile with last-se
 
 We built Buck List as a system for identifying and tracking individual bucks across trail camera images, and across multiple seasons. Each profile is a persistent record of a single animal, collecting images and activity over time.
 
-Phase 1 is manual. Users review recent images, assign them to profiles, and build a record of which bucks are on their property. Each profile captures a tagged image gallery, a profile photo, antler point counts, notes, and automatically surfaces when and where the buck was last seen. Phase 2 uses AI to suggest matches between new images and existing profiles and to flag potential unknowns, with users confirming before anything is applied.
+Phase 1 is manual. Users review recent images, assign them to profiles, and build a record of which bucks are on their property. Each profile captures a tagged image gallery, a profile photo, antler point counts, notes, and automatically surfaces when and where the buck was last seen. Phase 2 uses AI to identify matches and new bucks automatically.
 
 <ScreenGroup
   caption="A Buck List profile: browse bucks from the gallery, open a profile to see last-seen time and location, then tag new images directly from the image detail view."
@@ -111,9 +110,7 @@ Phase 1 is manual. Users review recent images, assign them to profiles, and buil
   ]}
 />
 
-The relationship between the phases is the core of the design strategy. Phase 1 is not a placeholder until the AI arrives. Every friction decision in the manual experience was also a data quality decision.
-
-<PullQuote>A manual flow that users abandon doesn't just fail on its own terms. It starves the model.</PullQuote>
+Every friction decision in the manual experience was also a data quality decision.
 
 ### Definition of Success
 
@@ -130,26 +127,30 @@ The 30% adoption bar meant profile creation had to be nearly effortless. And bec
 
 ### Designing the Profile
 
-The priority when designing the profile was minimizing friction.
-
 <figure>
   <img src="/images/BL-2.webp" loading="lazy" alt="A buck profile screen showing last-seen time and location above a grid of tagged images" />
-  <figcaption>The finished profile screen: last-seen time and location lead, with the tagged image grid below.</figcaption>
+  <figcaption>The finished profile screen: last-seen time and location lead.</figcaption>
 </figure>
 
 <DecisionBlock
   considered="An exact age year field. Hunters do think about a buck's age when deciding whether to target it."
   chose="A simple toggle between young and mature."
-  why="Estimating age from a trail camera image is genuinely uncertain. Asking users to enter an exact year produces guesses more than data. The toggle captures the decision hunters are actually making without asking for precision the images can't support."
+  why="Estimating age from a trail camera image is difficult. Asking for an exact year makes the task slower and harder. Simply choosing between young and mature lets hunters see at a glance which bucks to let grow and which to target."
 />
 
-The harder question was what to lead with when a user opens a profile. The research answered it: time of day and camera location were the two things hunters most wanted to know about a specific buck, so last-seen time and location lead the profile. If a buck showed up yesterday afternoon on the east side of the property, that is what a hunter needs before going out. Historical pattern data is still there. It just doesn't lead.
+The question of what to lead with when a hunter checks a profile was challenging. From the survey, I knew they are most interested in when and where a buck shows up.
+
+<DecisionBlock
+  considered="Most-seen time and location. It was my first instinct, since hunters build their strategies around patterns."
+  chose="Last-seen time and location."
+  why="Last seen is more actionable for the hunter. If a target buck showed up yesterday afternoon on the east side of the property, sitting there at that time may be their best bet. They can still dig into patterns in the profile's image grid, or on the Activity page, which charts time of day and camera activity for a single buck."
+/>
 
 ### A Workflow Built for Volume
 
 Hunters reviewing images from a session might be sorting through hundreds of photos, almost always on a phone. I designed the flow around newly detected images. Users can triage in bulk when the context is clear, which is common when a buck has been loitering near a feeder and appears across a run of consecutive images. For harder calls, they step into individual photos and take a closer look.
 
-The harder part was giving users something to compare against when an image wasn't obvious. Fitting two trail camera images side by side and expecting users to read subtle biological cues like tine count, spread, and brow tine shape is asking a lot on a phone screen. We solved it with a flyout sheet of profile pictures. Users can pull it up while viewing a new image, browse their existing bucks, and dismiss it when ready. The tradeoff: for a hard identification, asking users to hold an incoming image in memory while browsing the flyout is a real limitation. For easy decisions it works well. For harder ones it is a compromise, and I come back to it in the reflection.
+The harder part was giving users something to compare against when an image wasn't obvious. Fitting two trail camera images side by side and expecting users to read subtle biological cues like tine count, spread, and brow tine shape is asking a lot on a phone screen. We solved it with a flyout sheet of profile pictures. Users can pull it up while viewing a new image, browse their existing bucks, and dismiss it when ready.
 
 <ScreenGroup
   caption="The flyout sheet uses larger profile pictures than the gallery grid, making it easier to recognize the same buck across pictures taken in different contexts."
@@ -171,10 +172,10 @@ The harder part was giving users something to compare against when an image wasn
 
 ### A Guided AI Confirmation Flow
 
-For Phase 2, the goal was to make AI useful without making it autonomous.
+For Phase 2, I designed a flow where the AI suggests matches and users confirm them before anything is saved. The team went with a fully automatic version for the beta, and I come back to that in the reflection.
 
 <ScreenGroup
-  caption="AI confirmation flow: a prompt on the buck profile surfaces new matches, then users toggle between the full profile photo and the current photo to confirm."
+  caption="The confirmation flow as designed: a prompt on the buck profile surfaces new matches, then users toggle between the full profile photo and the current photo to confirm."
   images={[
     {
       src: "/images/ai-1.webp",
@@ -192,9 +193,10 @@ For Phase 2, the goal was to make AI useful without making it autonomous.
 />
 
 <DecisionBlock
-  considered="A more automated approach. The case for it was real: confirmation adds steps to a workflow we'd spent the whole project removing steps from."
+  considered="A more automated approach, since confirmation adds steps to a workflow we'd spent the whole project removing steps from."
+  choseLabel="recommended"
   chose="Users confirm before any match or new-buck flag is applied."
-  why="A bad match quietly corrupts the data a hunter is planning around. A bad new-buck flag fills the list with noise. And in a system where user tagging is also training data, silent errors compound. A slower system users trust produces better data than a faster one they second-guess."
+  why="A bad match quietly corrupts the data a hunter is planning around. A bad new-buck flag fills the list with noise. And in a system where user tagging is also training data, silent errors compound."
 />
 
 ### Adapting When the Plan Changed
@@ -230,8 +232,6 @@ Phase 1 launched in time for opening day of deer season. Against the targets:
 
 **CSAT: still being collected at the time of writing.**
 
-Beyond the targets, the platform now holds a structured dataset of how individual animals move across a property, which cameras they appear on, and when they show up. That is the training data Phase 2 needs, generated by exactly the behavior the survey said hunters wanted.
-
 From a business standpoint, the system adds meaningful value to Moultrie's premium hunt planning subscription. Internal forecasts project $11.8M in new revenue in FY27, driven by acquisition and retention gains as the feature deepens what the subscription offers.
 
 ---
@@ -242,4 +242,4 @@ The bounding box pivot taught me the most: translating between functions that ca
 
 The comparison flyout is where I'd push harder with another pass. A usability testing round would have caught its hard-case compromise early, but we didn't have time before the season deadline. The triage flow also shipped without instrumentation, so I can't tell you how bulk tagging performs against individual tagging. Both are costs of the deadline, and both are things I'd fight for earlier in the schedule next time.
 
-Phase 2 is the real test of the strategy. Phase 1 proved users will do the manual work and that the data flywheel turns. Whether the model performs well enough to earn their trust is the open question, and it's a hard one. Buck identification challenges experienced hunters working from good daylight photos. Doing it reliably from nighttime trail camera images is a different problem. The system was designed so that even when the AI is wrong, the user catches it before it costs them anything. The coming season will show whether that's enough.
+Phase 2 is the real test of the strategy. Phase 1 proved users will do the manual work. Whether the model performs well enough to earn their trust is the open question, and it's a hard one. Buck identification challenges experienced hunters working from good daylight photos. Doing it reliably from nighttime trail camera images is a different problem. The system was designed so that even when the AI is wrong, the user catches it before it costs them anything. The coming season will show whether that's enough.
