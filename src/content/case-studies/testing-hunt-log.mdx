@@ -22,7 +22,7 @@ import DecisionBlock from "../../components/DecisionBlock.astro";
 import PullQuote from "../../components/PullQuote.astro";
 import TryPrototype from "../../components/TryPrototype.astro";
 
-Hunt Log lets hunters record where they sat, how they walked in, what they saw, and whether they took a shot. Those records are also meant to be one of the main sources of training data for the company's planned AI hunt planning product. So the feature only works if a lot of hunters use it, and keep using it. I pushed for a usability study before development to find out whether they would.
+Hunt Log lets hunters record where they sat, how they walked in, what they saw, and whether they took a shot. The feature only works if a lot of hunters use it and keep using it, so I pushed for a usability study before development to find out whether they would.
 
 ---
 
@@ -30,9 +30,9 @@ Hunt Log lets hunters record where they sat, how they walked in, what they saw, 
 
 Trail cameras only know what walks past the sensor. They miss the buck that showed up at 1:30 just out of range, the stand that went cold after three sits in a row, and the pressure that pushed deer off a field they normally use. Hunters see all of that from the stand. Our app had nowhere to put it.
 
-For Moultrie, that gap matters more than it used to. The company is building an AI product that recommends when and where to hunt, and its recommendations can only be as good as its data on real hunt outcomes. Hunt logs are how that data gets in. The product owner's scope set the targets at 5% of users logging at least one hunt in the 2026 season, and 15% opening their end-of-season recap.
+For Moultrie, that gap matters more than it used to. The company is building an AI product that recommends when and where to hunt, and hunt logs are how it learns from real hunt outcomes. The product owner's scope set the targets at 5% of users logging at least one hunt in the 2026 season, and 15% opening their end-of-season recap.
 
-That puts a lot of weight on a form. Every extra field or confusing step means fewer logs, and fewer logs means weaker recommendations.
+That puts a lot of weight on a form.
 
 ---
 
@@ -40,16 +40,13 @@ That puts a lot of weight on a form. Every extra field or confusing step means f
 
 Nobody asked for a usability study, but I saw Hunt Log as a critical component for the company's AI initiative. The quality of results depends on the amount of logging data, and the accuracy of that data. I wanted to make sure the logging forms were frictionless and intuitive before development.
 
-So I didn't wait for permission. I let the product owner and stakeholders know I was running a study, then kept the product owner updated as sessions came in. He was very interested in what we were finding. I built the study around four questions:
+So I told the product owner and stakeholders I was running a study, and kept the product owner updated as sessions came in. I built the study around three questions:
 
 - Is the form balanced between the data the AI needs and the effort it asks of hunters?
 - Which fields add friction without adding value?
 - What could Hunt Log show back to hunters to make them log again?
-- Is the updated drawing tool clear about the difference between a line and an area?
 
-The last one came along for the ride. To make room for Log a Hunt in the map's tools menu, we merged the separate line and area tools into one.
-
-We went in with two hypotheses. The drawing tool would be highly intuitive. And hunters would like Hunt Log but not use it habitually, because they wouldn't see what they got back for the effort.
+We went in with one main hypothesis. Hunters would like Hunt Log but not use it habitually, because they wouldn't see what they got back for the effort.
 
 I also saw the study as a chance to try a new way of prototyping.
 
@@ -57,17 +54,17 @@ I also saw the study as a chance to try a new way of prototyping.
 
 ## Building a Prototype That Worked
 
-A linked Figma prototype couldn't test what this study needed. Testers had to log a hunt, then come back later and edit that same hunt. They needed to upload a real photo from their phone, pan around a map, and watch a measurement update as they drew. Linked screens can fake a happy path. They can't fake saved data.
+A linked Figma prototype couldn't test what this study needed. Testers had to log a hunt, then come back later and edit that same hunt. They needed to upload a real photo from their phone and pan around a map. Linked screens can fake a happy path. They can't fake saved data.
 
 <DecisionBlock
   considered="A linked Figma prototype, the team's standard for usability testing."
   chose="A working web app, built with an AI coding tool from my Figma screens and the app's real design tokens."
-  why="The study depended on behavior linked screens can't fake, like saving a log, finding it again and editing it. A coded prototype could also change between sessions without rebuilding a web of links."
+  why="It could handle saved data, and change between sessions without rebuilding a web of links."
 />
 
 Saved hunts showed up on the map and in lists, and the summary pulled real past weather for the date and time the tester entered. All four task flows were working two days after the first commit.
 
-The AI tool didn't get everything right. It placed drawing points by tapping the map, which isn't how the live app works, so I corrected it to the real model of a fixed crosshair you pan the map under. Testers needed to be reacting to our design, not the prototype's quirks. I also caught a bug before the first session that would have undermined the study. The edit task loaded a hard-coded sample hunt instead of the one the tester had just logged, so testers would have been asked to edit someone else's.
+The AI tool didn't get everything right. Before the first session, I caught a bug that would have undermined the study. The edit task loaded a hard-coded sample hunt instead of the one the tester had just logged, so testers would have been asked to edit someone else's.
 
 <ScreenGroup
   caption="Part of the log flow in the prototype: set your approach, crop a real photo from your phone, and review the saved log."
@@ -92,25 +89,18 @@ The AI tool didn't get everything right. It placed drawing points by tapping the
   tasks={[
     "Log a morning sit at one of your stands.",
     "Go back and add notes to the hunt you just logged.",
-    "Mark a food plot on the map as an area.",
   ]}
 >
-  This is the working prototype from the study, in the version the last two testers used. It's built for phones, so it works best opened on yours. Here are three of the tasks testers got:
+  This is the working prototype from the study, in the version the last two testers used. It's built for phones, so it works best opened on yours. Here are two of the tasks testers got:
 </TryPrototype>
 
 ---
 
 ## The Study
 
-My first plan was an unmoderated study on our existing Maze account, with heatmaps showing where testers tapped. In dry runs, the heatmap script crashed Maze tests on iOS, and a phone-first feature can't be tested by a study that breaks on iPhones. So I switched to moderated remote sessions, which turned out to be the better call: the follow-up questions they allowed mattered more than anything a heatmap could have shown.
+My first plan was an unmoderated study on our existing Maze account, with heatmaps showing where testers tapped. In dry runs, the heatmap script crashed Maze tests on iOS, so I switched to moderated remote sessions. That turned out to be the better call, because the follow-up questions mattered more than anything a heatmap could have shown.
 
-I ran six 45-minute think-aloud sessions with hunters from our research panel, three from the southeast, two from the northeast and one from the northwest. They shared their screens and worked through five tasks, then answered seven debrief questions. A UX researcher reviewed my test plan, and a senior researcher co-moderated some of the sessions.
-
-1. Find a hunt you logged a few weeks ago.
-2. Log a morning sit.
-3. Add notes to a hunt you logged earlier.
-4. Measure the distance between two of your stands.
-5. Mark a food plot as an area.
+I ran six 45-minute think-aloud sessions with hunters from our research panel. They shared their screens and worked through five tasks, then answered seven debrief questions. A UX researcher reviewed my test plan, and a senior researcher co-moderated some of the sessions.
 
 I wrote each task as an outcome, not an instruction, so none of them named a button or a screen.
 
@@ -124,11 +114,11 @@ Testers finished 24 of the 27 task attempts on record without help, and every on
 
 <PullQuote>"You can't get any easier, man."</PullQuote>
 
-The friction lived at the edges. Three of the four first-round testers expected one edit button for the whole log and were thrown by the separate edit links on each section. All four looked in My Content first when they went to start a new log, which was where they'd go to find one, but not where we'd put the button to create one.
+Three of the four first-round testers expected one edit button for the whole log and were thrown by the separate edit links on each section. All four looked in My Content first when they went to start a new log, which was where they'd go to find one, but not where we'd put the button to create one.
 
 ### The Reason to Log
 
-Our second hypothesis mostly held. Everyone saw value in Hunt Log, but when we asked how often they'd realistically log a hunt, 4 of 6 said "sometimes." Every one of them currently kept their hunt history in their head.
+Our hypothesis mostly held. Everyone saw value in Hunt Log, but when we asked how often they'd realistically log a hunt, 4 of 6 said "sometimes." Every one of them currently kept their hunt history in their head.
 
 The surprise came in the debrief. I asked testers how they'd feel knowing their logs would power AI hunt planning recommendations. One who had said "I'd probably use it sometimes" changed his answer on the spot.
 
@@ -138,50 +128,16 @@ Our least motivated tester, who had said he'd rarely log, answered "No, I love t
 
 That changed what I thought the problem was. We had treated the AI as Moultrie's reason for Hunt Log, and the personal record as the hunter's reason. For the hunters least likely to log, the AI was their reason too. The business goal and the user's motivation were the same thing, and nothing in the design said so.
 
-### Lines Worked. Areas Were Hidden.
-
-The first hypothesis was half right. All six testers measured a distance quickly, and several volunteered real uses for it, like ranging shots, planning drag-out routes and spacing stands safely.
-
-Areas were a different story. Asked to "mark" a food plot, four of six reached for a pin first. To a hunter, marking something means dropping a pin. Once they found the area tool, closing the shape worked well, even though I'd left out any text explaining how. The only cues were a target around the first point, a dashed preview line, and a button that changed from Drop Point to Close Shape. "That snap... that's what I'm expecting," one tester said.
-
-<ScreenGroup
-  caption="Drawing in the prototype: a line measures distance and elevation, the button changes to Close Shape near the first point, and the closed shape reports area and perimeter."
-  images={[
-    {
-      src: "/images/hl-draw-line.webp",
-      alt: "Drawing tool with a line between two stands, showing a total distance of 54.1 yards and elevation loss",
-    },
-    {
-      src: "/images/hl-draw-close.webp",
-      alt: "Drawing tool with three points placed and a dashed line back to the first point, with the button reading Close Shape",
-    },
-    {
-      src: "/images/hl-draw-area.webp",
-      alt: "A closed triangular area on the map showing total area of 0.106 acres and a total perimeter of 126.6 yards",
-    },
-  ]}
-/>
-
-Every drawing struggle happened on a laptop. All three phone testers finished both drawing tasks without friction.
-
 ---
 
 ## Changing the Design Mid-Study
 
 After four sessions the same problems kept coming up, and there was no time on the schedule for a second round. Because the prototype was code, I didn't need one. I built the fixes and deployed them the same day, then tested them with the last two testers.
 
-<DecisionBlock
-  considered="Keeping the prototype fixed for all six sessions and saving the fixes for a later round."
-  chose="Fixing the prototype after session four and testing the fixes in sessions five and six."
-  why="Four sessions had already shown the same problems. Two more on the same design would mostly confirm what we knew. Two on a fixed design would tell us whether the fixes worked."
-/>
-
 - **A second way to start a log.** Since everyone looked in My Content first, I added a Log New Hunt button to the Hunt Logs list.
-- **Drop a New Pin in the location list.** The pin button in the corner was too easy to miss on its own, so logging a hunt away from a stand moved into the location dropdown.
 - **Buck count separated from Buck List.** Tapping a named buck from the hunter's Buck List was quietly adding one to the buck count. I split them and moved the Buck List question to the top of the step. This came from what I watched testers do, not anything they said, so I flagged it as a call to keep an eye on.
 - **Stars instead of emoji.** The trip rating went from a 1 to 5 emoji scale to three stars on its own step. One tester had said he didn't know if he'd really click an emoji.
 - **A notes prompt that asks for a story.** "Additional notes" became "Want to remember details from your trip? Tell your story below."
-- **Phones only.** Laptops were distorting a phone design, so the last two sessions were on phones.
 
 <ScreenGroup
   caption="Version 2 changes: a Log New Hunt button in Hunt Logs, Buck List bucks separated from the counters, and a notes prompt that invites a story."
@@ -201,7 +157,7 @@ After four sessions the same problems kept coming up, and there was no time on t
   ]}
 />
 
-The biggest addition was a two-screen New Feature intro that explained the AI benefit up front. The results were mixed. One tester understood it right away. The other thought the feature was for coordinating future hunts with friends. My co-moderator pinned down why in our debrief. The copy sold a future benefit, planning, for something the hunter does about the past. And the tester who misread the screen was the same one who changed his answer once I explained the AI benefit in conversation. The message worked. The screen didn't carry it yet.
+The biggest addition was a two-screen New Feature intro that explained the AI benefit up front. The results were mixed. One tester understood it right away. The other thought the feature was for coordinating future hunts with friends. My co-moderator pinned down why in our debrief. The copy sold a future benefit, planning, for something the hunter does about the past. And the tester who misread the screen was the same one who changed his answer once I explained the AI benefit in conversation.
 
 <ScreenGroup
   caption="The New Feature intro added for the last two sessions. The idea landed with one of two testers."
@@ -217,17 +173,17 @@ The biggest addition was a two-screen New Feature intro that explained the AI be
   ]}
 />
 
-Two sessions isn't proof, and I presented the version 2 results as directional. But the fixed design produced fewer misconceptions, fewer roadblocks and more buy-in. Notes went from mostly skipped to filled in without prompting.
+Two sessions isn't proof, and I presented the version 2 results as directional. But notes went from mostly skipped to filled in without prompting.
 
 ---
 
 ## Outcomes
 
-Hunt Log is now in development. My co-moderator and I presented the findings to stakeholders, with usability issues separated from product questions, and they were thrilled with the study. Every recommendation was picked up. That included the mid-study fixes, plus one consistent edit button, bringing back View More in the sightings list after flattening it hid how long the list was, auto-capturing moon phase, and room for more than one photo per log.
+Hunt Log is now in development. My co-moderator and I presented the findings to stakeholders, with usability issues separated from product questions, and they were thrilled with the study. Every recommendation was picked up, including the mid-study fixes.
 
-One change moved past what we tested. The final design keeps stars for the trip rating but uses five instead of three, because a five-point scale gives the AI team more usable data. Testers got the stars they preferred, and the data got the range it needed.
+One change moved past what we tested. The final design keeps stars for the trip rating but uses five instead of three, because a five-point scale gives the AI team more usable data.
 
-The one exception was the intro screen itself. Based on its mixed results, the team is going with different copy than the version we tested. The idea behind it stayed. The AI benefit is the strongest reason to log, so the product has to say so.
+The one exception was the intro screen itself. Based on its mixed results, the team is going with different copy than the version we tested. The idea stayed, since the AI benefit is still the strongest reason to log.
 
 <ScreenGroup
   caption="The high-fidelity designs now in development: a five-star rating, moon phase alongside the weather, more than one photo per log, and one Edit button for the whole log."
@@ -253,6 +209,6 @@ The prototyping method outlived the study. I trained another designer on it, and
 
 ## Reflection
 
-I'd test on phones only from the start. Allowing laptops made recruiting easier, but it muddied the drawing results for half the study. I'd also try any third-party script on a real phone before building a study plan around it.
+I'd try any third-party script on a real phone before building a study plan around it.
 
-The open problem is still the intro. New copy should help, but telling hunters about a benefit they won't see until the AI ships is hard, and one screen at the start of a feature is a thin place to do it. The next study should test the message at the moment it matters most, right when a hunter saves a log and wonders whether it was worth the effort.
+The open problem is still the intro. New copy should help, but it's hard to sell hunters on a benefit they won't see until the AI ships, and one screen at the start of a feature might not be enough. I'd test the message right after a hunter saves a log, when they're deciding whether it was worth the effort.
