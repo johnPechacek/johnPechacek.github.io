@@ -20,7 +20,6 @@ metrics:
 
 import Clip from "../../components/Clip.astro";
 import DecisionBlock from "../../components/DecisionBlock.astro";
-import PullQuote from "../../components/PullQuote.astro";
 
 This is earlier work from Istation, which makes reading assessment and instruction software for schools. The students it was for were 3 to 5 years old and couldn't read yet. Every instruction, label and piece of feedback had to work without words, which is why we tested with a child instead of guessing.
 
@@ -40,7 +39,7 @@ The team's educational experts identified the foundational skills students neede
 
 <figure>
   <img src="/images/pa-classroom-references.webp" loading="lazy" alt="Two classroom syllable-counting materials: picture cards with rows of colored counters, and a How Many Syllables worksheet with buttons placed on numbers" />
-  <figcaption>Classroom strategies the educational experts shared. The activities started from these, not from a blank screen.</figcaption>
+  <figcaption>Classroom strategies the educational experts shared. We started every activity from these.</figcaption>
 </figure>
 
 I led the brainstorming sessions with rough sketches, working with the whole team to translate those classroom strategies to a screen.
@@ -72,7 +71,7 @@ I built low-fidelity prototypes in Adobe XD so we could test early and change de
 
 The team felt it was critical to test with a pre-reader. We were only able to test with one student, but as a native Spanish speaker of Pre-K age, she was exactly who the activities were for. We paid her in pizza, and she was thrilled to help.
 
-Counting Syllables shows how testing shaped the design. We tested three versions of the same activity.
+We tested three versions of the Counting Syllables activity.
 
 <Clip
   caption="The three Counting Syllables prototypes, recorded in Adobe XD."
@@ -86,10 +85,8 @@ Counting Syllables shows how testing shaped the design. We tested three versions
 <DecisionBlock
   considered="Simple Tap, where students place counters in any order and tap a counter again to remove it. It tested as intuitive. Plus/Minus, which adds and removes counters with buttons."
   chose="Disabled States, which only lets students fill counters left to right."
-  why="Simple Tap was easy to use but taught the wrong habit. Teachers have students place counters left to right to prepare them for reading left to right. Plus/Minus kept the order but relied on symbols pre-readers don't know yet. I assumed an enforced order would feel restrictive, but our tester enjoyed Disabled States the most."
+  why="Simple Tap was easy to use but taught the wrong habit. Teachers have students place counters left to right to prepare them for reading left to right. Plus/Minus kept the order but relied on symbols pre-readers don't know yet. My assumption that Disabled States would be less intuitive proved incorrect, and our tester actually enjoyed it most!"
 />
-
-<PullQuote>The easiest version wasn't the one that taught kids to read. The design had to satisfy both the children and the experts.</PullQuote>
 
 Testing caught one more problem. Our tester didn't think to tap a placed counter to remove it, so we added an eraser button.
 
@@ -138,8 +135,15 @@ The suite added seven activities to Istation's Spanish content library and cover
 
 ## Reflection
 
-This project changed how I think about intuitive design. The most intuitive version of Counting Syllables was the wrong one, and only testing with real users next to subject matter experts could show that. Neither group alone would have landed on the final design.
+The most intuitive version of Counting Syllables taught the wrong habit. Testing showed us what kids found easy, and our curriculum specialists knew what would actually help them learn to read. I strongly advocate for early testing with target users, even when they're hard to test with. One pre-reader caught problems no adult reviewer would have, like not knowing to tap a counter again to remove it.
 
-It also reinforced something I still push for on every project: test with the real users, even when they're hard to test with. Even one pre-reader caught problems no adult reviewer would have, like not knowing to tap a counter again to remove it.
+If I did it again, I'd push to test in a real classroom. Pre-readers rely on their teachers, and we never got to see how teachers guide students through activities like these.
 
-{/* TODO(John): add one thing you'd do differently. One possibility: instrumenting the activities so you could see replay rates and know whether the reward system drove practice. */}
+I'd also fix a few UI decisions. Counting Syllables shows right and wrong answers mostly with red and green, when it should have used the check and X icons we used in other activities. The activity where students build words from spoken syllables needed the most work, and it's one we never got to test. Its play buttons didn't look draggable, and the only difference between them was color. I'd turn each syllable into a little creature, so kids could start to recognize the sounds by who was saying them.
+
+<Clip
+  caption="The syllable-building activity: students drag play buttons into numbered slots to build the word."
+  items={[
+    { src: "/video/pa-syllables.mp4", alt: "Syllable-building activity with a grapes picture, two numbered slots, and three colored play buttons that students drag into the slots, with a wrong attempt followed by a correct one" },
+  ]}
+/>
