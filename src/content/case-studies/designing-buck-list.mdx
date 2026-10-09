@@ -114,10 +114,7 @@ Every friction decision in the manual experience was also a data quality decisio
 
 ### Definition of Success
 
-The product owner set targets in the initial one-pager, including:
-
-1. By the end of the 25-26 whitetail season, 30% of users have created at least one buck profile.
-2. CSAT for users of Buck Profiles measures 10% higher than for non-users in gallery surveys.
+The product owner's one-pager set a target of 30% of users creating at least one buck profile by the end of the 25-26 whitetail season.
 
 The 30% adoption bar meant profile creation had to be nearly effortless. And because patterns only show up across repeat sightings, the system had to encourage repeat tagging over time, not one-and-done profiles.
 
@@ -203,12 +200,12 @@ For Phase 2, I designed a flow where the AI suggests matches and users confirm t
 
 About three weeks before development started, a research spike came back with bad news. The bounding box data from smart tagging that we planned to use for automatic profile image cropping was not going to be available in a usable way.
 
-Without automatic cropping, the fallback was full trail camera images as profile thumbnails. That created two problems.
+Without automatic cropping, the fallback was to stretch the full trail camera image into the square thumbnail. The images came out distorted, and if two bucks showed up in the same photo, their profiles ended up with identical thumbnails.
 
 <DecisionBlock
-  considered="Full trail-camera images as profile thumbnails. The fallback once bounding box data fell through."
+  considered="Stretched full-image thumbnails, which didn't add a step to profile creation."
   chose="A manual crop step during profile creation."
-  why="Full-image thumbnails are ambiguous when a frame contains multiple deer, and they collide visually with the existing camera-album pattern. A manual crop keeps the profile card legible as its own pattern, which everything downstream of profile creation depends on."
+  why="Hunters create a profile once, but they check it over and over. One extra step at creation is worth a clear thumbnail every time after that."
 />
 
 <figure>
@@ -216,30 +213,26 @@ Without automatic cropping, the fallback was full trail camera images as profile
   <figcaption>The manual crop step: a resizable frame over the trail camera image, with a slider to adjust crop size and a prompt to center the buck.</figcaption>
 </figure>
 
-The fallback was on the table mostly because no single function had the full picture. ML understood why the bounding boxes failed, engineering understood the implementation cost of alternatives, the product owner understood the timeline, and design understood what the thumbnail problem would do to the experience. There was no real disagreement to overcome, just a gap in shared understanding, and closing that gap was the work. I made the case for a manual cropping step and worked through a custom cropping implementation with engineering after an off-the-shelf library proved too limiting, simplifying the controls and reducing the precision the crop required.
+Once the product owner agreed the extra step was worth it, I worked with the developers to adapt the cropping tool from Syncfusion, a component library we already had access to. We could restyle it, but we couldn't change how it worked.
 
-The result wasn't the automated experience we planned, but it worked.
+Most of my changes were about keeping the photo visible. The crop is locked to a square, so its four corner handles all did the same thing while covering part of the image. I replaced them with a single size slider. I also added a drop shadow to the drag handle so it shows up on the bright patches common in trail camera photos.
 
 ---
 
 ## Outcomes
 
-Phase 1 launched in time for opening day of deer season. Against the targets:
+Phase 1 launched in time for opening day of deer season.
 
-**Adoption: 27% against a 30% target.** Close, but a miss, and worth being honest about. Profile creation is a new behavior with real upfront effort, and we shipped without a usability testing cycle that might have found friction we couldn't see. I'd rather report 27% with that context than round it up to a win.
+**Adoption: 27% against a 30% target.** We missed by three points. Profile creation takes effort up front, and we shipped without a usability testing round that might have caught friction we couldn't see. But I think the bigger reason is awareness. The app has grown a lot in a short time, new features have gotten harder to notice, and we haven't done enough to address that.
 
-**Identification: over 300,000 unique bucks identified.** The supporting signal is just as important: images per buck grew from 2.7 to over 4 across the season, which is exactly the repeat-tagging behavior the system was designed to encourage. Users weren't creating profiles and abandoning them. They were building records.
+**Identification: over 300,000 unique bucks identified.** Images per buck also grew from 2.7 to over 4 across the season. Hunters kept adding to profiles after they made them, which is the repeat tagging the system was designed for.
 
-**CSAT: still being collected at the time of writing.**
-
-From a business standpoint, the system adds meaningful value to Moultrie's premium hunt planning subscription. Internal forecasts project $11.8M in new revenue in FY27, driven by acquisition and retention gains as the feature deepens what the subscription offers.
+Internal forecasts estimate the feature will add $11.8M in subscription revenue in FY27.
 
 ---
 
 ## Reflection
 
-The bounding box pivot taught me the most: translating between functions that can't see each other's constraints turned out to be the design work that mattered most on this project. That's the kind of work I want more of.
+If I had another pass, I'd start with the comparison flyout. On a hard call, users have to remember the new photo while they scroll through their bucks, since they can't see both at once. A usability testing round would have caught that early, but we ran out of time before the season deadline.
 
-The comparison flyout is where I'd push harder with another pass. A usability testing round would have caught its hard-case compromise early, but we didn't have time before the season deadline. The triage flow also shipped without instrumentation, so I can't tell you how bulk tagging performs against individual tagging. Both are costs of the deadline, and both are things I'd fight for earlier in the schedule next time.
-
-Phase 2 is the real test of the strategy. Phase 1 proved users will do the manual work. Whether the model performs well enough to earn their trust is the open question, and it's a hard one. Buck identification challenges experienced hunters working from good daylight photos. Doing it reliably from nighttime trail camera images is a different problem. The system was designed so that even when the AI is wrong, the user catches it before it costs them anything. The coming season will show whether that's enough.
+Phase 2 is in beta now, and the team took it in a different direction than I recommended. Instead of suggesting matches for hunters to confirm, it identifies and creates bucks automatically in the background. Early feedback has been mixed. Testers say the automatic IDs aren't accurate enough yet, but they're also excited about the feature and say they plan to use it a lot. In its current form it can be frustrating, but hunters see what it could become. I still think a confirmation step is the best way to earn their trust while the model improves, since every correction a hunter makes is also better training data.
