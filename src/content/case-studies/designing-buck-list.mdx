@@ -30,7 +30,7 @@ Every profile users built also trains a machine learning model for automatic ide
 
 ## Problem
 
-Hunters are more likely to hunt a trophy buck successfully if they understand that buck's movement patterns. A big part of that understanding is knowing when and where an individual buck shows up in trail camera pictures, and hunters form their strategies around the patterns they see in that data.
+Hunters are more likely to take a trophy buck if they know when and where that buck shows up on their trail cameras, and they plan their hunts around those patterns.
 
 Our app had no tools for collecting or categorizing trail camera images at the level of an individual animal. Hunters were working around it with basic photo albums.
 
@@ -40,7 +40,7 @@ For Moultrie, that was also a business problem. The premium hunt planning subscr
 
 ## Where This Started
 
-Buck List grew out of design exploration I was doing for a different feature. Deer Survey had shipped on mobile, giving users population estimates derived from a single input: a manual count of unique bucks across a set of images. The mobile flow asked users to review images in the gallery, then return to the survey to type in a number.
+Buck List grew out of design exploration I was doing for a different feature. Deer Survey gave users population estimates based on a manual count of unique bucks across a set of images. On mobile, that meant reviewing images in the gallery, then going back to the survey to type in a number.
 
 <ScreenGroup
   caption="Deer Survey's original mobile flow: review images in the gallery, then return to type in a count."
@@ -60,20 +60,18 @@ Buck List grew out of design exploration I was doing for a different feature. De
   ]}
 />
 
-Designing Deer Survey for web, I wanted to streamline that review process, so I designed tools for categorizing images into persistent buck profiles that could hold tine counts, notes, and a name. When I presented the work to stakeholders, the profiles concept changed the conversation. Leadership saw more customer value in tracking individual bucks than in the survey feature itself. Deer Survey for web went to the backburner, and the roadmap was reprioritized around what became Buck List.
+While designing Deer Survey for web, I wanted to make that review faster, so I designed buck profiles that sorted images by individual buck and held tine counts, notes, and a name. When I presented the work, leadership saw more value in tracking individual bucks than in the survey itself. Deer Survey for web went on the backburner, and the roadmap was reprioritized around what became Buck List.
 
 <figure>
   <img src="/images/lofiBP.webp" loading="lazy" alt="Early lo-fi wireframe of a buck profile screen, with placeholder fields for name, age, points, last seen, favorite spots, and notes above a grid of image placeholders" />
   <figcaption>The original lo-fi concept of a buck profile.</figcaption>
 </figure>
 
-The exploration wasn't assigned. It's a case for why speculative design work inside a real project pays off.
-
 ---
 
 ## Research
 
-I inherited findings from an internal Moultrie survey of 3,844 deer hunters, which put numbers to both the behavior and the opportunity. The average user sees about 5.5 unique bucks in a season. 67% keep a seasonal target list, and 73% of those manage it with a photo album on their phone or computer. A Kano analysis showed that both manual and AI-assisted identification were attractive but unexpected, with 92% saying they were likely to use either.
+I inherited findings from an internal Moultrie survey of 3,844 deer hunters, which put numbers to both the behavior and the opportunity. The average user sees about 5.5 unique bucks in a season. 67% keep a seasonal target list, and 73% of those manage it with a photo album on their phone or computer.
 
 My job was turning those findings into design priorities. Two stats did most of the work:
 
@@ -82,13 +80,9 @@ My job was turning those findings into design priorities. Two stats did most of 
   <StatCard value="77%" label="wanted to know which cameras a buck appears on" />
 </StatRow>
 
-The first finding directly drove the decision to lead every profile with last-seen time. The second drove leading with last-seen location alongside it.
-
 ---
 
 ## Product Approach
-
-We built Buck List as a system for identifying and tracking individual bucks across trail camera images, and across multiple seasons. Each profile is a persistent record of a single animal, collecting images and activity over time.
 
 Phase 1 is manual. Users review recent images, assign them to profiles, and build a record of which bucks are on their property. Each profile captures a tagged image gallery, a profile photo, antler point counts, notes, and automatically surfaces when and where the buck was last seen. Phase 2 uses AI to identify matches and new bucks automatically.
 
@@ -110,13 +104,9 @@ Phase 1 is manual. Users review recent images, assign them to profiles, and buil
   ]}
 />
 
+The product owner's one-pager set a target of 30% of users creating at least one buck profile by the end of the 25-26 whitetail season. That meant profile creation had to be nearly effortless. And because patterns only show up across repeat sightings, the system had to encourage hunters to keep tagging over time.
+
 Every friction decision in the manual experience was also a data quality decision.
-
-### Definition of Success
-
-The product owner's one-pager set a target of 30% of users creating at least one buck profile by the end of the 25-26 whitetail season.
-
-The 30% adoption bar meant profile creation had to be nearly effortless. And because patterns only show up across repeat sightings, the system had to encourage repeat tagging over time, not one-and-done profiles.
 
 ---
 
@@ -145,9 +135,9 @@ The question of what to lead with when a hunter checks a profile was challenging
 
 ### A Workflow Built for Volume
 
-Hunters reviewing images from a session might be sorting through hundreds of photos, almost always on a phone. I designed the flow around newly detected images. Users can triage in bulk when the context is clear, which is common when a buck has been loitering near a feeder and appears across a run of consecutive images. For harder calls, they step into individual photos and take a closer look.
+Hunters reviewing new images might be sorting through hundreds of photos, almost always on a phone. I designed the flow so they can tag a whole run of photos at once, which is common when a buck hangs around a feeder. For harder calls, they open individual photos for a closer look.
 
-The harder part was giving users something to compare against when an image wasn't obvious. Fitting two trail camera images side by side and expecting users to read subtle biological cues like tine count, spread, and brow tine shape is asking a lot on a phone screen. We solved it with a flyout sheet of profile pictures. Users can pull it up while viewing a new image, browse their existing bucks, and dismiss it when ready.
+The harder part was giving users something to compare against when an image wasn't obvious. Fitting two trail camera images side by side and expecting users to read subtle biological cues like tine count, spread, and brow tine shape is asking a lot on a phone screen. We solved it with a flyout sheet of profile pictures that users can pull up over a new image to browse their existing bucks.
 
 <ScreenGroup
   caption="The flyout sheet uses larger profile pictures than the gallery grid, making it easier to recognize the same buck across pictures taken in different contexts."
@@ -189,13 +179,6 @@ For Phase 2, I designed a flow where the AI suggests matches and users confirm t
   ]}
 />
 
-<DecisionBlock
-  considered="A more automated approach, since confirmation adds steps to a workflow we'd spent the whole project removing steps from."
-  choseLabel="recommended"
-  chose="Users confirm before any match or new-buck flag is applied."
-  why="A bad match quietly corrupts the data a hunter is planning around. A bad new-buck flag fills the list with noise. And in a system where user tagging is also training data, silent errors compound."
-/>
-
 ### Adapting When the Plan Changed
 
 About three weeks before development started, a research spike came back with bad news. The bounding box data from smart tagging that we planned to use for automatic profile image cropping was not going to be available in a usable way.
@@ -210,7 +193,7 @@ Without automatic cropping, the fallback was to stretch the full trail camera im
 
 <figure>
   <img src="/images/crop-2.webp" loading="lazy" alt="Crop Buck Photo screen with a resizable frame over a trail camera image and a slider to adjust the crop area" />
-  <figcaption>The manual crop step: a resizable frame over the trail camera image, with a slider to adjust crop size and a prompt to center the buck.</figcaption>
+  <figcaption>The manual crop step, with a prompt to center the buck.</figcaption>
 </figure>
 
 Once the product owner agreed the extra step was worth it, I worked with the developers to adapt the cropping tool from Syncfusion, a component library we already had access to. We could restyle it, but we couldn't change how it worked.
@@ -235,4 +218,4 @@ Internal forecasts estimate the feature will add $11.8M in subscription revenue 
 
 If I had another pass, I'd start with the comparison flyout. On a hard call, users have to remember the new photo while they scroll through their bucks, since they can't see both at once. A usability testing round would have caught that early, but we ran out of time before the season deadline.
 
-Phase 2 is in beta now, and the team took it in a different direction than I recommended. Instead of suggesting matches for hunters to confirm, it identifies and creates bucks automatically in the background. Early feedback has been mixed. Testers say the automatic IDs aren't accurate enough yet, but they're also excited about the feature and say they plan to use it a lot. In its current form it can be frustrating, but hunters see what it could become. I still think a confirmation step is the best way to earn their trust while the model improves, since every correction a hunter makes is also better training data.
+Phase 2 is in beta now, and the team took it in a different direction than I recommended. Instead of suggesting matches for hunters to confirm, it identifies and creates bucks automatically in the background. Early feedback has been mixed. Testers say the automatic IDs aren't accurate enough yet, but they're also excited about the feature and say they plan to use it a lot. I still think a confirmation step is the best way to earn their trust while the model improves, since every correction a hunter makes is also better training data.
